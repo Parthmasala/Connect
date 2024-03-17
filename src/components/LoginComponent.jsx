@@ -1,5 +1,7 @@
 import React , {useState} from 'react'
 import { LoginAPI , RegisterAPI} from '../API/AuthAPI';
+import ConnectLogo from "../assets/ConnectLogo.png";
+import GoogleButton from 'react-google-button'
 import "../Scss/LoginComponent.scss";
 
 
@@ -17,7 +19,14 @@ export default function LoginComponent() {
   }
   return (
     <div className='login-wrapper'>
-        <h1>LoginComponent</h1>
+
+        <img src = {ConnectLogo} className = "connectLogo" />
+
+        <div className='login-wrapper-inner'>
+        
+        <h1 className = "heading">Sign In</h1>
+        <p className = "sub-heading">Welcome to Connect</p>
+
 
         <div className='auth-input'>
           <input onChange={
@@ -25,20 +34,30 @@ export default function LoginComponent() {
             setCredentials({ ...credentails, email: e.target.value })
           }
           type="email"
-          className="login-input"
-          placeholder="Enter your Email"
+          className="common-input"
+          placeholder="Email or Phone"
           />
+
           <input onChange={
-            (e) => 
-            setCredentials({ ...credentails, password: e.target.value })
-          }
-          type="password"
-          className="login-input"
-          placeholder="Enter your Email"
-          />
+              (e) => 
+              setCredentials({ ...credentails, password: e.target.value })
+            }
+            type="password"
+            className="common-input"
+            placeholder="Enter your Password" 
+            />
         </div>
 
+
         <button className='login-btn' onClick={login}>Log In</button>
+        
+        </div>
+        <hr class="hr-text" data-content="OR"></hr>
+        <div className='google-btn-container'>
+        <GoogleButton className='google-btn'
+          onClick={() => { console.log('Google button clicked') }}
+        />
+        </div>
     </div>
   )
 }
