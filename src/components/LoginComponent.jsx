@@ -1,22 +1,39 @@
 import React , {useState} from 'react'
-import { LoginAPI , RegisterAPI} from '../API/AuthAPI';
+import { LoginAPI , GoogleAPI} from '../API/AuthAPI';
 import ConnectLogo from "../assets/ConnectLogo.png";
 import GoogleButton from 'react-google-button'
 import "../Scss/LoginComponent.scss";
-
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 export default function LoginComponent() {
   const [credentails, setCredentials] = useState({});
+
+  let navigate = useNavigate();
+
   const login = async () => {
     try
     {
       let response = await LoginAPI(credentails.email , credentails.password);
-      console.log(response);
+      toast.success('Login Successfully');
+      navigate('/home');
     }
     catch(error){
-      console.log(error.errors.message);
+      toast.error('Invalid Email or Password');
     }
   }
+  const googleLogin = () => {
+    try
+    {
+      let response = GoogleAPI();
+      console.log("Google Response : ",response);
+      toast.success('Login Successfully');
+    }
+    catch(error){
+      toast.error('Invalid Email or Password');
+    }
+  }
+
   return (
     <div className='login-wrapper'>
 
@@ -24,7 +41,7 @@ export default function LoginComponent() {
 
         <div className='login-wrapper-inner'>
         
-        <h1 className = "heading">Sign In</h1>
+        <h1 className = "heading">Log In</h1>
         <p className = "sub-heading">Welcome to Connect</p>
 
 
@@ -52,11 +69,15 @@ export default function LoginComponent() {
         <button className='login-btn' onClick={login}>Log In</button>
         
         </div>
-        <hr class="hr-text" data-content="OR"></hr>
+        <hr className="hr-text" data-content="or" />
         <div className='google-btn-container'>
-        <GoogleButton className='google-btn'
-          onClick={() => { console.log('Google button clicked') }}
-        />
+          <GoogleButton className='google-btn'
+            onClick={googleLogin}
+          />
+          <p className='signup-link'>
+            Don't have an account? <span className="register" onClick={() => navigate('/signup')}>Sign Up</span>
+          </p>
+
         </div>
     </div>
   )
