@@ -1,179 +1,112 @@
-body{
+body {
   margin: 0;
   padding: 0;
   display: flex;
-  // justify-content: center;
-  place-content: center;
-  place-items: center;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: black;
 }
 
-.login-wrapper{
-  font: Helvetica;
-  background-color: black;
-  .login-wrapper-inner{
-    padding: 100px 100px 0px 100px;
-  }
-  .heading{
-    color : white;
-    font: Helvetica;
+.login-wrapper {
+  font-family: Helvetica;
+  max-width: 400em;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  .heading {
+    color: white;
     font-weight: 200;
     font-size: 30px;
   }
-  .sub-heading{
+  .sub-heading {
     color: white;
     font-weight: 200;
     font-size: 20px;
     margin-top: -20px;
-    font: Helvetica;
   }
-  // position: absolute;
-  // top: 20px;
-  // left: 20px;
 }
 
-.auth-input{
-  display: flex;
-  gap: 10px;
-  flex-direction: column;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  width: 200px;
-  .common-input{
-    height: 30px;
-    padding: 5px;
-    font: Helvetica;
-    font-weight: 200;
-    font-size: 20px;
-    color: red;
-    background-color: white;
-    outline: none;
-    border: 2px solid orange;
-    border-radius: 5px;
-  }
-  .common-input:focus{
-    outline: 2px solid purple;
-  }
-  ::placeholder{
-    font: Helvetica;
-    font-weight: 200;
-    font-size: 20px;
+.auth-input {
+  margin-top: 10%;
+  .common-input {
+    width: 80%;
   }
 }
 
 
 .login-btn {
   display: inline-block;
-  background-color: purple;
-  height: 40px;
-  color: orange;
-  border: 2px solid white;
-  width: 200px;
-  border-radius: 5px;
-  padding: none;
-  font: Helvetica;
-  margin: 10px 0px;
-  font-weight: 200;
-  font-size: 20px; // Adjust font size as needed
-  text-align: center;
-  text-decoration: none;
-  cursor: pointer;
-  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-
+  padding: .25em .75em;
+  border-radius: 5em;
+  color: #fff;
+  font-size: 1em;
+  letter-spacing: .15em;
+  transition: all .3s;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #0cf;
+    border-radius: 10em;
+    z-index: -2;
+  }
+  &:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: darken(#0cf, 15%);
+    transition: all .3s;
+    border-radius: 10em;
+    z-index: -1;
+  }
   &:hover {
-    background-color: blue;
-    border-color: red;
+    color: #fff;
+    &:before {
+      width: 100%;
+    }
   }
 }
 
-// .login-btn {
-//   display: inline-block;
-//   padding: .75em 1.25em;
-//   border-radius: 10em;
-//   color: #fff;
-//   text-transform: uppercase;
-//   font-size: 1em;
-//   letter-spacing: .15em;
-//   transition: all .3s;
-//   position: relative;
-//   overflow: hidden;
-//   z-index: 1;
-//   &:after {
-//     content: '';
-//     position: absolute;
-//     bottom: 0;
-//     left: 0;
-//     width: 100%;
-//     height: 100%;
-//     background-color: #0cf;
-//     border-radius: 10em;
-//     z-index: -2;
-//   }
-//   &:before {
-//     content: '';
-//     position: absolute;
-//     bottom: 0;
-//     left: 0;
-//     width: 0%;
-//     height: 100%;
-//     background-color: darken(#0cf, 15%);
-//     transition: all .3s;
-//     border-radius: 10em;
-//     z-index: -1;
-//   }
-//   &:hover {
-//     color: #fff;
-//     &:before {
-//       width: 100%;
-//     }
-//   }
-// }
 
-// .google-btn-container{
-//   margin: 10px;
+.google-btn-container {
+  margin-top: 10%;
+  .google-btn{
+    width: 80% !important;
+  }
 
-//   .google-btn{
+  .signup-link{
+    margin-top: 5%;
+    font-size: 80%;
+  }
 
-//   }
-// }
+  .register{
+    color: #0072b1;
+    font-family: system-ui;
+    cursor: pointer;
+  }
+}
 
 .hr-text {
-  line-height: 1em;
-  position: relative;
-  outline: 0;
-  border: 0;
-  color: red;
-  text-align: center;
-  height: 1.5em;
-  opacity: .5;
+  margin: 10% 0;
   &:before {
-    content: '';
-    // use the linear-gradient for the fading effect
-    // use a solid background color for a solid bar
     background: linear-gradient(to right, transparent, #818078, transparent);
-    position: absolute;
-    left: 0;
-    top: 50%;
-    width: 100%;
-    height: 1px;
   }
   &:after {
-    content: attr(data-content);
-    position: relative;
-    display: inline-block;
-    color: black;
-
-    padding: 0 .5em;
-    line-height: 1.5em;
-    // this is really the only tricky part, you need to specify the background color of the container element...
-    color: yellow;
-    background-color: blue;
+    color: white;
+    background-color: transparent;
   }
 }
 
 .connectLogo {
-  width: 80;
-  position: absolute;
-
+  width: 50%;
 }
-
-
