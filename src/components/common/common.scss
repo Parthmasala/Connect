@@ -1,0 +1,15 @@
+.loader{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    gap: 20px;
+
+    p{
+        font: Helvetica;
+        font-weight: 500;
+        font-size: 20px;
+        color: red;
+    }
+}
