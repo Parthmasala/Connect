@@ -1,3 +1,1 @@
-This is BTP Project By 
-Parth Masalawala
-Jay Patel
+This is BTP Project By : Parth Masalawala & Jay Patel
