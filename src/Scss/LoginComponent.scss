@@ -1,19 +1,26 @@
 body {
   margin: 0;
   padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background-color: black;
+  background-color: #35374B;
 }
 
 .login-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   font-family: Helvetica;
-  max-width: 400em;
+  max-width: 400px;
   width: 100%;
   padding: 20px;
   box-sizing: border-box;
+  background-color: black;
+  .login-wrapper-inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
   .heading {
     color: white;
     font-weight: 200;
@@ -29,11 +36,39 @@ body {
 
 .auth-input {
   margin-top: 10%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .common-input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 2px solid transparent; // Set initial border to transparent
+    border-radius: 5px;
+    background-color: #1f1f1f;
+    color: white;
+    font-size: 1em;
+    &:focus {
+      outline: none;
+      animation: blinkBorder 1s infinite alternate; // Apply animation only when focused
+      border-color: #0cf; // Change border color on focus
+    }
+  }
   .common-input {
     width: 80%;
   }
 }
 
+@keyframes blinkBorder {
+  from {
+    border-color: transparent; // Initial border color
+  }
+  to {
+    border-color: #0cf; // Final border color
+  }
+}
 
 .login-btn {
   display: inline-block;
@@ -77,19 +112,20 @@ body {
   }
 }
 
-
 .google-btn-container {
   margin-top: 10%;
-  .google-btn{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .google-btn {
     width: 80% !important;
   }
-
-  .signup-link{
+  .signup-link {
     margin-top: 5%;
     font-size: 80%;
   }
-
-  .register{
+  .register {
     color: #0072b1;
     font-family: system-ui;
     cursor: pointer;
@@ -98,6 +134,7 @@ body {
 
 .hr-text {
   margin: 10% 0;
+  text-align: center;
   &:before {
     background: linear-gradient(to right, transparent, #818078, transparent);
   }
