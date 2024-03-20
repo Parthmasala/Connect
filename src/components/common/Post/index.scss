@@ -1,36 +1,42 @@
-.post-status-parent{
+/* Styles for post creation section */
+.post-status-parent {
     display: flex;
     justify-content: center;
-    align-items: cente  ;
+    align-items: center;
     flex-direction: column;
-
-    .post-status{
+  
+    .post-status {
+      width: 80%;
+      max-width: 500px;
+      height: 120px;
+      background-color: #f0f5f5;
+      margin-top: 20px;
+      border: 2px solid #dbe3e3;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  
+      .create-post {
         width: 80%;
-        height: 120px;
-        background-color: #c7d6c7;
-        margin-top: 10%;
-        border: 1px solid rgb(0, 0, 0);
-        border-radius: 7px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        
-        .create-post{
-            width: 80%;
-            height: 40px;
-            text-align: left;
-            font-family: system-ui;
-            color: #212121;
-            font-size:medium;
-            background-color: red;
-            border: 1px solid #b7b7b7;
-            border-radius: 30px;
-            cursor: pointer;
-            padding: 15px;
-            font-weight: 600;
+        height: 40px;
+        text-align: left;
+        font-family: Arial, sans-serif;
+        color: #333;
+        font-size: 16px;
+        background-color: #4CAF50;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        padding: 0 20px;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+        box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+  
+        &:hover {
+          background-color: #45a049;
         }
-        .create-post:hover{
-            background-color: #f7f7f7;
-        }
+      }
     }
-}
+  }
