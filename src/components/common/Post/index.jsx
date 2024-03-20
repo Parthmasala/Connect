@@ -1,23 +1,47 @@
-import React , {useState} from 'react'
+import React , {useState, useMemo} from 'react'
 import './index.scss'
 import ModalComponent from '../Modal';
-import { postStatus } from '../../../API/FirestoreAPI';
+import PostsCard from '../PostsCard';
+import { getCurrentTimeStamp } from '../../../helpers/useMoment';
+import { postStatus, getStatus } from '../../../API/FirestoreAPI';
 
 
 export default function PostStatus() {
+    let userEmail = localStorage.getItem("userEmail");
     const [modalOpen, setModalOpen] = useState(false);
     const [status , setStatus] = useState('')
+    const [allStatuses , setAllStatus] = useState([]);
     const sendStatus = async () => {
-        await postStatus(status);
+        let object = {
+            status: status,
+            timeStamp: getCurrentTimeStamp('LLL'),
+            userEmail: userEmail
+        }
+        await postStatus(object);
         await setModalOpen(false);
         await setStatus('');
     }
+
+
+    useMemo(() => {
+        getStatus(setAllStatus);
+    } , []);
+
+
   return (
     <div className='post-status-parent'>
         <div className='post-status'>
             <button className='create-post' onClick={() => setModalOpen(true)}> Create a Post</button>
         </div>
         <ModalComponent setStatus={setStatus} modalOpen={modalOpen} setModalOpen={setModalOpen} status={status} sendStatus={sendStatus}/>
+    
+    <div>
+      {allStatuses.map((posts) =>{
+          return <PostsCard posts = {posts}/>;
+        })
+        }
+    </div>
+      
     </div>
   );
 }
