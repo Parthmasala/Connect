@@ -1,5 +1,5 @@
 //firebase product
-import {signInWithEmailAndPassword , createUserWithEmailAndPassword , GoogleAuthProvider , signInWithPopup} from 'firebase/auth';
+import {signInWithEmailAndPassword , signOut , createUserWithEmailAndPassword , GoogleAuthProvider , signInWithPopup} from 'firebase/auth';
 import {auth} from '../FirebaseConfig';
 
 // let authentication = getAuth();
@@ -32,6 +32,16 @@ export const GoogleAPI = (email , password) => {
         let googleAccount = new GoogleAuthProvider();
         let response = signInWithPopup(auth , googleAccount);
         return response;
+    }
+    catch(error){
+        return error;
+    }
+
+};
+
+export const onLogout = () => {
+    try{
+        signOut(auth);
     }
     catch(error){
         return error;
