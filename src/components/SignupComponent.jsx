@@ -5,17 +5,18 @@ import GoogleButton from 'react-google-button'
 import "../Scss/LoginComponent.scss";
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-
+import { postUserData } from '../API/FirestoreAPI';
 export default function SignupComponent() {
   const [credentails, setCredentials] = useState({});
 
   let navigate = useNavigate();
 
-  const login = async () => {
+  const register = async () => {
     try
     {
       let response = await RegisterAPI(credentails.email , credentails.password);
       toast.success('Successfully Created Account');
+      postUserData({name : credentails.name , email : credentails.email})
       navigate('/home');
       // console.log(response) ;
       localStorage.setItem("userEmail", response.user.email);
@@ -43,6 +44,15 @@ export default function SignupComponent() {
 
 
         <div className='auth-input'>
+        <input onChange={
+            (e) => 
+            setCredentials({ ...credentails, name : e.target.value })
+          }
+          type="text"
+          className="common-input"
+          placeholder="Name"
+          />
+          
           <input onChange={
             (e) => 
             setCredentials({ ...credentails, email: e.target.value })
@@ -63,7 +73,7 @@ export default function SignupComponent() {
         </div>
 
 
-        <button className='login-btn' onClick={login}>Create Account</button>
+        <button className='login-btn' onClick={register}>Create Account</button>
         
         </div>
         <hr className="hr-text" data-content="or" />

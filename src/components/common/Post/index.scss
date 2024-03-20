@@ -19,7 +19,7 @@
       box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
   
       .create-post {
-        width: 80%;
+        width: 70%; // Adjusted width for responsiveness
         height: 40px;
         text-align: left;
         font-family: Arial, sans-serif;
@@ -39,4 +39,12 @@
         }
       }
     }
+    
+    // Media query for smaller screens
+    @media screen and (max-width: 768px) {
+      .post-status {
+        width: 90%; // Adjusted width for smaller screens
+      }
+    }
   }
+  
