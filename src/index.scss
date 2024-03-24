@@ -26,3 +26,20 @@ body {
   /* min-width: 320px; */
   min-height: 100vh;
 }
+
+
+.common-input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 2px solid transparent; // Set initial border to transparent
+  border-radius: 5px;
+  background-color: #1f1f1f;
+  color: white;
+  font-size: 1em;
+  &:focus {
+    outline: none;
+    animation: blinkBorder 1s infinite alternate; // Apply animation only when focused
+    border-color: #0cf; // Change border color on focus
+  }
+}

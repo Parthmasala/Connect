@@ -1,5 +1,5 @@
 import { db } from "../FirebaseConfig"
-import {addDoc , collection, onSnapshot} from "firebase/firestore"
+import {addDoc , collection, onSnapshot, doc, updateDoc} from "firebase/firestore"
 import {toast} from "react-toastify"
 let dbRef = collection(db , "posts")
 let userRef = collection(db , "users")
@@ -48,3 +48,15 @@ export const getCurrentUser = (setUserData) => {
         )
     })
 }
+
+export const editProfile = (userID, payLoad) =>{
+    let userToEdit = doc(userRef, userID);
+
+    updateDoc(userToEdit, payLoad)
+    .then(() => {
+        toast.success('Profile Updated');
+    })
+    .catch((err) => {
+        console.log(err);
+    });
+};
