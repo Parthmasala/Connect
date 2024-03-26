@@ -19,10 +19,10 @@ export default function ProfileEdit({currentUser, onEdit}) {
     // console.log(editInputs);
     return (<div className="profileEdit">
         <div className="edit-btn">
-            <button onClick={onEdit}>GO back</button>
+            <button onClick={onEdit}>Back</button>
             
         </div>
-        <div className="profieEditInputs">
+        <div className="profileEditInputs">
 
             <input onChange={getInput}  className="common-input"  placeholder="Name" name = "name"></input>
             <input onChange={getInput}  className="common-input" placeholder="Headline" name = "headline"></input>

@@ -1,5 +1,5 @@
 .navbar-master {
-    width: 100vw;
+    width: 99vw;
     height: 10vh;
     background-color: black;
     display: flex;
@@ -25,7 +25,7 @@
 .user-logo {
     width: 40px;
     height: 40px;
-    margin-right: 10px;
+    margin-right: 20px;
     cursor: pointer;
 
     .logout-button {
@@ -52,6 +52,10 @@
 }
 
 
+.popup {
+    display: flex;
+    flex-direction: column;
+}
 
 .icons {
     width: 30%;

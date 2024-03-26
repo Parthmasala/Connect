@@ -13,7 +13,7 @@ export default function ProfileComponent({currentUser}) {
             {isEdit ? 
             (<ProfileEdit currentUser={currentUser} onEdit={onEdit} />) :
             (<ProfileCard currentUser={currentUser} onEdit={onEdit}/>)
-            }
+            } 
         </div>
     );
 }
