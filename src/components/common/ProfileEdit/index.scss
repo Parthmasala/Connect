@@ -1,13 +1,14 @@
 .profileEdit {
   display: flex;
   flex-direction: column;
-  width: 90%; 
-  max-width: 600px; 
-  margin: 30px auto;  
+  width: 90%;
+  max-width: 600px;
+  margin: 30px auto;
   background-color: whitesmoke;
   border-radius: 10px;
   position: relative;
   padding: 20px;
+
   .edit-btn {
     button {
       cursor: pointer;
@@ -22,38 +23,54 @@
       box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
 
       &:hover {
-          background-color: #45a049;
+        background-color: #45a049;
       }
-  }
+    }
   }
 
   .profileEditInputs {
+    margin-top: 30px;
+    margin-bottom: 30px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-top: 50px;
 
-    input {
-      width: 80%; 
-      max-width: 70%; 
-      height: 40px;
+    label {
+      color: black;
+      font-family: system-ui;
+      margin-bottom: 5px;
+      padding-left: 10px;
+    }
+
+    input,
+    textArea {
+      width: 100%;
+      height: 50px;
       border-radius: 5px;
       border: 1px solid gray;
-      margin: 10px;
-      padding-left: 10px;
+      margin: 5px 0;
+      padding: 0 10px;
+      box-sizing: border-box;
+    }
+
+    textArea {
+      color: rgb(255, 252, 252);
+      font-family: system-ui;
+      font-size: 14px;
+      height: 100px;
+      resize: vertical;
+      padding: 10px;
     }
   }
 
   .save-btn {
     display: inline-block;
-    padding: .5em 1em; // Added padding for the button
+    padding: 0.5em 1em;
     border-radius: 5em;
     color: #fff;
     font-size: 1em;
     max-width: 20%;
-    letter-spacing: .15em;
-    transition: all .3s;
+    letter-spacing: 0.15em;
+    transition: all 0.3s;
     position: relative;
     overflow: hidden;
     z-index: 1;
@@ -78,7 +95,7 @@
       width: 0%;
       height: 100%;
       background-color: darken(#0cf, 15%);
-      transition: all .3s;
+      transition: all 0.3s;
       border-radius: 10em;
       z-index: -1;
     }

@@ -43,9 +43,18 @@ export default function ProfileCard({ onEdit, currentUser }) {
                         </p>
                         <p className="location">
                         {Object.values(currentProfile).length == 0
-                            ? currentUser.location
-                            : currentProfile?.location}
+                            ? `${currentUser.city}, ${currentUser.country}`
+                            : `${currentUser.city}, ${currentUser.country}`}
                         </p>
+                        <a className="website" 
+                            target="_blank"
+                            href={Object.values(currentProfile).length == 0
+                            ? `${currentUser.website}`
+                            : currentProfile?.website}>
+                        {Object.values(currentProfile).length == 0
+                            ? `${currentUser.website}`
+                            : currentProfile?.website}
+                        </a>
                     </div>
 
                     <div className="right-info">
@@ -60,7 +69,29 @@ export default function ProfileCard({ onEdit, currentUser }) {
                         </p>
                     </div>
                 </div>
-                
+                {
+                    //only when skills or aboutme is present otherwise there is horizontal line
+                    (currentProfile.skills || currentProfile.aboutme )
+                    ?
+                    <div className="extra-info">
+                    <p className="aboutme">{Object.values(currentProfile).length == 0
+                        ? currentUser.aboutme
+                        : currentProfile?.aboutme}
+                    </p>
+                    <p className="skills">
+                        {
+                        //only when skills is present otherwise there is Bold Skills
+                        currentProfile.skills ? 
+                         <span className="skills-label">Skills : </span> : 
+                         <></>
+                        }
+                        &nbsp;{Object.values(currentProfile).length == 0
+                        ? currentUser.skills
+                        : currentProfile?.skills}
+                    </p>
+                </div> :
+                <></>
+                }
             </div>
 
             <div className="post-status-parent">

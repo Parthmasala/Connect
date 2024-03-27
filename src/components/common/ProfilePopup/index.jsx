@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { getCurrentUser } from "../../../API/FirestoreAPI";
 import Button from "../Button";
 import "./index.scss";
+import {onLogout} from "../../../API/AuthAPI";
 
 export default function ProfilePopup() {
   let navigate = useNavigate();
@@ -24,6 +25,8 @@ export default function ProfilePopup() {
           })
         }
       />
+      <Button title="Logout" onClick={onLogout} />
+
     </div>
   );
 }
