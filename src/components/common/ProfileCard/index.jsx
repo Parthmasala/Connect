@@ -72,7 +72,7 @@ export default function ProfileCard({ onEdit, currentUser }) {
                 </div>
                 {
                     //only when skills or aboutme is present otherwise there is horizontal line
-                    (currentProfile.skills || currentProfile.aboutme )
+                    (currentUser.skills != "" || currentUser.aboutme != "")
                     ?
                     <div className="extra-info">
                     <p className="aboutme">{Object.values(currentProfile).length == 0
@@ -81,15 +81,24 @@ export default function ProfileCard({ onEdit, currentUser }) {
                     </p>
                     <p className="skills">
                         {
-                        //only when skills is present otherwise there is Bold Skills
-                        currentProfile.skills ? 
-                         <span className="skills-label">Skills : </span> : 
-                         <></>
+                            (location?.state?.id === currentUser.userID) ? (
+                                (currentUser.skills) ? (
+                                    <>
+                                        <span className="skills-label">Skills : </span>
+                                        &nbsp;{currentUser.skills}
+                                    </>
+                                ) : null
+                            ) : (
+                                (currentProfile.skills) ? (
+                                    <>
+                                        <span className="skills-label">Skills : </span>
+                                        &nbsp;{currentProfile.skills}
+                                    </>
+                                ) : null
+                            )
                         }
-                        &nbsp;{Object.values(currentProfile).length == 0
-                        ? currentUser.skills
-                        : currentProfile?.skills}
                     </p>
+
                 </div> :
                 <></>
                 }
