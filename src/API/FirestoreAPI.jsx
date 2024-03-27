@@ -1,7 +1,11 @@
 import { db } from "../FirebaseConfig"
-import {addDoc , collection, onSnapshot, doc, updateDoc} from "firebase/firestore"
+import {addDoc , collection, onSnapshot, doc, updateDoc,
+    query, where, getDocs, getDoc
+} from "firebase/firestore"
 import {toast} from "react-toastify"
-let dbRef = collection(db , "posts")
+
+
+let dbRef = collection(db , "posts") //this is the reference to the posts postRef
 let userRef = collection(db , "users")
 
 export const postStatus = (obj) => {
@@ -58,5 +62,25 @@ export const editProfile = (userID, payLoad) =>{
     })
     .catch((err) => {
         console.log(err);
+    });
+};
+
+export const getSingleStatus = (setAllStatus , id) =>{
+    const singlePostQuery = query(dbRef , where("userID" , "==" , id));
+    onSnapshot(singlePostQuery, (response) =>{
+        setAllStatus(
+            response.docs.map((docs) => {
+                return {...docs.data(), id: docs.id};
+        }));
+    });
+};
+
+export const getSingleUser = (setCurrentUser , email) =>{
+    const singleUserQuery = query(userRef , where("email" , "==" , email));
+    onSnapshot(singleUserQuery, (response) =>{
+        setCurrentUser(
+            response.docs.map((docs) => {
+                return {...docs.data(), id: docs.id};
+        })[0]);
     });
 };

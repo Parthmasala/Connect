@@ -6,6 +6,8 @@ import "../Scss/LoginComponent.scss";
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { postUserData } from '../API/FirestoreAPI';
+import {getUniqueID} from '../helpers/getUniqueID'
+
 export default function SignupComponent() {
   const [credentails, setCredentials] = useState({});
 
@@ -16,7 +18,11 @@ export default function SignupComponent() {
     {
       let response = await RegisterAPI(credentails.email , credentails.password);
       toast.success('Successfully Created Account');
-      postUserData({name : credentails.name , email : credentails.email})
+      postUserData({
+        name : credentails.name , 
+        email : credentails.email,
+        userID : getUniqueID(),
+      })
       navigate('/home');
       // console.log(response) ;
       localStorage.setItem("userEmail", response.user.email);

@@ -5,9 +5,9 @@ import usericon from '../../../assets/user-icon.png';
 import { IoMdHome, IoIosBriefcase, IoMdNotifications } from 'react-icons/io';
 import { FaUserPlus, FaSearch, FaComments } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import { onLogout } from '../../../API/AuthAPI';
+import ProfilePopup from '../ProfilePopup';
 
-export default function Navbar() {
+export default function Navbar(currentUser) {
   const navigate = useNavigate();
   const [showPopup, setShowPopup] = useState(false);
 
@@ -17,7 +17,7 @@ export default function Navbar() {
 
   return (
     <div className="navbar-master">
-      <img className="connect-logo" src={ConnectLogo} alt="Connect Logo" />
+      <img className="connect-logo" src={ConnectLogo} alt="Connect Logo" onClick={() => Route('/home')}/>
       <div className="icons">
         <IoMdHome size={40} className="icon-scss" onClick={() => Route('/Home')} />
         <FaUserPlus size={30} className="icon-scss" onClick={() => Route('/Connections')} />
@@ -26,13 +26,9 @@ export default function Navbar() {
         <FaComments size={30} className="icon-scss" onClick={() => Route('/Messages')} />
         <IoMdNotifications size={40} className="icon-scss" onClick={() => Route('/Notifications')} />
       </div>
-      <div className="user-logo-container" onMouseEnter={() => setShowPopup(true)} onMouseLeave={() => setShowPopup(false)}>
+      <div onMouseEnter={() => setShowPopup(true)} onMouseLeave={() => setShowPopup(false)}>
         <img className="user-logo" src={usericon} alt="User Icon" />
-        {showPopup && (
-          <div className="popup">
-            <button className="logout-button" onClick={onLogout}>Logout</button>
-          </div>
-        )}
+        {showPopup && <ProfilePopup currentUser={currentUser}/>}
       </div>
     </div>
   );

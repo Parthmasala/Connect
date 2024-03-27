@@ -1,46 +1,116 @@
 import React, {useState, useMemo} from "react";
-import { getStatus } from '../../../API/FirestoreAPI';
+// import { getStatus } from '../../../API/FirestoreAPI';
+import {getSingleStatus , getSingleUser} from "../../../API/FirestoreAPI";
 import PostsCard from "../PostsCard";
+import { useLocation } from "react-router-dom";
 import "./index.scss";
 
-export default function ProfileCard({ currentUser, onEdit }) {
+export default function ProfileCard({ onEdit, currentUser }) {
+    let location = useLocation();
     const [allStatuses , setAllStatus] = useState([]);
+    const [currentProfile , setCurrentProfile] = useState({});
 
     useMemo(() => {
-        getStatus(setAllStatus);
+        if(location?.state?.id){
+            getSingleStatus(setAllStatus , location?.state?.id);
+        }
+        if(location?.state?.email){
+            getSingleUser(setCurrentProfile , location?.state?.email);
+        }
+        
     } , []);
-
+    // console.log(currentProfile);
+    // console.log(currentUser);
     return (
         <>
             <div className="profile-card">
-                <div className="edit-btn">
+                
+                {(location?.state?.id == currentUser.userID) &&
+                    <div className="edit-btn">
                     <button onClick={onEdit}>Edit</button>
-                </div>
+                </div>}
+
                 <div className="profile-info">
                     <div>
-                        <h3 className="userName">{currentUser.name}</h3>;
-                        <p className="text">{currentUser.headline}</p>;
-                        <p className="text">{currentUser.location}</p>
+                        <h3 className="userName">
+                            {Object.values(currentProfile).length == 0
+                            ? currentUser.name
+                            : currentProfile?.name}    
+                        </h3>
+                        <p className="heading">
+                        {Object.values(currentProfile).length == 0
+                            ? currentUser.headline
+                            : currentProfile?.headline} 
+                        </p>
+                        <p className="location">
+                        {Object.values(currentProfile).length == 0
+                            ? `${currentUser.city}, ${currentUser.country}`
+                            : `${currentUser.city}, ${currentUser.country}`}
+                        </p>
+                        <a className="website" 
+                            target="_blank"
+                            href={Object.values(currentProfile).length == 0
+                            ? `${currentUser.website}`
+                            : currentProfile?.website}>
+                        {Object.values(currentProfile).length == 0
+                            ? `${currentUser.website}`
+                            : currentProfile?.website}
+                        </a>
                     </div>
 
                     <div className="right-info">
-                        <p className="college">{currentUser.college}</p>
-                        <p className="company">{currentUser.company}</p>
+                        <p className="college">{Object.values(currentProfile).length == 0
+                            ? currentUser.college
+                            : currentProfile?.college}
+                        </p>
+                        <p className="company">
+                        {Object.values(currentProfile).length == 0
+                            ? currentUser.company
+                            : currentProfile?.company}
+                        </p>
                     </div>
                 </div>
-                
+                {
+                    //only when skills or aboutme is present otherwise there is horizontal line
+                    (currentUser.skills != "" || currentUser.aboutme != "")
+                    ?
+                    <div className="extra-info">
+                    <p className="aboutme">{Object.values(currentProfile).length == 0
+                        ? currentUser.aboutme
+                        : currentProfile?.aboutme}
+                    </p>
+                    <p className="skills">
+                        {
+                            (location?.state?.id === currentUser.userID) ? (
+                                (currentUser.skills) ? (
+                                    <>
+                                        <span className="skills-label">Skills : </span>
+                                        &nbsp;{currentUser.skills}
+                                    </>
+                                ) : null
+                            ) : (
+                                (currentProfile.skills) ? (
+                                    <>
+                                        <span className="skills-label">Skills : </span>
+                                        &nbsp;{currentProfile.skills}
+                                    </>
+                                ) : null
+                            )
+                        }
+                    </p>
+
+                </div> :
+                <></>
+                }
             </div>
 
             <div className="post-status-parent">
-                {allStatuses.filter((item) => {
-                    return item.userEmail === localStorage.getItem("userEmail");
-                })
-                .map((posts) =>{
-                    return (
-                        <div key = {posts.id}>
-                            <PostsCard posts = {posts}/>
-                        </div>
-                    );
+                {allStatuses?.map((posts) => {
+                return (
+                    <div key={posts.id}>
+                    <PostsCard posts={posts} />
+                    </div>
+                );
                 })}
             </div>
         </>

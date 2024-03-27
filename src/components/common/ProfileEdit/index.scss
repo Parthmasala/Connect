@@ -1,78 +1,110 @@
-.profileEdit { 
+.profileEdit {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  max-width: 600px;
+  margin: 30px auto;
+  background-color: whitesmoke;
+  border-radius: 10px;
+  position: relative;
+  padding: 20px;
+
+  .edit-btn {
+    button {
+      cursor: pointer;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 8px 16px;
+      font-size: 14px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+      box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+
+      &:hover {
+        background-color: #45a049;
+      }
+    }
+  }
+
+  .profileEditInputs {
+    margin-top: 30px;
+    margin-bottom: 30px;
     display: flex;
     flex-direction: column;
-    width: auto; 
-    height: auto; 
-    background-color: whitesmoke;
-    margin: 30px; 
-    border-radius: 5px;
+
+    label {
+      color: black;
+      font-family: system-ui;
+      margin-bottom: 5px;
+      padding-left: 10px;
+    }
+
+    input,
+    textArea {
+      width: 100%;
+      height: 50px;
+      border-radius: 5px;
+      border: 1px solid gray;
+      margin: 5px 0;
+      padding: 0 10px;
+      box-sizing: border-box;
+    }
+
+    textArea {
+      color: rgb(255, 252, 252);
+      font-family: system-ui;
+      font-size: 14px;
+      height: 100px;
+      resize: vertical;
+      padding: 10px;
+    }
+  }
+
+  .save-btn {
+    display: inline-block;
+    padding: 0.5em 1em;
+    border-radius: 5em;
+    color: #fff;
+    font-size: 1em;
+    max-width: 20%;
+    letter-spacing: 0.15em;
+    transition: all 0.3s;
     position: relative;
+    overflow: hidden;
+    z-index: 1;
 
-    .edit-btn{
-        position: absolute;
-        right: 20px;
-        button{
-            cursor: pointer;
-        }
-    }
-    .profileEditInputs{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        margin-top: 50px;
-        input{
-            width: 300px;
-            height: 40px;
-            border-radius: 5px;
-            border: 1px solid gray;
-            margin: 10px;
-            padding-left: 10px;
-        }
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #0cf;
+      border-radius: 10em;
+      z-index: -2;
     }
 
-    .save-btn{
-            display: inline-block;
-            padding: .25em .75em;
-            border-radius: 5em;
-            color: #fff;
-            font-size: 1em;
-            letter-spacing: .15em;
-            transition: all .3s;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-            &:after {
-              content: '';
-              position: absolute;
-              bottom: 0;
-              left: 0;
-              width: 100%;
-              height: 100%;
-              background-color: #0cf;
-              border-radius: 10em;
-              z-index: -2;
-            }
-            &:before {
-              content: '';
-              position: absolute;
-              bottom: 0;
-              left: 0;
-              width: 0%;
-              height: 100%;
-              background-color: darken(#0cf, 15%);
-              transition: all .3s;
-              border-radius: 10em;
-              z-index: -1;
-            }
-            &:hover {
-              color: #fff;
-              &:before {
-                width: 100%;
-              }
-          }
+    &:before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0%;
+      height: 100%;
+      background-color: darken(#0cf, 15%);
+      transition: all 0.3s;
+      border-radius: 10em;
+      z-index: -1;
     }
-    
+
+    &:hover {
+      color: #fff;
+      &:before {
+        width: 100%;
+      }
+    }
+  }
 }
-
-
