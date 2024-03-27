@@ -1,8 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { onLogout } from "../../../API/AuthAPI";
 import { getCurrentUser } from "../../../API/FirestoreAPI";
-// import Button from "../Button";
+import Button from "../Button";
 import "./index.scss";
 
 export default function ProfilePopup() {
@@ -13,19 +12,18 @@ export default function ProfilePopup() {
   }, []);
   return (
     <div className="popup-card">
-      <p className="name">{currentUser?.name}</p>
-      <p className="headline">{currentUser?.headline}</p>
-      {/* <Button
+      <p className="name">{currentUser.name}</p>
+      <p className="headline">{currentUser.headline}</p>
+      <Button
         title="View Profile"
         onClick={() =>
           navigate("/profile", {
             state: {
-              id: currentUser?.id,
+              id: currentUser.userID,
             },
           })
         }
       />
-      <Button title="Log out" onClick={onLogout} /> */}
     </div>
   );
 }

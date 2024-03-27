@@ -23,9 +23,12 @@ export default function ProfileCard({ onEdit, currentUser }) {
     return (
         <>
             <div className="profile-card">
-                <div className="edit-btn">
+                
+                {(currentProfile.userID == currentUser.userID) &&
+                    <div className="edit-btn">
                     <button onClick={onEdit}>Edit</button>
-                </div>
+                </div>}
+
                 <div className="profile-info">
                     <div>
                         <h3 className="userName">
@@ -61,15 +64,12 @@ export default function ProfileCard({ onEdit, currentUser }) {
             </div>
 
             <div className="post-status-parent">
-                {allStatuses.filter((item) => {
-                    return item.userEmail === localStorage.getItem("userEmail");
-                })
-                .map((posts) =>{
-                    return (
-                        <div key = {posts.id}>
-                            <PostsCard posts = {posts}/>
-                        </div>
-                    );
+                {allStatuses?.map((posts) => {
+                return (
+                    <div key={posts.id}>
+                    <PostsCard posts={posts} />
+                    </div>
+                );
                 })}
             </div>
         </>

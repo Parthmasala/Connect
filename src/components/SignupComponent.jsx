@@ -21,7 +21,7 @@ export default function SignupComponent() {
       postUserData({
         name : credentails.name , 
         email : credentails.email,
-        useID : getUniqueID(),
+        userID : getUniqueID(),
       })
       navigate('/home');
       // console.log(response) ;
