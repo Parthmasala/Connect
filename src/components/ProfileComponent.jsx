@@ -1,6 +1,6 @@
 import React, {useState} from "react";
-import ProfileCard from "../components/common/ProfileCard/index";
-import ProfileEdit from "../components/common/ProfileEdit/index";
+import ProfileCard from "../components/common/ProfileCard";
+import ProfileEdit from "../components/common/ProfileEdit";
 
 export default function ProfileComponent({currentUser}) {
 

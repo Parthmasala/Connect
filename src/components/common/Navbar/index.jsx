@@ -7,7 +7,7 @@ import { FaUserPlus, FaSearch, FaComments } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import ProfilePopup from '../ProfilePopup';
 
-export default function Navbar() {
+export default function Navbar(currentUser) {
   const navigate = useNavigate();
   const [showPopup, setShowPopup] = useState(false);
 
@@ -28,7 +28,7 @@ export default function Navbar() {
       </div>
       <div onMouseEnter={() => setShowPopup(true)} onMouseLeave={() => setShowPopup(false)}>
         <img className="user-logo" src={usericon} alt="User Icon" />
-        {showPopup && <ProfilePopup />}
+        {showPopup && <ProfilePopup currentUser={currentUser}/>}
       </div>
     </div>
   );

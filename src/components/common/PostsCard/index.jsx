@@ -8,7 +8,7 @@ export default function PostsCard({posts , id}){
         <div className='posts-card' key={id}>
             <p className='name' 
             onClick={() => navigate('/profile' , {
-                state : {id : posts.userID , email:posts.userEmail},
+                state : {id : posts?.userID , email:posts.userEmail},
             })}>
                 
                 {posts.userName}</p>

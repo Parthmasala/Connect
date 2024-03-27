@@ -19,12 +19,13 @@ export default function ProfileCard({ onEdit, currentUser }) {
         }
         
     } , []);
-    console.log(currentProfile);
+    // console.log(currentProfile);
+    // console.log(currentUser);
     return (
         <>
             <div className="profile-card">
                 
-                {(currentProfile.userID == currentUser.userID) &&
+                {(location?.state?.id == currentUser.userID) &&
                     <div className="edit-btn">
                     <button onClick={onEdit}>Edit</button>
                 </div>}

@@ -10,7 +10,7 @@ export default function ProfileLayout() {
     }, []);
     return (
         <div>
-            <Navbar />
+            <Navbar currentUser={currentUser} />
             <Profile currentUser={currentUser} />
         </div>
     );
