@@ -18,7 +18,7 @@ export default function PostStatus({currentUser}) {
             userEmail: currentUser.email,
             userName : currentUser.name,
             userID : currentUser.userID,
-            posID : getUniqueID(), 
+            postID : getUniqueID(), 
 
         }
         await postStatus(object);

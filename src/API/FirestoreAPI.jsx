@@ -1,12 +1,13 @@
 import { db } from "../FirebaseConfig"
 import {addDoc , collection, onSnapshot, doc, updateDoc,
-    query, where, getDocs, getDoc
+    query, where, getDocs, getDoc, setDoc
 } from "firebase/firestore"
 import {toast} from "react-toastify"
 
 
 let dbRef = collection(db , "posts") //this is the reference to the posts postRef
 let userRef = collection(db , "users")
+let likeRef = collection(db, "likes")
 
 export const postStatus = (obj) => {
     
@@ -84,3 +85,23 @@ export const getSingleUser = (setCurrentUser , email) =>{
         })[0]);
     });
 };
+
+export const likePost = (userId, postId) => {
+    try{
+        let docToLike = doc(likeRef, `${userId}_${postId}`);
+        setDoc(docToLike, {postId, userId});
+    }
+    catch(err){
+        console.log(err);
+
+    }
+}
+
+export const getLikesByUser = (userId, postId) =>{
+    try{
+        
+    }
+    catch(err){
+        console.log(err);
+    }
+}
