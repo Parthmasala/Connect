@@ -1,0 +1,52 @@
+
+.like-container{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    color: purple;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-bottom: -20px;
+
+    .hr-line{
+        margin-top: -20px;
+        hr{
+            border: 1px solid orange;
+        }
+    }
+
+    .likes-inner{
+        margin-top: -20px;
+        display: flex;
+        align-items: center;
+        .purple{
+            color: purple;
+        }
+        .black{
+            color: black;
+        }
+        p{
+            font: Helvetica;
+            font-weight: 600; 
+            color: rgba(0, 0, 0, 0.835);
+        }
+    }
+    p{
+        font: Helvetica;
+        font-weight: 600; 
+        color: #000000d5;
+        margin-left: 10px;
+    }
+}
+
+// .like-container{
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     width: 100%;
+//     gap: 10px;
+//     color: #014488;
+//     cursor: pointer;
+//     // margin: 10px 10px 10px 10px;
+// }

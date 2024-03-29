@@ -1,12 +1,13 @@
 import { db } from "../FirebaseConfig"
 import {addDoc , collection, onSnapshot, doc, updateDoc,
-    query, where, getDocs, getDoc
+    query, where, getDocs, getDoc, setDoc, deleteDoc
 } from "firebase/firestore"
 import {toast} from "react-toastify"
 
 
 let dbRef = collection(db , "posts") //this is the reference to the posts postRef
 let userRef = collection(db , "users")
+let likeRef = collection(db, "likes")
 
 export const postStatus = (obj) => {
     
@@ -84,3 +85,42 @@ export const getSingleUser = (setCurrentUser , email) =>{
         })[0]);
     });
 };
+
+export const likePost = (userId, postId, liked) => {
+    try{
+        let docToLike = doc(likeRef, `${userId}_${postId}`);
+
+        if(liked){
+            deleteDoc(docToLike);
+        }
+        else{
+            setDoc(docToLike, {postId, userId}); 
+        }
+        
+    }
+    catch(err){
+        console.log(err);
+
+    }
+}
+
+export const getLikesByUser = (userId, postId, setLiked, setLikesCount) =>{
+    try{
+        let likeQuery = query(likeRef, where('postId', "==", postId));
+        onSnapshot(likeQuery, (response) =>{
+            let likes = response.docs.map((doc) => doc.data());
+            // console.log(likes);
+
+            let likesCount = likes?.length;
+            const isLiked = likes.some((like) => like.userId === userId);
+
+            // console.log(likesCount);
+            setLikesCount(likesCount);
+            setLiked(isLiked);
+
+        });
+    }
+    catch(err){
+        console.log(err);
+    }
+}
