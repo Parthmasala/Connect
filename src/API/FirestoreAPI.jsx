@@ -8,6 +8,7 @@ import {toast} from "react-toastify"
 let dbRef = collection(db , "posts") //this is the reference to the posts postRef
 let userRef = collection(db , "users")
 let likeRef = collection(db, "likes")
+let commentRef = collection(db, "comments")
 
 export const postStatus = (obj) => {
     
@@ -118,6 +119,34 @@ export const getLikesByUser = (userId, postId, setLiked, setLikesCount) =>{
             setLikesCount(likesCount);
             setLiked(isLiked);
 
+        });
+    }
+    catch(err){
+        console.log(err);
+    }
+}
+
+export const postComment = (postId , comment, timeStamp ,name) =>{
+    try{
+        addDoc(commentRef, {postId, comment, timeStamp , name});
+    }
+    catch(err){
+        console.log(err);s
+    }
+}
+export const getComments = (postId , setShowComments) =>{
+    try{
+        let commentQuery = query(commentRef, where('postId', "==", postId));
+        onSnapshot(commentQuery, (response) =>{
+            // setComments(response.docs.map((doc) => doc.data()));
+            const comments = response.docs.map((doc) => {
+                return {
+                    id : doc.id,
+                ...doc.data(),
+            };
+            }
+            );
+            setShowComments(comments);
         });
     }
     catch(err){

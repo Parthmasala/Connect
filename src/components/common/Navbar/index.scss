@@ -1,10 +1,13 @@
 .navbar-master {
-    width: 99vw;
+    width: 97vw;
     height: 10vh;
     background-color: black;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 0 20px; 
+    position: relative;
+
     @media screen and (max-width: 768px) {
         flex-direction: column;
         height: auto;
@@ -22,34 +25,17 @@
 }
 
 .user-logo {
-    width: 40px;
+    width: 70%;
     height: 40px;
     margin-right: 20px;
     cursor: pointer;
+    z-index: 2; 
 
-    // .logout-button {
-    //     position: absolute;
-    //     top: 100%;
-    //     left: 50%;
-    //     transform: translateX(-50%);
-    //     background-color: #333;
-    //     color: #fff;
-    //     padding: 5px 10px;
-    //     border-radius: 5px;
-    //     display: none; // Initially hide the logout button
-    // }
-
-    // &:hover {
-    //     .logout-button {
-    //         display: block; // Show the logout button on hover
-    //     }
-    // }
-    
     @media screen and (max-width: 768px) {
         margin: 10px;
+        
     }
 }
-
 
 .popup {
     display: flex;
