@@ -10,7 +10,7 @@ export default function HomeLayout() {
   } , [])
   return (
     <div>
-        <Navbar/>
+        <Navbar currentUser={currentUser}/>
         <Home currentUser={currentUser}/>
     </div>
   )
