@@ -1,14 +1,23 @@
-import React, {useState, useMemo} from "react";
-// import { getStatus } from '../../../API/FirestoreAPI';
-import {getSingleStatus , getSingleUser} from "../../../API/FirestoreAPI";
+import React, {useState, useMemo, useEffect} from "react";
+import { getStatus } from '../../../API/FirestoreAPI';
+import {getSingleStatus , getSingleUser, editProfile} from "../../../API/FirestoreAPI";
 import PostsCard from "../PostsCard";
 import { useLocation } from "react-router-dom";
+import { uploadImage as uploadImageAPI} from "../../../API/ImageUpload";
 import "./index.scss";
 
 export default function ProfileCard({ onEdit, currentUser }) {
     let location = useLocation();
     const [allStatuses , setAllStatus] = useState([]);
     const [currentProfile , setCurrentProfile] = useState({});
+    const [currentImage, setCurrentImage] = useState({});
+    const getImage = (event) => {
+        setCurrentImage(event.target.files[0]);
+    };
+
+    const uploadImage = () => {
+        uploadImageAPI(currentImage, currentUser.userid);
+    };
 
     useMemo(() => {
         if(location?.state?.id){
@@ -19,12 +28,12 @@ export default function ProfileCard({ onEdit, currentUser }) {
         }
         
     } , []);
-    // console.log(currentProfile);
-    // console.log(currentUser);
+    
     return (
         <>
             <div className="profile-card">
-                
+            <input type = {"file"} onChange={getImage}/>
+            <button onClick={uploadImage}>Upload</button>
                 {(location?.state?.id == currentUser.userID) &&
                     <div className="edit-btn">
                     <button onClick={onEdit}>Edit</button>
@@ -32,6 +41,7 @@ export default function ProfileCard({ onEdit, currentUser }) {
 
                 <div className="profile-info">
                     <div>
+                        <img className = "profile-image" src ={currentUser?.imageLink} alt="profile-image"/>
                         <h3 className="userName">
                             {Object.values(currentProfile).length == 0
                             ? currentUser.name

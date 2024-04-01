@@ -131,7 +131,7 @@ export const postComment = (postId , comment, timeStamp ,name) =>{
         addDoc(commentRef, {postId, comment, timeStamp , name});
     }
     catch(err){
-        console.log(err);s
+        console.log(err);
     }
 }
 export const getComments = (postId , setShowComments) =>{
