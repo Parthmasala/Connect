@@ -45,14 +45,19 @@ export default function ProfileCard({ onEdit, currentUser }) {
             />
             <div className="profile-card">
                {(location?.state?.id == currentUser.userID) &&
-                    <div className="edit-btn">
+                    (<div className="edit-btn">
                     <button onClick={onEdit}>Edit</button>
-                </div>}
+                </div>)}
 
                 <div className="profile-info">
                     <div>
                         <img className = "profile-image" 
-                        onClick={() => setModalOpen(true)}
+                        onClick={() => {
+                            if (location?.state?.id == currentUser.userID) {
+                                setModalOpen(true);
+                            }
+                        }}
+
                         src ={
                             Object.values(currentProfile).length == 0
                             ? currentUser.imageLink
