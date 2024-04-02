@@ -87,6 +87,16 @@ export const getSingleUser = (setCurrentUser , email) =>{
     });
 };
 
+
+export const getAllUsers = (setAllUsers) =>{
+    onSnapshot(userRef, (response) =>{
+        setAllUsers(
+            response.docs.map((docs) => {
+                return {...docs.data(), id: docs.id};
+        }));
+    });
+};
+
 export const likePost = (userId, postId, liked) => {
     try{
         let docToLike = doc(likeRef, `${userId}_${postId}`);
