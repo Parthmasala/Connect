@@ -44,7 +44,7 @@ export default function ProfileCard({ onEdit, currentUser }) {
             progress={progress}
             />
             <div className="profile-card">
-               {(location?.state?.id == currentUser.userID) &&
+               {(location?.state?.id == currentUser.userid) &&
                     (<div className="edit-btn">
                     <button onClick={onEdit}>Edit</button>
                 </div>)}
@@ -53,7 +53,7 @@ export default function ProfileCard({ onEdit, currentUser }) {
                     <div>
                         <img className = "profile-image" 
                         onClick={() => {
-                            if (location?.state?.id == currentUser.userID) {
+                            if (location?.state?.id == currentUser.userid) {
                                 setModalOpen(true);
                             }
                         }}
@@ -106,7 +106,7 @@ export default function ProfileCard({ onEdit, currentUser }) {
                 </div>
                 {
                     //only when skills or aboutme is present otherwise there is horizontal line
-                    (currentUser.skills != "" || currentUser.aboutme != "")
+                    (currentProfile.skills != "" || currentProfile.aboutme != "")
                     ?
                     <div className="extra-info">
                     <p className="aboutme">{Object.values(currentProfile).length == 0
@@ -115,7 +115,7 @@ export default function ProfileCard({ onEdit, currentUser }) {
                     </p>
                     <p className="skills">
                         {
-                            (location?.state?.id === currentUser.userID) ? (
+                            (location?.state?.id === currentUser.userid) ? (
                                 (currentUser.skills) ? (
                                     <>
                                         <span className="skills-label">Skills : </span>

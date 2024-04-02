@@ -14,7 +14,7 @@ export default function ProfilePopup() {
 
   const onViewProfile = () => {
     navigate('/profile' , {
-      state : {id : currentUser?.userID , email:currentUser.userEmail},
+      state : {id : currentUser?.userid , email:currentUser.userEmail},
   });
     window.location.reload();
   };
