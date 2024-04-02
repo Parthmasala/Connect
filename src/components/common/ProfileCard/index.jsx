@@ -4,6 +4,7 @@ import {getSingleStatus , getSingleUser, editProfile} from "../../../API/Firesto
 import PostsCard from "../PostsCard";
 import { useLocation } from "react-router-dom";
 import { uploadImage as uploadImageAPI} from "../../../API/ImageUpload";
+import ProfileUploadModal from "../ProfileUploadModal";
 import "./index.scss";
 
 export default function ProfileCard({ onEdit, currentUser }) {
@@ -11,12 +12,15 @@ export default function ProfileCard({ onEdit, currentUser }) {
     const [allStatuses , setAllStatus] = useState([]);
     const [currentProfile , setCurrentProfile] = useState({});
     const [currentImage, setCurrentImage] = useState({});
+    const [modalOpen , setModalOpen] = useState(false);
+    const [progress, setProgress] = useState(0);
     const getImage = (event) => {
         setCurrentImage(event.target.files[0]);
     };
 
     const uploadImage = () => {
-        uploadImageAPI(currentImage, currentUser.userid);
+        uploadImageAPI(currentImage, currentUser.userid ,setModalOpen , setProgress , setCurrentImage);
+ 
     };
 
     useMemo(() => {
@@ -31,17 +35,32 @@ export default function ProfileCard({ onEdit, currentUser }) {
     
     return (
         <>
+            <ProfileUploadModal 
+            getImage={getImage} 
+            uploadImage={uploadImage} 
+            modalOpen={modalOpen} 
+            setModalOpen={setModalOpen}
+            currentImage={currentImage}
+            progress={progress}
+            />
             <div className="profile-card">
-            <input type = {"file"} onChange={getImage}/>
-            <button onClick={uploadImage}>Upload</button>
-                {(location?.state?.id == currentUser.userID) &&
+               {(location?.state?.id == currentUser.userID) &&
                     <div className="edit-btn">
                     <button onClick={onEdit}>Edit</button>
                 </div>}
 
                 <div className="profile-info">
                     <div>
-                        <img className = "profile-image" src ={currentUser?.imageLink} alt="profile-image"/>
+                        <img className = "profile-image" 
+                        onClick={() => setModalOpen(true)}
+                        src ={
+                            Object.values(currentProfile).length == 0
+                            ? currentUser.imageLink
+                            : currentProfile?.imageLink
+                        } 
+                        alt="profile-image"/>
+
+
                         <h3 className="userName">
                             {Object.values(currentProfile).length == 0
                             ? currentUser.name
