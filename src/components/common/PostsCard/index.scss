@@ -79,4 +79,27 @@
       background-color: #45a049;
     }
   }
+
+  .post-header{
+
+    .action-container{ 
+      right: 20px;
+      cursor: pointer;
+      display: flex;
+      top: 10px;
+      .action-icon { 
+        color:#474747;
+        padding: 10px;
+      }
+    }
+  
+    .action-icon:hover {
+      color:#000000;
+      background-color: #b7b7b7;
+      padding: 10px;
+      border-radius: 50%;
+    }
+
+  }
+
 }
