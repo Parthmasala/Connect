@@ -15,6 +15,7 @@ export default function PostsCard({posts , id, getEditData}){
     }, [])
     // console.log(currentUser);
     // console.log(posts);
+    // console.log(allUsers.filter((user) => user.id === posts.userID)[0].name);
     return (
         <div className='posts-card' key={id}>
             <div className='post-header'>
@@ -28,10 +29,11 @@ export default function PostsCard({posts , id, getEditData}){
                 <div className='name-timestamp'>
                     <p className='name' 
                     onClick={() => navigate('/profile' , {
-                        state : {id : posts?.userID , email:posts.userEmail},
+                        state : {id : posts?.userID , email:posts?.userEmail},
                     })}>
-                        
-                        {posts.userName}</p>
+                        {allUsers.filter((user) => user.id === posts.userID)[0]?.name}
+                        </p>
+                    <p className='headline'> {allUsers.filter((user) => user.id === posts.userID)[0]?.headline}</p>
                     <p className='timeStamp'> {posts.timeStamp}</p>
                 </div>
 

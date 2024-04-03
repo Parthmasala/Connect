@@ -50,6 +50,7 @@ export default function PostStatus({currentUser}) {
   return (
     <div className='post-status-parent'>
         <div className='post-status'>
+          <img className='post-image' src ={currentUser.imageLink} alt = "imageLink"/>
             <button className='create-post' onClick={() => {
               setModalOpen(true);
               setIsEdit(false);
