@@ -9,6 +9,7 @@ let dbRef = collection(db , "posts") //this is the reference to the posts postRe
 let userRef = collection(db , "users")
 let likeRef = collection(db, "likes")
 let commentRef = collection(db, "comments")
+let connectionRef = collection(db, "connections")
 
 export const postStatus = (obj) => {
     
@@ -184,5 +185,35 @@ export const deletePost = (id) =>{
     }
     catch(error){
         console.log(error);
+    }
+}
+
+export const addConnection = (userId, targetId) => {
+    try{
+        let connectionAdd = doc(connectionRef, `${userId}_${targetId}`);
+
+        setDoc(connectionAdd, {userId, targetId}); 
+        
+        toast.success("Connection Added");
+    }
+    catch(err){
+        console.log(err);
+
+    }
+}
+
+export const getConnections = (userId, targetId , setIsConnected) =>{
+    try{
+        let ConnectionQuery = query(connectionRef, where('targetId', "==", targetId));
+        onSnapshot(ConnectionQuery, (response) =>{
+            let connections = response.docs.map((doc) => doc.data());
+            const isConnected = connections.some((connection) => connection.userId === userId);
+
+            // console.log(likesCount);
+            setIsConnected(isConnected);
+        });
+    }
+    catch(err){
+        console.log(err);
     }
 }

@@ -42,6 +42,7 @@ export default function ProfileCard({ onEdit, currentUser }) {
             setModalOpen={setModalOpen}
             currentImage={currentImage}
             progress={progress}
+            currentUser={currentUser}
             />
             <div className="profile-card">
                {(location?.state?.id == currentUser.userid) &&
