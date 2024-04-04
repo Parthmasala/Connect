@@ -9,6 +9,7 @@ export default function ProfileUploadModal({
   uploadImage,
   currentImage,
   progress,
+  currentUser
 }) {
   return (
     <Modal
@@ -28,6 +29,9 @@ export default function ProfileUploadModal({
         </Button>,
       ]}
     >
+      <div className = "user-profile-pic">
+        <img className='post-image' src ={currentUser.imageLink} alt = "current-profile-image" />
+      </div>
       <div className="image-upload-main">
         <p>{currentImage.name}</p>
         <label className="upload-btn" htmlFor="image-upload">
