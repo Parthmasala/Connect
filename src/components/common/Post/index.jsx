@@ -3,7 +3,7 @@ import './index.scss'
 import ModalComponent from '../Modal';
 import PostsCard from '../PostsCard';
 import { getCurrentTimeStamp } from '../../../helpers/useMoment';
-import { postStatus, getStatus } from '../../../API/FirestoreAPI';
+import { postStatus, getStatus, updatePost } from '../../../API/FirestoreAPI';
 import { getUniqueID } from '../../../helpers/getUniqueID';
 
 export default function PostStatus({currentUser}) {
@@ -11,6 +11,8 @@ export default function PostStatus({currentUser}) {
     const [modalOpen, setModalOpen] = useState(false);
     const [status , setStatus] = useState('')
     const [allStatuses , setAllStatus] = useState([]);
+    const [currentPost, setCurrentPost] = useState({});
+    const [isEdit, setIsEdit] = useState(false);
     const sendStatus = async () => {
         let object = {
             status: status,
@@ -23,9 +25,22 @@ export default function PostStatus({currentUser}) {
         }
         await postStatus(object);
         await setModalOpen(false);
+        setIsEdit(false);
         await setStatus('');
     }
 
+    const getEditData = (posts) =>{
+      setModalOpen(true);
+      setStatus(posts?.status);
+      setCurrentPost(posts)
+      setIsEdit(true);
+    }
+
+    const updateStatus = () =>{
+      // console.log(status);
+      updatePost(currentPost.id, status);
+      setModalOpen(false);
+    }
 
     useMemo(() => {
         getStatus(setAllStatus);
@@ -35,15 +50,27 @@ export default function PostStatus({currentUser}) {
   return (
     <div className='post-status-parent'>
         <div className='post-status'>
-            <button className='create-post' onClick={() => setModalOpen(true)}> Create a Post</button>
+          <img className='post-image' src ={currentUser.imageLink} alt = "imageLink"/>
+            <button className='create-post' onClick={() => {
+              setModalOpen(true);
+              setIsEdit(false);
+            }}> Create a Post</button>
         </div>
-        <ModalComponent setStatus={setStatus} modalOpen={modalOpen} setModalOpen={setModalOpen} status={status} sendStatus={sendStatus}/>
+        <ModalComponent 
+          setStatus={setStatus} 
+          modalOpen={modalOpen} 
+          setModalOpen={setModalOpen} 
+          status={status} 
+          sendStatus={sendStatus}
+          isEdit={isEdit}
+          updateStatus={updateStatus}
+        />
     
     <div>
       {allStatuses.map((posts) =>{
           return (
             <div key = {posts.id}>
-                <PostsCard posts = {posts}/>
+                <PostsCard posts = {posts} getEditData = {getEditData}/>
             </div>
           );
         })

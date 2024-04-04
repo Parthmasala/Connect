@@ -1,10 +1,11 @@
 import React, { useMemo, useState } from 'react'
 import "./index.scss"
 import { useNavigate } from 'react-router-dom'
-import {getCurrentUser , getAllUsers} from '../../../API/FirestoreAPI'
+import { BsPencil, BsTrash} from "react-icons/bs";
+import {getCurrentUser , getAllUsers, deletePost} from '../../../API/FirestoreAPI'
 import LikeButton from '../LikeButton';
 
-export default function PostsCard({posts , id}){
+export default function PostsCard({posts , id, getEditData}){
     let navigate = useNavigate();
     const [currentUser, setCurrentUser] = useState({});
     const [allUsers, setAllUsers] = useState([]);
@@ -12,8 +13,9 @@ export default function PostsCard({posts , id}){
         getCurrentUser(setCurrentUser);
         getAllUsers(setAllUsers)
     }, [])
-    // console.log();
+    // console.log(currentUser);
     // console.log(posts);
+    // console.log(allUsers.filter((user) => user.id === posts.userID)[0].name);
     return (
         <div className='posts-card' key={id}>
             <div className='post-header'>
@@ -27,13 +29,22 @@ export default function PostsCard({posts , id}){
                 <div className='name-timestamp'>
                     <p className='name' 
                     onClick={() => navigate('/profile' , {
-                        state : {id : posts?.userID , email:posts.userEmail},
+                        state : {id : posts?.userID , email:posts?.userEmail},
                     })}>
-                        
-                        {posts.userName}</p>
+                        {allUsers.filter((user) => user.id === posts.userID)[0]?.name}
+                        </p>
+                    <p className='headline'> {allUsers.filter((user) => user.id === posts.userID)[0]?.headline}</p>
                     <p className='timeStamp'> {posts.timeStamp}</p>
                 </div>
-                </div>
+
+               {currentUser.userid === posts.userID ? 
+               (<div className='action-container'>
+                    <BsPencil size={20} className="action-icon" onClick={() => getEditData(posts)}/>
+                    <BsTrash size={20} className="action-icon" onClick={() => deletePost(posts.id)}/>
+                </div>) 
+                : (<></>)}
+
+            </div>
             <p className='status'>
                 {posts.status}
             </p>
