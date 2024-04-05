@@ -46,11 +46,13 @@ export default function Navbar({ currentUser }) {
   }
 
   const openUser = (user) => {
-    navigate(`/profile`, {state : {
-      id: user.id,
+    navigate('/profile', {state : {
+      id: user?.id,
       email: user.email
-    }
-    })
+    },
+    });
+    setSearchInput('');
+    window.location.reload();
   }
 
   useEffect(() => {

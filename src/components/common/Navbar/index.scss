@@ -80,7 +80,8 @@
         gap: 20px;
         padding: 10px;
         align-items: center;
-        border-radius: 10px;
+        cursor: pointer;
+        // border-radius: 10px;
         img{
             width:60px;
             height: 60px;
@@ -93,6 +94,6 @@
         }
     }
     .search-inner:hover{
-        background-color: white;
+        background-color: rgb(39, 34, 34);
     }
 }

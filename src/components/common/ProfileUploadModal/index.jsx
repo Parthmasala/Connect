@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Modal, Progress} from "antd";
 import "./index.scss";
+import { useLocation } from "react-router-dom";
 
 export default function ProfileUploadModal({
   modalOpen,
@@ -12,8 +13,11 @@ export default function ProfileUploadModal({
   currentUser,
   currentProfile
 }) {
+  let location = useLocation();
   const renderFooter = () => {
-    if (currentProfile && currentUser && currentProfile.id === currentUser.id) {
+    // if (currentProfile && currentUser && currentProfile.id === currentUser.id) {
+      if(location?.state?.id == currentUser.userid) {
+
       return (
         <Button
           disabled={!currentImage.name}
@@ -44,7 +48,10 @@ export default function ProfileUploadModal({
       <div className="user-profile-pic">
         <img className="post-image" src={profileImageSrc} alt="current-profile-image" />
       </div>
-      {currentProfile && currentUser && currentProfile.id === currentUser.id && (
+      {/* {currentProfile && currentUser && currentProfile.id === currentUser.id && ( */}
+      {
+        (location?.state?.id == currentUser.userid ) && (
+      
         <div className="image-upload-main">
           <p>{currentImage.name}</p>
           <label className="upload-btn" htmlFor="image-upload">
