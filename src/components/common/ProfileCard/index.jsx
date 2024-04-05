@@ -43,7 +43,9 @@ export default function ProfileCard({ onEdit, currentUser }) {
             currentImage={currentImage}
             progress={progress}
             currentUser={currentUser}
+            currentProfile={currentProfile}
             />
+            
             <div className="profile-card">
                {(location?.state?.id == currentUser.userid) &&
                     (<div className="edit-btn">
@@ -54,9 +56,9 @@ export default function ProfileCard({ onEdit, currentUser }) {
                     <div>
                         <img className = "profile-image" 
                         onClick={() => {
-                            if (location?.state?.id == currentUser.userid) {
+                            // if (location?.state?.id == currentUser.userid) {
                                 setModalOpen(true);
-                            }
+                            // }
                         }}
 
                         src ={
