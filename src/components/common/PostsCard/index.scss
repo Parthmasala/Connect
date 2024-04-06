@@ -93,6 +93,7 @@
     margin-top: 10px;
     border-radius: 5px;
     object-fit: cover;
+    cursor: pointer;
   }
   .post-header{
 
@@ -116,4 +117,11 @@
 
   }
 
+}
+
+.post-modal-image{
+  cursor: pointer;
+  margin-top: 30px;
+  width: 100%;
+  // margin-top:50px;
 }

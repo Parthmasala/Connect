@@ -1,5 +1,6 @@
 import React, { useMemo, useState, useEffect } from "react";
 import "./index.scss";
+import {Button, Modal} from "antd";
 import { useNavigate } from "react-router-dom";
 import { BsPencil, BsTrash } from "react-icons/bs";
 import {
@@ -14,6 +15,7 @@ export default function PostsCard({ posts, id, getEditData }) {
   let navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState({});
   const [allUsers, setAllUsers] = useState([]);
+  const [imageModal, setImageModal] = useState(false);
   const [isConnected, setIsConnected] = useState(false);
 
   useMemo(() => {
@@ -79,16 +81,35 @@ export default function PostsCard({ posts, id, getEditData }) {
           <></>
         )}
       </div>
-      <p className='status'>{posts.status}</p>
+      {/* <p className='status'>{posts.status}</p> */}
+      <div className="status" dangerouslySetInnerHTML={{ __html: posts.status }} ></div>
 
-      {posts.postImage && (
-        <img src={posts.postImage} alt='post-image' className='post-image' />
-      )}
+      {posts.postImage ? (
+        <img src={posts.postImage}
+        onClick={() => setImageModal(true)} 
+        alt='post-image' className='post-image' />
+      ) :
+      (<></>)
+      }
       <LikeButton
         userId={currentUser?.userid}
         postId={posts.id}
         currentUser={currentUser}
       />
+      < Modal
+        centered 
+        open={imageModal}
+        onCancel={() => setImageModal(false)}
+        footer= {[]}
+      >
+
+        <img
+          src={posts.postImage}
+          alt='post-modal-image'
+          style={{ color: "black", fontSize: "11px" }}
+          className='post-modal-image'
+        />
+      </Modal>
     </div>
   ) : (
     <></>

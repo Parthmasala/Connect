@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ReactQuill from 'react-quill';
 import { Modal, Button, Progress } from "antd";
 import { GrGallery } from "react-icons/gr";
 import "./index.scss";
@@ -49,13 +50,14 @@ const ModalComponent = ({
     >
       <div className='post-container'>
         <div className='textarea-container'>
-          <textarea
+          {/* <textarea
             placeholder='What is on your mind?'
             className='modal-input'
             rows={4}
             value={status}
             onChange={(e) => setStatus(e.target.value)}
-          ></textarea>
+          ></textarea> */}
+          <ReactQuill className = "modal-input" placeholder="What is on your mind?" theme="snow" value = {status} onChange={setStatus}/>
           {(postImage || currentPost.postImage) && (
             <img
               src={postImage || currentPost.postImage}
