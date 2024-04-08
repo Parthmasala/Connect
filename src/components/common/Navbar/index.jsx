@@ -85,7 +85,7 @@ export default function Navbar({ currentUser }) {
       </div>
       }
       <div ref={userLogoRef} onClick={() => setShowPopup(!showPopup)}>
-        <img className="user-logo" src={usericon} alt="User Icon" />
+        <img className="user-logo" src={currentUser.imageLink} alt="User Icon" />
         {showPopup && <ProfilePopup currentUser={currentUser} />}
       </div>
 

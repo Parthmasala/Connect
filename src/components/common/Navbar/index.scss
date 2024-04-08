@@ -12,6 +12,19 @@
         flex-direction: column;
         height: auto;
     }
+    
+}
+
+.user-logo {
+    max-width: 100px;
+    height: auto;
+    border-radius: 100%;
+    object-fit: cover;
+
+    margin-top: -30px;
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
 }
 
 .connect-logo {
@@ -24,18 +37,7 @@
     }
 }
 
-.user-logo {
-    width: 70%;
-    height: 40px;
-    margin-right: 20px;
-    cursor: pointer;
-    z-index: 2; 
 
-    @media screen and (max-width: 768px) {
-        margin: 10px;
-        
-    }
-}
 
 .popup {
     display: flex;
