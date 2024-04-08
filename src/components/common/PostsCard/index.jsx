@@ -26,7 +26,7 @@ export default function PostsCard({ posts, id, getEditData }) {
   useEffect(() => {
     getConnections(currentUser.userid, posts.userID, setIsConnected);
   }, [currentUser.userid, posts.userID]);
-  console.log(isConnected);
+  // console.log(isConnected);
   return isConnected || currentUser.userid == posts.userID ? (
     <div className='posts-card' key={id}>
       <div className='post-header'>

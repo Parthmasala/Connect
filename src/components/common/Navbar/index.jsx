@@ -72,7 +72,7 @@ export default function Navbar({ currentUser }) {
     <div className="navbar-master">
       
       <img className="connect-logo" src={ConnectLogo} alt="Connect Logo" onClick={() => Route('/home')} />
-      {isSearch ? <Search setIsSearch = {setIsSearch} setSearchInput = {setSearchInput}/> : 
+      {isSearch ? <Search setIsSearch = {setIsSearch} setSearchInput = {setSearchInput} searchInput={searchInput}/> : 
       <div className="icons">
         <IoMdHome size={40} className="icon-scss" onClick={() => Route('/Home')} />
         <FaUserPlus size={30} className="icon-scss" onClick={() => Route('/Connections')} />

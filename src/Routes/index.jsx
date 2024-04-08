@@ -6,6 +6,7 @@ import HomeLayout from "../Layout/HomeLayout.jsx";
 import Profile from "../WebPages/Profile.jsx";
 import ProfileLayout from "../Layout/ProfileLayout.jsx";
 import ConnectionLayout from "../Layout/ConnectionLayout.jsx";
+import SearchResultsLayout from "../Layout/SearchResultsLayout.jsx";
 
 export const router = createBrowserRouter([
     {
@@ -31,5 +32,9 @@ export const router = createBrowserRouter([
     {
       path: "/connections",
       element: <ConnectionLayout/>,
+    },
+    {
+      path: "/SearchResultsLayout",
+      element: <SearchResultsLayout />,
     }
   ]);
