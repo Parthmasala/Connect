@@ -55,7 +55,7 @@ export default function PostStatus({ currentUser }) {
         <div className='profile-image'>
           <img
             className='post-image'
-            src={currentUser.imageLink}
+            src={currentUser?.imageLink}
             alt='imageLink'
           />
         </div>
