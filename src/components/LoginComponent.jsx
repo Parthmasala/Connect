@@ -25,8 +25,8 @@ export default function LoginComponent() {
   const googleLogin = () => {
     try {
       let response = GoogleAPI();
-      console.log("Google Response : ", response);
-      toast.success("Login Successfully");
+      // console.log("Google Response : ", response);
+      // toast.success("Login Successfully");
     } catch (error) {
       toast.error("Invalid Email or Password");
     }
