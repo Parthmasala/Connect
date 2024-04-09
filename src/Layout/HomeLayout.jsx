@@ -2,17 +2,14 @@ import React, { useEffect, useState, useMemo } from "react";
 import Home from "../WebPages/Home";
 import Navbar from "../components/common/Navbar";
 import { getCurrentUser } from "../API/FirestoreAPI";
-import {
-  onAuthStateChanged,
-  sendEmailVerification,
-  signOut,
-} from "firebase/auth";
+import { onAuthStateChanged, sendEmailVerification } from "firebase/auth";
 import { auth } from "../FirebaseConfig";
 import Loader from "../components/common/Loader/index.jsx";
 import { toast } from "react-toastify";
-import { onLogout } from "../API/AuthAPI.jsx";
+import { useNavigate } from "react-router-dom";
 
 export default function HomeLayout() {
+  let navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState({});
   const [loading, setLoading] = useState(true);
   const [isEmailVerified, setIsEmailVerified] = useState(false);
@@ -44,6 +41,12 @@ export default function HomeLayout() {
           toast.error("Error sending verification email:", error);
         });
     }
+  };
+
+  const handleLogout = () => {
+    auth.signOut().then(() => {
+      navigate("/login");
+    });
   };
 
   useEffect(() => {
@@ -87,7 +90,10 @@ export default function HomeLayout() {
             <button onClick={resendVerificationEmail}>
               Resend Verification Email
             </button>{" "}
-            | <button onClick={onLogout}>Logout</button>
+            |{" "}
+            <button onClick={handleLogout} title='Logout'>
+              Logout
+            </button>
           </p>
         </div>
       )}
