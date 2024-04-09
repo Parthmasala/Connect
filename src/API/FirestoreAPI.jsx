@@ -40,14 +40,21 @@ export const getStatus = (setAllStatus) => {
   });
 };
 
-export const postUserData = (obj) => {
-  addDoc(userRef, obj)
-    .then(() => {
-      toast.success("User Created");
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+export const postUserData = async (obj) => {
+  try {
+    const userSnapshot = await getDocs(
+      query(userRef, where("email", "==", obj.email))
+    );
+    if (!userSnapshot.empty) {
+      toast.info("Welcome Back");
+      return;
+    }
+
+    await addDoc(userRef, obj);
+    toast.success("User Created");
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const getCurrentUser = (setUserData) => {
