@@ -7,6 +7,7 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import { auth } from "../FirebaseConfig";
+import { postUserData } from "./FirestoreAPI";
 
 // let authentication = getAuth();
 
@@ -31,11 +32,31 @@ export const RegisterAPI = (email, password) => {
 
 export const GoogleAPI = (email, password) => {
   try {
-    let googleAccount = new GoogleAuthProvider();
-    let response = signInWithPopup(auth, googleAccount);
-    return response;
+    const provider = new GoogleAuthProvider();
+    // let response = signInWithPopup(auth, googleAccount);
+
+    //to prevent error
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const user = result.user;
+        const email = user.email;
+        const name = user.displayName;
+        const photoUrl = user.photoURL;
+
+        const userData = {
+          email: email,
+          name: name,
+          imageLink: photoUrl,
+        };
+
+        postUserData(userData);
+        toast.success("SignIn with Google Account");
+      })
+      .catch((error) => {
+        console.error("Error signing in with Google:", error);
+      });
   } catch (error) {
-    return error;
+    console.error("Error signing in with Google:", error);
   }
 };
 

@@ -32,8 +32,13 @@ export default function SignupComponent() {
     }
   };
   const googleLogin = () => {
-    let response = GoogleAPI();
-    navigate("/home");
+    try {
+      let response = GoogleAPI();
+      // console.log("Google Response : ", response);
+      // toast.success("Login Successfully");
+    } catch (error) {
+      toast.error("Invalid Email or Password");
+    }
   };
 
   return (
