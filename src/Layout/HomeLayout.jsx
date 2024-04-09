@@ -1,17 +1,96 @@
-import React , {useMemo} from 'react'
-import Home from '../WebPages/Home'
-import Navbar from '../components/common/Navbar'
-import { getCurrentUser } from '../API/FirestoreAPI'
+import React, { useEffect, useState, useMemo } from "react";
+import Home from "../WebPages/Home";
+import Navbar from "../components/common/Navbar";
+import { getCurrentUser } from "../API/FirestoreAPI";
+import {
+  onAuthStateChanged,
+  sendEmailVerification,
+  signOut,
+} from "firebase/auth";
+import { auth } from "../FirebaseConfig";
+import Loader from "../components/common/Loader/index.jsx";
+import { toast } from "react-toastify";
+import { onLogout } from "../API/AuthAPI.jsx";
 
 export default function HomeLayout() {
-  const [currentUser , setCurrentUser] = React.useState({});
+  const [currentUser, setCurrentUser] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [isEmailVerified, setIsEmailVerified] = useState(false);
+
   useMemo(() => {
-    getCurrentUser(setCurrentUser); 
-  } , [])
+    getCurrentUser(setCurrentUser);
+  }, []);
+
+  const refreshVerificationStatus = () => {
+    setLoading(true);
+    setIsEmailVerified(false);
+    const user = auth.currentUser;
+    if (user) {
+      user.reload().then(() => {
+        setIsEmailVerified(user.emailVerified);
+        setLoading(false);
+      });
+    }
+  };
+
+  const resendVerificationEmail = () => {
+    const user = auth.currentUser;
+    if (user) {
+      sendEmailVerification(user)
+        .then(() => {
+          toast.success("Verification email sent!");
+        })
+        .catch((error) => {
+          toast.error("Error sending verification email:", error);
+        });
+    }
+  };
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setIsEmailVerified(user.emailVerified);
+        setLoading(false);
+      } else {
+        setIsEmailVerified(false);
+        setLoading(false);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+
   return (
     <div>
-        <Navbar currentUser={currentUser}/>
-        <Home currentUser={currentUser}/>
+      {loading ? (
+        <Loader />
+      ) : isEmailVerified ? (
+        <>
+          <Navbar currentUser={currentUser} />
+          <Home currentUser={currentUser} />
+        </>
+      ) : (
+        <div>
+          <p>
+            Please verify your email to access the home page.{" "}
+            <span
+              onClick={refreshVerificationStatus}
+              style={{
+                cursor: "pointer",
+                color: "cyan",
+                textDecoration: "underline",
+              }}
+            >
+              Click here to refresh
+            </span>{" "}
+            |{" "}
+            <button onClick={resendVerificationEmail}>
+              Resend Verification Email
+            </button>{" "}
+            | <button onClick={onLogout}>Logout</button>
+          </p>
+        </div>
+      )}
     </div>
-  )
+  );
 }
