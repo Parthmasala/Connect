@@ -7,34 +7,39 @@ import Profile from "../WebPages/Profile.jsx";
 import ProfileLayout from "../Layout/ProfileLayout.jsx";
 import ConnectionLayout from "../Layout/ConnectionLayout.jsx";
 import SearchResultsLayout from "../Layout/SearchResultsLayout.jsx";
+import MessagesLayout from "../Layout/MessagesLayout.jsx";
 
 export const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Login />,
-  },
-  {
-    path: "/login",
-    element: <Login />,
-  },
-  {
-    path: "/signup",
-    element: <Signup />,
-  },
-  {
-    path: "/home",
-    element: <HomeLayout />,
-  },
-  {
-    path: "/profile",
-    element: <ProfileLayout />,
-  },
-  {
-    path: "/connections",
-    element: <ConnectionLayout />,
-  },
-  {
-    path: "/SearchResultsLayout",
-    element: <SearchResultsLayout />,
-  },
+    {
+        path: "/",
+        element: <Login />,
+    },
+    {
+        path: "/login",
+        element: <Login />,
+    },
+    {
+        path: "/signup",
+        element: <Signup />,
+    },
+    {
+        path: "/home",
+        element: <HomeLayout />,
+    },
+    {
+        path: "/profile",
+        element: <ProfileLayout />,
+    },
+    {
+        path: "/connections",
+        element: <ConnectionLayout />,
+    },
+    {
+        path: "/SearchResultsLayout",
+        element: <SearchResultsLayout />,
+    },
+    {
+        path: "/Messages",
+        element: <MessagesLayout />,
+    },
 ]);

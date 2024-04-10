@@ -1,0 +1,55 @@
+.messages-component-container {
+    font: Helvetica;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    .message-inner {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+        p {
+            font: helvetica;
+            color: red;
+        }
+    }
+
+    .message-preview {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+        p {
+            font: helvetica;
+            color: red;
+        }
+
+        .message-header {
+            color: red;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+
+            .message-name {
+                color: blue;
+                font-weight: 500;
+            }
+        }
+
+        .message-text {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+    }
+}
