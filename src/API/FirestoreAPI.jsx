@@ -248,9 +248,21 @@ export const addResume = async (resumeData) => {
     }
 };
 
-export const saveMessage = (senderId, receiverId, timeStamp, message) => {
+export const saveMessage = (
+    senderId,
+    senderName,
+    receiverId,
+    timeStamp,
+    message
+) => {
     try {
-        addDoc(messageRef, { senderId, receiverId, timeStamp, message });
+        addDoc(messageRef, {
+            senderId,
+            senderName,
+            receiverId,
+            timeStamp,
+            message,
+        });
     } catch (err) {
         console.log(err);
     }

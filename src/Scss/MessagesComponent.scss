@@ -7,7 +7,7 @@
     margin: 0 auto;
 
     .message-preview {
-        background-color: #f0f5f5;
+        background-color: #ffffff;
         border: 2px solid #ccc;
         border-radius: 10px;
         padding: 15px;
@@ -17,7 +17,19 @@
         .message-header {
             display: flex;
             justify-content: space-between;
+            align-items: center; /* Align items vertically */
             margin-bottom: 10px;
+
+            .message-sender {
+                color: #666;
+                font-size: 14px;
+                font-weight: bold;
+            }
+
+            .message-timestamp {
+                color: #999;
+                font-size: 12px;
+            }
         }
 
         .message-text {
@@ -60,6 +72,10 @@
         .Message-input,
         .Message-btn {
             font-size: 14px;
+        }
+
+        .messages-component-container {
+            padding: 10px;
         }
     }
 }

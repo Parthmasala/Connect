@@ -16,9 +16,16 @@ export default function MessagesComponent({ currentUser }) {
         setMessage(event.target.value);
     };
 
+    const handleKeyDown = (event) => {
+        if (event.key === "Enter" && message.trim() !== "") {
+            uploadMessage();
+        }
+    };
+
     const uploadMessage = () => {
         saveMessage(
             currentUser?.userid,
+            currentUser?.name,
             messengerId,
             getCurrentTimeStamp("LLL"),
             message
@@ -39,7 +46,12 @@ export default function MessagesComponent({ currentUser }) {
                 allMessages.map((Message, index) => (
                     <div className='message-preview' key={index}>
                         <div className='message-header'>
-                            {/* <p className="message-timestamp">{Message?.timeStamp}</p> */}
+                            <p className='message-sender'>
+                                {Message?.senderName}
+                            </p>
+                            <p className='message-timestamp'>
+                                {Message?.timeStamp}
+                            </p>
                         </div>
                         <p className='message-text'>{Message?.message}</p>
                     </div>
@@ -51,6 +63,7 @@ export default function MessagesComponent({ currentUser }) {
                 <>
                     <input
                         onChange={getMessage}
+                        onKeyDown={handleKeyDown}
                         name='Message'
                         placeholder='Type a message...'
                         className='Message-input'
