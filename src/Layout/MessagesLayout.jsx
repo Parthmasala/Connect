@@ -13,7 +13,7 @@ export default function MessagesLayout() {
     return (
         <div>
             <Navbar currentUser={currentUser} />
-            <div className="messages-layout">
+            <div className='messages-layout'>
                 <Messengers currentUser={currentUser} />
                 <Messages currentUser={currentUser} />
             </div>

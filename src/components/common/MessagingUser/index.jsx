@@ -18,14 +18,14 @@ export default function MessagingUser({ user, getCurrentUser, currentUser }) {
     };
 
     return isConnected ? (
-        <div className="messaging-user" onClick={handleClick}>
+        <div className='messaging-user' onClick={handleClick}>
             <img
                 src={user.imageLink || usericon}
                 alt={user.name}
                 style={{ color: "black" }}
             />
-            <div className="user-details">
-                <p className="name">{user.name}</p>
+            <div className='user-details'>
+                <p className='name'>{user.name}</p>
             </div>
         </div>
     ) : null;
