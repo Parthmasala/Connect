@@ -11,7 +11,7 @@ export default function MessengersComponent({ currentUser }) {
     }, []);
 
     return (
-        <div className="">
+        <div className=''>
             {users.map((user) => {
                 return (
                     user.id !== currentUser?.userid && (
