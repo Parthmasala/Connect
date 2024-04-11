@@ -31,7 +31,8 @@ export default function SignupComponent() {
             // console.log(response) ;
             localStorage.setItem("userEmail", response.user.email);
         } catch (error) {
-            toast.error("Unable to Create Account");
+            // toast.error({ error });
+            toast.error(`Error: ${error.message}`);
         }
     };
     const googleLogin = () => {

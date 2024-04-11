@@ -1,55 +1,65 @@
 .messages-component-container {
-    font: Helvetica;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    .message-inner {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-        cursor: pointer;
-        p {
-            font: helvetica;
-            color: red;
-        }
-    }
+    gap: 20px;
+    padding: 20px;
+    max-width: 800px; 
+    margin: 0 auto;
 
     .message-preview {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-        cursor: pointer;
-        p {
-            font: helvetica;
-            color: red;
-        }
+        background-color: #f0f5f5;
+        border: 2px solid #ccc;
+        border-radius: 10px;
+        padding: 15px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        width: 100%;
 
         .message-header {
-            color: red;
             display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-
-            .message-name {
-                color: blue;
-                font-weight: 500;
-            }
+            justify-content: space-between;
+            margin-bottom: 10px;
         }
 
         .message-text {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
+            color: #333;
+            font-size: 16px;
+            line-height: 1.4;
+        }
+    }
+
+    .Message-input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        font-size: 16px;
+    }
+
+    .Message-btn {
+        background-color: #4caf50;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+        font-size: 16px;
+
+        &:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .message-preview {
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        .Message-input,
+        .Message-btn {
+            font-size: 14px;
         }
     }
 }
