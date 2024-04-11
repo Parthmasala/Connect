@@ -19,6 +19,7 @@ let userRef = collection(db, "users");
 let likeRef = collection(db, "likes");
 let commentRef = collection(db, "comments");
 let connectionRef = collection(db, "connections");
+let resumeRef = collection(db, "resumes");
 let messageRef = collection(db, "messages");
 
 export const postStatus = (obj) => {
@@ -225,6 +226,25 @@ export const getConnections = (userId, targetId, setIsConnected) => {
         });
     } catch (err) {
         console.log(err);
+    }
+};
+
+export const addResume = async (resumeData) => {
+    try {
+        const resumeSnapshot = await getDocs(
+            query(resumeRef, where("name", "==", resumeData.name))
+        );
+
+        if (!resumeSnapshot.empty) {
+            toast.warning("A resume with the same name already exists");
+            return;
+        }
+
+        await addDoc(resumeRef, resumeData);
+        toast.success("Resume added successfully");
+    } catch (error) {
+        console.error("Error adding resume:", error);
+        toast.error("Failed to add resume");
     }
 };
 

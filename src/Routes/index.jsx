@@ -7,6 +7,7 @@ import Profile from "../WebPages/Profile.jsx";
 import ProfileLayout from "../Layout/ProfileLayout.jsx";
 import ConnectionLayout from "../Layout/ConnectionLayout.jsx";
 import SearchResultsLayout from "../Layout/SearchResultsLayout.jsx";
+import ResumeAnalyzerLayout from "../Layout/ResumeAnalyzerLayout.jsx";
 import MessagesLayout from "../Layout/MessagesLayout.jsx";
 
 export const router = createBrowserRouter([
@@ -41,5 +42,9 @@ export const router = createBrowserRouter([
     {
         path: "/Messages",
         element: <MessagesLayout />,
+    },
+    {
+        path: "/resumeanalyzer",
+        element: <ResumeAnalyzerLayout />,
     },
 ]);
