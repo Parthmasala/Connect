@@ -33,112 +33,112 @@ export default function ProfileEdit({ currentUser, onEdit }) {
     };
 
     return (
-        <div className='profileEdit'>
-            <div className='edit-btn'>
+        <div className="profileEdit">
+            <div className="edit-btn">
                 <button onClick={onEdit}>Back</button>
             </div>
-            <div className='profileEditInputs'>
+            <div className="profileEditInputs">
                 <label>Name</label>
                 <input
                     onChange={getInput}
-                    className='common-input'
+                    className="common-input"
                     placeholder={currentUser.name ? currentUser.name : "Name"}
-                    name='name'
+                    name="name"
                     value={editInputs.name}
                 />
                 <label>Headline</label>
                 <input
                     onChange={getInput}
-                    className='common-input'
+                    className="common-input"
                     placeholder={
                         currentUser.headline ? currentUser.headline : "Headline"
                     }
-                    name='headline'
+                    name="headline"
                     value={editInputs.headline}
                 />
                 <label>Country</label>
                 <input
                     onChange={getInput}
-                    className='common-input'
+                    className="common-input"
                     placeholder={
                         currentUser.country ? currentUser.country : "Country"
                     }
-                    name='country'
+                    name="country"
                     value={editInputs.country}
                 />
                 <label>City</label>
                 <input
                     onChange={getInput}
-                    className='common-input'
+                    className="common-input"
                     placeholder={currentUser.city ? currentUser.city : "City"}
-                    name='city'
+                    name="city"
                     value={editInputs.city}
                 />
                 <label>Company</label>
                 <input
                     onChange={getInput}
-                    className='common-input'
+                    className="common-input"
                     placeholder={
                         currentUser.company ? currentUser.company : "Company"
                     }
-                    name='company'
+                    name="company"
                     value={editInputs.company}
                 />
                 <label>Industry</label>
                 <input
                     onChange={getInput}
-                    className='common-input'
+                    className="common-input"
                     placeholder={
                         currentUser.industry ? currentUser.industry : "Industry"
                     }
-                    name='industry'
+                    name="industry"
                     value={editInputs.industry}
                 />
                 <label>College</label>
                 <input
                     onChange={getInput}
-                    className='common-input'
+                    className="common-input"
                     placeholder={
                         currentUser.college ? currentUser.college : "College"
                     }
-                    name='college'
+                    name="college"
                     value={editInputs.college}
                 />
 
                 <label>Website</label>
                 <input
                     onChange={getInput}
-                    className='common-input'
+                    className="common-input"
                     placeholder={
                         currentUser.website ? currentUser.website : "Website"
                     }
-                    name='website'
+                    name="website"
                     value={editInputs.website}
                 />
 
                 <label>Skills</label>
                 <input
                     onChange={getInput}
-                    className='common-input'
+                    className="common-input"
                     placeholder={
                         currentUser.skills ? currentUser.skills : "Skill"
                     }
-                    name='skills'
+                    name="skills"
                     value={editInputs.skills}
                 />
 
                 <label>About</label>
                 <textarea
-                    className='common-textArea'
+                    className="common-textArea"
                     onChange={getInput}
                     placeholder={
                         currentUser.aboutme ? currentUser.aboutme : "About Me"
                     }
-                    name='aboutme'
+                    name="aboutme"
                     value={editInputs.aboutme}
                 />
             </div>
-            <button className='save-btn' onClick={updateProfileData}>
+            <button className="save-btn" onClick={updateProfileData}>
                 Save
             </button>
         </div>

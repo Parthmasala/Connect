@@ -36,14 +36,14 @@ export default function LoginComponent() {
     };
 
     return (
-        <div className='login-wrapper'>
-            <img src={ConnectLogo} className='connectLogo' />
+        <div className="login-wrapper">
+            <img src={ConnectLogo} className="connectLogo" />
 
-            <div className='login-wrapper-inner'>
-                <h1 className='heading'>Log In</h1>
-                <p className='sub-heading'>Welcome to Connect</p>
+            <div className="login-wrapper-inner">
+                <h1 className="heading">Log In</h1>
+                <p className="sub-heading">Welcome to Connect</p>
 
-                <div className='auth-input'>
+                <div className="auth-input">
                     <input
                         onChange={(e) =>
                             setCredentials({
@@ -51,9 +51,9 @@ export default function LoginComponent() {
                                 email: e.target.value,
                             })
                         }
-                        type='email'
-                        className='common-input'
-                        placeholder='Email or Phone'
+                        type="email"
+                        className="common-input"
+                        placeholder="Email or Phone"
                     />
 
                     <input
@@ -63,23 +63,23 @@ export default function LoginComponent() {
                                 password: e.target.value,
                             })
                         }
-                        type='password'
-                        className='common-input'
-                        placeholder='Enter your Password'
+                        type="password"
+                        className="common-input"
+                        placeholder="Enter your Password"
                     />
                 </div>
 
-                <button className='login-btn' onClick={login}>
+                <button className="login-btn" onClick={login}>
                     Log In
                 </button>
             </div>
-            <hr className='hr-text' data-content='or' />
-            <div className='google-btn-container'>
-                <GoogleButton className='google-btn' onClick={googleLogin} />
-                <p className='signup-link'>
+            <hr className="hr-text" data-content="or" />
+            <div className="google-btn-container">
+                <GoogleButton className="google-btn" onClick={googleLogin} />
+                <p className="signup-link">
                     Don't have an account?{" "}
                     <span
-                        className='register'
+                        className="register"
                         onClick={() => navigate("/signup")}
                     >
                         Sign Up

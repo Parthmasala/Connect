@@ -4,6 +4,7 @@ import {
     getAllUsers,
     addConnection,
     getConnections,
+    removeConnection,
 } from "../API/FirestoreAPI";
 import ConnectedUsers from "./common/ConnectedUsers";
 
@@ -14,12 +15,16 @@ export default function ConnectionsComponent({ currentUser }) {
         addConnection(currentUser?.userid, id);
     };
 
+    const removeCurrentUser = (id) => {
+        removeConnection(currentUser?.userid, id);
+    };
+
     useEffect(() => {
         getAllUsers(setUsers);
     }, []);
 
     return (
-        <div className='connections-container'>
+        <div className="connections-container">
             {users.map((user) => {
                 return (
                     user.id !== currentUser?.userid && (
@@ -28,6 +33,7 @@ export default function ConnectionsComponent({ currentUser }) {
                             key={user.id}
                             getCurrentUser={getCurrentUser}
                             currentUser={currentUser}
+                            removeCurrentUser={removeCurrentUser}
                         />
                     )
                 );
