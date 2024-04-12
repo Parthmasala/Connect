@@ -309,7 +309,6 @@ export const getAllMessages = (senderId, receiverId, setMessages) => {
 };
 
 export const removeConnection = (userId, targetId) => {
-
     let docToDelete = doc(connectionRef, `${userId}_${targetId}`);
     try {
         deleteDoc(docToDelete);

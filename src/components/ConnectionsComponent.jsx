@@ -15,7 +15,7 @@ export default function ConnectionsComponent({ currentUser }) {
         addConnection(currentUser?.userid, id);
     };
 
-    const removeCurrentUser = (id) =>{
+    const removeCurrentUser = (id) => {
         removeConnection(currentUser?.userid, id);
     };
 
@@ -24,7 +24,7 @@ export default function ConnectionsComponent({ currentUser }) {
     }, []);
 
     return (
-        <div className='connections-container'>
+        <div className="connections-container">
             {users.map((user) => {
                 return (
                     user.id !== currentUser?.userid && (
