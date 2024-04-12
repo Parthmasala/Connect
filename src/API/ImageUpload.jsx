@@ -58,8 +58,8 @@ export const uploadPostImage = (file, setPostImage, setProgress) => {
     );
 };
 
-export const uploadResume = (file, id, setProgress) => {
-    const resumeRef = ref(storage, `resumes/${file.name}`);
+export const uploadResume = (file, id, setProgress, setResume) => {
+    const resumeRef = ref(storage, `resumes/${id}_${file.name}`);
     const uploadTask = uploadBytesResumable(resumeRef, file);
 
     uploadTask.on(
@@ -75,7 +75,10 @@ export const uploadResume = (file, id, setProgress) => {
             console.error(err);
         },
         () => {
-            getDownloadURL(uploadTask.snapshot.ref);
+            getDownloadURL(uploadTask.snapshot.ref).then(() => {
+                setResume(null);
+                setProgress(0);
+            });
         }
     );
 };
