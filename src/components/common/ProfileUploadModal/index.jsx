@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Modal, Progress } from "antd";
 import "./index.scss";
 import { useLocation } from "react-router-dom";
-
+import usericon from "../../../assets/user-icon.png";
 export default function ProfileUploadModal({
     modalOpen,
     setModalOpen,
@@ -36,7 +36,7 @@ export default function ProfileUploadModal({
             ? currentUser.imageLink
             : currentProfile
             ? currentProfile.imageLink
-            : "";
+            : "../../../assets/user-icon.png";
 
     return (
         <Modal
@@ -51,7 +51,7 @@ export default function ProfileUploadModal({
                 <img
                     className='post-image'
                     src={profileImageSrc}
-                    alt='current-profile-image'
+                    alt='no-image-available'
                 />
             </div>
             {/* {currentProfile && currentUser && currentProfile.id === currentUser.id && ( */}

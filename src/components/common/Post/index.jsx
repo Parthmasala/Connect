@@ -6,6 +6,7 @@ import { getCurrentTimeStamp } from "../../../helpers/useMoment";
 import { postStatus, getStatus, updatePost } from "../../../API/FirestoreAPI";
 import { getUniqueID } from "../../../helpers/getUniqueID";
 import { uploadPostImage } from "../../../API/ImageUpload";
+import usericon from "../../../assets/user-icon.png";
 
 export default function PostStatus({ currentUser }) {
     let userEmail = localStorage.getItem("userEmail");
@@ -55,7 +56,7 @@ export default function PostStatus({ currentUser }) {
                 <div className='profile-image'>
                     <img
                         className='post-image'
-                        src={currentUser?.imageLink}
+                        src={currentUser?.imageLink || usericon}
                         alt='imageLink'
                     />
                 </div>

@@ -10,6 +10,7 @@ import { useLocation } from "react-router-dom";
 import { uploadImage as uploadImageAPI } from "../../../API/ImageUpload";
 import ProfileUploadModal from "../ProfileUploadModal";
 import "./index.scss";
+import usericon from "../../../assets/user-icon.png";
 
 export default function ProfileCard({ onEdit, currentUser }) {
     let location = useLocation();
@@ -71,9 +72,9 @@ export default function ProfileCard({ onEdit, currentUser }) {
                                 // }
                             }}
                             src={
-                                Object.values(currentProfile).length == 0
-                                    ? currentUser.imageLink
-                                    : currentProfile?.imageLink
+                                currentProfile.imageLink ||
+                                currentUser.imageLink ||
+                                usericon
                             }
                             alt='profile-image'
                         />

@@ -10,6 +10,7 @@ import {
     getConnections,
 } from "../../../API/FirestoreAPI";
 import LikeButton from "../LikeButton";
+import dummyuser from "../../../assets/dummy-image.png";
 
 export default function PostsCard({ posts, id, getEditData }) {
     let navigate = useNavigate();
@@ -34,7 +35,7 @@ export default function PostsCard({ posts, id, getEditData }) {
                     src={
                         allUsers
                             .filter((item) => item.id === posts?.userID)
-                            .map((item) => item.imageLink)[0]
+                            .map((item) => item.imageLink)[0] || dummyuser
                     }
                     alt='profile image'
                     style={{ color: "black", fontSize: "11px" }}
