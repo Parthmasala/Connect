@@ -307,3 +307,14 @@ export const getAllMessages = (senderId, receiverId, setMessages) => {
         console.log(err);
     }
 };
+
+export const removeConnection = (userId, targetId) => {
+
+    let docToDelete = doc(connectionRef, `${userId}_${targetId}`);
+    try {
+        deleteDoc(docToDelete);
+        toast.success("Connection Removed");
+    } catch (error) {
+        console.log(error);
+    }
+};

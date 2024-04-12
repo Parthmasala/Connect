@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import { getConnections } from "../../../API/FirestoreAPI";
 import usericon from "../../../assets/dummy-image.png";
 
-export default function ConnectedUsers({ user, getCurrentUser, currentUser }) {
+export default function ConnectedUsers({ user, getCurrentUser, currentUser, removeCurrentUser }) {
     const [isConnected, setIsConnected] = useState(false);
 
     useEffect(() => {
         getConnections(currentUser.userid, user.id, setIsConnected);
     }, [currentUser.userid, user.id]);
 
-    return !isConnected ? (
+    return  (
         <div className='connected-user'>
             <img
                 src={user.imageLink || usericon}
@@ -21,12 +21,19 @@ export default function ConnectedUsers({ user, getCurrentUser, currentUser }) {
                 <p className='headline'>{user.headline}</p>
             </div>
 
-            <button
+            {!isConnected?
+            (<button
                 className='connect-button'
                 onClick={() => getCurrentUser(user.id)}
             >
                 Connect
-            </button>
+            </button>):
+            (<button
+                className='unfollow-button'
+                onClick={() => removeCurrentUser(user.id)}
+            >
+                unfollow
+            </button>)}
         </div>
-    ) : null;
+    ) 
 }
