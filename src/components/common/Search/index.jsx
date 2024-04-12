@@ -17,15 +17,15 @@ export default function Search({ setIsSearch, setSearchInput, searchInput }) {
         }
     };
     return (
-        <div className='search-main'>
+        <div className="search-main">
             <input
-                placeholder='Search'
+                placeholder="Search"
                 onKeyUp={handleKeyPress}
                 // onKeyPress={handleKeyPress}
                 onChange={(event) => setSearchInput(event.target.value)}
             />
             <IoIosClose
-                className='close-icon'
+                className="close-icon"
                 size={20}
                 onClick={() => {
                     setIsSearch(false);

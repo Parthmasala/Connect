@@ -17,6 +17,7 @@ export default function Navbar({ currentUser }) {
     const [users, setUsers] = useState([]);
     const [filteredUsers, setFilteredUsers] = useState([]);
     const userLogoRef = useRef(null);
+    const menuRef = useRef(null);
 
     const Route = (path) => {
         navigate(path);
@@ -57,6 +58,22 @@ export default function Navbar({ currentUser }) {
         setSearchInput("");
         window.location.reload();
     };
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (menuRef.current && !menuRef.current.contains(event.target)) {
+                setSearchInput("");
+                // setIsSearch(!isSearch);
+                setIsSearch(false);
+            }
+        };
+
+        document.addEventListener("click", handleClickOutside);
+
+        return () => {
+            document.removeEventListener("click", handleClickOutside);
+        };
+    }, []);
 
     useEffect(() => {
         function handleClickOutside(event) {
@@ -134,7 +151,7 @@ export default function Navbar({ currentUser }) {
             {searchInput.length === 0 ? (
                 <></>
             ) : (
-                <div className='search-results'>
+                <div ref={menuRef} className='search-results'>
                     {filteredUsers.length === 0 ? (
                         <div className='search-inner'>No results</div>
                     ) : (

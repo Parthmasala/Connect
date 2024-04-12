@@ -1,24 +1,29 @@
 import React, { useState, useMemo, useEffect } from "react";
-import { getStatus } from "../../../API/FirestoreAPI";
+import { getStatus, getConnections } from "../../../API/FirestoreAPI";
 import {
     getSingleStatus,
     getSingleUser,
     editProfile,
+    addConnection,
+    removeConnection,
 } from "../../../API/FirestoreAPI";
 import PostsCard from "../PostsCard";
 import { useLocation } from "react-router-dom";
 import { uploadImage as uploadImageAPI } from "../../../API/ImageUpload";
 import ProfileUploadModal from "../ProfileUploadModal";
 import "./index.scss";
+import { useNavigate } from "react-router-dom";
 import usericon from "../../../assets/user-icon.png";
 
 export default function ProfileCard({ onEdit, currentUser }) {
     let location = useLocation();
+    let navigate = useNavigate();
     const [allStatuses, setAllStatus] = useState([]);
     const [currentProfile, setCurrentProfile] = useState({});
     const [currentImage, setCurrentImage] = useState({});
     const [modalOpen, setModalOpen] = useState(false);
     const [progress, setProgress] = useState(0);
+    const [isConnected, setIsConnected] = useState(false);
     const getImage = (event) => {
         setCurrentImage(event.target.files[0]);
     };
@@ -41,6 +46,31 @@ export default function ProfileCard({ onEdit, currentUser }) {
             getSingleUser(setCurrentProfile, location?.state?.email);
         }
     }, []);
+
+    useEffect(() => {
+        getConnections(currentUser.userid, location?.state?.id, setIsConnected);
+    }, [currentUser.userid, location?.state?.id]);
+
+    const getCurrentUser = (id) => {
+        addConnection(currentUser?.userid, id);
+    };
+
+    const removeCurrentUser = (id) => {
+        removeConnection(currentUser?.userid, id);
+    };
+
+    const handleClick = (event) => {
+        event.preventDefault();
+
+        if (event.target.classList.contains("message-button")) {
+            navigate("/messages", {
+                state: {
+                    messengerId: location?.state?.id,
+                    messengerEmail: location?.state?.email,
+                },
+            });
+        }
+    };
 
     return (
         <>
@@ -110,6 +140,33 @@ export default function ProfileCard({ onEdit, currentUser }) {
                     </div>
 
                     <div className='right-info'>
+                        {isConnected ? (
+                            <>
+                                <button
+                                    className='unfollow-button'
+                                    onClick={() =>
+                                        removeCurrentUser(location?.state?.id)
+                                    }
+                                >
+                                    Unfollow
+                                </button>
+                                <button
+                                    className='message-button'
+                                    onClick={handleClick}
+                                >
+                                    Message
+                                </button>
+                            </>
+                        ) : (
+                            <button
+                                className='connect-button'
+                                onClick={() =>
+                                    getCurrentUser(location?.state?.id)
+                                }
+                            >
+                                Follow
+                            </button>
+                        )}
                         <p className='college'>
                             {Object.values(currentProfile).length == 0
                                 ? currentUser.college
