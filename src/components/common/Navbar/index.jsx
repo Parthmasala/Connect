@@ -17,6 +17,7 @@ export default function Navbar({ currentUser }) {
     const [users, setUsers] = useState([]);
     const [filteredUsers, setFilteredUsers] = useState([]);
     const userLogoRef = useRef(null);
+    const menuRef = useRef(null);
 
     const Route = (path) => {
         navigate(path);
@@ -59,6 +60,22 @@ export default function Navbar({ currentUser }) {
     };
 
     useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (menuRef.current && !menuRef.current.contains(event.target)) {
+                setSearchInput("");
+                // setIsSearch(!isSearch);
+                setIsSearch(false);
+            }
+        };
+
+        document.addEventListener("click", handleClickOutside);
+
+        return () => {
+            document.removeEventListener("click", handleClickOutside);
+        };
+    }, []);
+
+    useEffect(() => {
         function handleClickOutside(event) {
             if (
                 userLogoRef.current &&
@@ -75,11 +92,11 @@ export default function Navbar({ currentUser }) {
     }, []);
 
     return (
-        <div className='navbar-master'>
+        <div className="navbar-master">
             <img
-                className='connect-logo'
+                className="connect-logo"
                 src={ConnectLogo}
-                alt='Connect Logo'
+                alt="Connect Logo"
                 onClick={() => Route("/home")}
             />
             {isSearch ? (
@@ -89,44 +106,44 @@ export default function Navbar({ currentUser }) {
                     searchInput={searchInput}
                 />
             ) : (
-                <div className='icons'>
+                <div className="icons">
                     <IoMdHome
                         size={40}
-                        className='icon-scss'
+                        className="icon-scss"
                         onClick={() => Route("/Home")}
                     />
                     <FaUserPlus
                         size={30}
-                        className='icon-scss'
+                        className="icon-scss"
                         onClick={() => Route("/Connections")}
                     />
                     <IoIosBriefcase
                         size={40}
-                        className='icon-scss'
+                        className="icon-scss"
                         onClick={() => Route("/Jobs")}
                     />
                     <FaSearch
                         size={30}
-                        className='icon-scss'
+                        className="icon-scss"
                         onClick={() => setIsSearch(true)}
                     />
                     <FaComments
                         size={30}
-                        className='icon-scss'
+                        className="icon-scss"
                         onClick={() => Route("/Messages")}
                     />
                     <IoMdNotifications
                         size={40}
-                        className='icon-scss'
+                        className="icon-scss"
                         onClick={() => Route("/Notifications")}
                     />
                 </div>
             )}
             <div ref={userLogoRef} onClick={() => setShowPopup(!showPopup)}>
                 <img
-                    className='user-logo'
+                    className="user-logo"
                     src={currentUser?.imageLink}
-                    alt='User Icon'
+                    alt="User Icon"
                 />
                 {showPopup && <ProfilePopup currentUser={currentUser} />}
             </div>
@@ -134,20 +151,20 @@ export default function Navbar({ currentUser }) {
             {searchInput.length === 0 ? (
                 <></>
             ) : (
-                <div className='search-results'>
+                <div ref={menuRef} className="search-results">
                     {filteredUsers.length === 0 ? (
-                        <div className='search-inner'>No results</div>
+                        <div className="search-inner">No results</div>
                     ) : (
                         filteredUsers.map((user) => (
                             <div
-                                className='search-inner'
+                                className="search-inner"
                                 onClick={() => openUser(user)}
                             >
                                 <img
                                     src={user?.imageLink || usericon}
                                     alt={user.name}
                                 />
-                                <p className='name'>{user?.name}</p>
+                                <p className="name">{user?.name}</p>
                             </div>
                         ))
                     )}

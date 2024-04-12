@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "../Scss/SearchResultsComponent.scss";
-import { getAllUsers } from "../API/FirestoreAPI";
+import {
+    getAllUsers,
+    addConnection,
+    removeConnection,
+} from "../API/FirestoreAPI";
 import SearchedUsers from "./common/SearchedUsers";
 import { useLocation } from "react-router-dom";
 
@@ -28,6 +32,14 @@ export default function SearchResultsComponent({ currentUser }) {
         handleSearch();
     }, [searchInput, users]);
 
+    const getCurrentUser = (id) => {
+        addConnection(currentUser?.userid, id);
+    };
+
+    const removeCurrentUser = (id) => {
+        removeConnection(currentUser?.userid, id);
+    };
+
     useEffect(() => {
         getAllUsers(setUsers);
     }, []);
@@ -35,14 +47,19 @@ export default function SearchResultsComponent({ currentUser }) {
     return searchInput.length === 0 ? (
         <></>
     ) : (
-        <div className='searched-results'>
+        <div className="searched-results">
             {filteredUsers.length === 0 ? (
-                <div className='search-inner'>No results</div>
+                <div className="search-inner">No results</div>
             ) : (
                 filteredUsers.map((user) => {
                     return (
                         user.id !== currentUser.userid && (
-                            <SearchedUsers user={user} />
+                            <SearchedUsers
+                                user={user}
+                                getCurrentUser={getCurrentUser}
+                                currentUser={currentUser}
+                                removeCurrentUser={removeCurrentUser}
+                            />
                         )
                     );
                 })
