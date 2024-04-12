@@ -19,7 +19,12 @@ export default function ResumeAnalyzerComponent({ currentUser }) {
         }
 
         try {
-            uploadResume(resume, currentUser?.userid, setUploadProgress);
+            uploadResume(
+                resume,
+                currentUser?.userid,
+                setUploadProgress,
+                setResume
+            );
             toast.success("Resume uploaded successfully");
         } catch (error) {
             console.error("Error uploading resume:", error);

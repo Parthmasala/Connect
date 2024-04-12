@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { editProfile } from "../../../API/FirestoreAPI";
+import { UpdatePassword } from "../../../API/AuthAPI";
+import { toast } from "react-toastify";
 import "./index.scss";
+import { updatePassword } from "firebase/auth";
+import { auth } from "../../../FirebaseConfig";
 
 export default function ProfileEdit({ currentUser, onEdit }) {
     const [editInputs, setEditInputs] = useState({});
+    const [newPassword, setNewPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
 
     useEffect(() => {
         // Populate the editInputs state with the currentUser data when it changes
@@ -28,6 +34,21 @@ export default function ProfileEdit({ currentUser, onEdit }) {
     };
 
     const updateProfileData = async () => {
+        if (newPassword !== confirmPassword) {
+            toast.error("Passwords do not match");
+            return;
+        }
+        if (newPassword !== "") {
+            try {
+                await updatePassword(auth.currentUser, newPassword);
+                toast.success("Password updated successfully");
+            } catch (error) {
+                console.error("Error updating password:", error);
+                toast.error(`${error.message}`);
+
+                return;
+            }
+        }
         await editProfile(currentUser?.userid, editInputs);
         await onEdit();
     };
@@ -136,6 +157,22 @@ export default function ProfileEdit({ currentUser, onEdit }) {
                     }
                     name="aboutme"
                     value={editInputs.aboutme}
+                />
+                <label>New Password</label>
+                <input
+                    type='password'
+                    onChange={(e) => setNewPassword(e.target.value)}
+                    className='common-input'
+                    placeholder='New Password'
+                    value={newPassword}
+                />
+                <label>Confirm Password</label>
+                <input
+                    type='password'
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    className='common-input'
+                    placeholder='Confirm Password'
+                    value={confirmPassword}
                 />
             </div>
             <button className="save-btn" onClick={updateProfileData}>

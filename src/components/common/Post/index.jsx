@@ -6,6 +6,7 @@ import { getCurrentTimeStamp } from "../../../helpers/useMoment";
 import { postStatus, getStatus, updatePost } from "../../../API/FirestoreAPI";
 import { getUniqueID } from "../../../helpers/getUniqueID";
 import { uploadPostImage } from "../../../API/ImageUpload";
+import usericon from "../../../assets/user-icon.png";
 
 export default function PostStatus({ currentUser }) {
     let userEmail = localStorage.getItem("userEmail");
@@ -50,17 +51,17 @@ export default function PostStatus({ currentUser }) {
     }, []);
 
     return (
-        <div className="post-status-parent">
-            <div className="post-status">
-                <div className="profile-image">
+        <div className='post-status-parent'>
+            <div className='post-status'>
+                <div className='profile-image'>
                     <img
-                        className="post-image"
-                        src={currentUser?.imageLink}
-                        alt="imageLink"
+                        className='post-image'
+                        src={currentUser?.imageLink || usericon}
+                        alt='imageLink'
                     />
                 </div>
                 <button
-                    className="create-post"
+                    className='create-post'
                     onClick={() => {
                         setModalOpen(true);
                         setIsEdit(false);

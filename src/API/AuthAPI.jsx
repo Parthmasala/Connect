@@ -1,12 +1,13 @@
 //firebase product
+import { auth } from "../FirebaseConfig";
 import {
     signInWithEmailAndPassword,
     signOut,
     createUserWithEmailAndPassword,
     GoogleAuthProvider,
     signInWithPopup,
+    updatePassword,
 } from "firebase/auth";
-import { auth } from "../FirebaseConfig";
 import { postUserData } from "./FirestoreAPI";
 
 // let authentication = getAuth();
@@ -57,6 +58,16 @@ export const GoogleAPI = (email, password) => {
             });
     } catch (error) {
         console.error("Error signing in with Google:", error);
+    }
+};
+
+export const UpdatePassword = async (newPassword) => {
+    try {
+        await updatePassword(auth.currentUser, newPassword);
+        console.log("Password updated successfully");
+    } catch (error) {
+        console.error("Error updating password:", error);
+        throw error;
     }
 };
 
