@@ -120,10 +120,19 @@ export default function ProfileCard({ onEdit, currentUser }) {
                                 : currentProfile?.headline}
                         </p>
                         <p className='location'>
-                            {Object.values(currentProfile).length == 0
-                                ? `${currentUser.city}, ${currentUser.country}`
-                                : `${currentUser.city}, ${currentUser.country}`}
+                            {Object.values(currentProfile).length === 0
+                                ? currentUser.city && currentUser.country
+                                    ? `${currentUser.city}, ${currentUser.country}`
+                                    : currentUser.city ||
+                                      currentUser.country ||
+                                      ""
+                                : currentProfile.city && currentProfile.country
+                                ? `${currentProfile.city}, ${currentProfile.country}`
+                                : currentProfile.city ||
+                                  currentProfile.country ||
+                                  ""}
                         </p>
+
                         <a
                             className='website'
                             target='_blank'
