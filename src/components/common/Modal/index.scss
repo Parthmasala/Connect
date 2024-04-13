@@ -40,9 +40,24 @@
   .preview-post-image {
     width: 100%;
     margin-top: 10px;
+    max-width: 400px; 
     border-radius: 5px;
   }
-  
+  .image-container {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto; 
+    .remove-button{
+      position: absolute;
+      top: -7%;
+      right: 0;
+      color: red;
+      cursor: pointer;
+
+    }
+}
+
   .upload-label {
     cursor: pointer;
   }
