@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import ReactQuill from "react-quill";
-import { Modal, Button, Progress } from "antd";
+import { Modal, Button, Progress, message } from "antd";
 import { GrGallery } from "react-icons/gr";
+import { AiOutlineClose } from "react-icons/ai"; // Import the close icon
 import "./index.scss";
 
 const ModalComponent = ({
@@ -19,6 +20,12 @@ const ModalComponent = ({
     setCurrentPost,
 }) => {
     const [progress, setProgress] = useState(0);
+
+    const removeImage = () => {
+        setPostImage("");
+        setCurrentPost({ ...currentPost, postImage: "" }); // Update current post state
+        message.success("Image removed successfully!");
+    };
 
     return (
         <Modal
@@ -50,13 +57,6 @@ const ModalComponent = ({
         >
             <div className='post-container'>
                 <div className='textarea-container'>
-                    {/* <textarea
-            placeholder='What is on your mind?'
-            className='modal-input'
-            rows={4}
-            value={status}
-            onChange={(e) => setStatus(e.target.value)}
-          ></textarea> */}
                     <ReactQuill
                         className='modal-input'
                         placeholder='What is on your mind?'
@@ -65,11 +65,19 @@ const ModalComponent = ({
                         onChange={setStatus}
                     />
                     {(postImage || currentPost.postImage) && (
-                        <img
-                            src={postImage || currentPost.postImage}
-                            alt='postImage'
-                            className='preview-post-image'
-                        />
+                        <div className='image-container'>
+                            <button
+                                className='remove-button' // Change class name
+                                onClick={removeImage}
+                            >
+                                <AiOutlineClose />
+                            </button>
+                            <img
+                                src={postImage || currentPost.postImage}
+                                alt='postImage'
+                                className='preview-post-image'
+                            />
+                        </div>
                     )}
                     {progress > 0 && progress < 100 && (
                         <div className='progress-bar'>
