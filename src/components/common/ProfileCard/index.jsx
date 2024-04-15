@@ -1,16 +1,19 @@
 import React, { useState, useMemo, useEffect } from "react";
-import { getStatus, getConnections } from "../../../API/FirestoreAPI";
 import {
+    getStatus,
+    getConnections,
     getSingleStatus,
     getSingleUser,
     editProfile,
     addConnection,
     removeConnection,
 } from "../../../API/FirestoreAPI";
+import { deleteAccount } from "../../../API/AuthAPI";
 import PostsCard from "../PostsCard";
 import { useLocation } from "react-router-dom";
 import { uploadImage as uploadImageAPI } from "../../../API/ImageUpload";
 import ProfileUploadModal from "../ProfileUploadModal";
+import { Modal } from "antd"; // Import Ant Design Modal component
 import "./index.scss";
 import { useNavigate } from "react-router-dom";
 import usericon from "../../../assets/user-icon.png";
@@ -24,6 +27,8 @@ export default function ProfileCard({ onEdit, currentUser }) {
     const [modalOpen, setModalOpen] = useState(false);
     const [progress, setProgress] = useState(0);
     const [isConnected, setIsConnected] = useState(false);
+    const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false); // State for delete account confirmation modal
+
     const getImage = (event) => {
         setCurrentImage(event.target.files[0]);
     };
@@ -70,6 +75,17 @@ export default function ProfileCard({ onEdit, currentUser }) {
                 },
             });
         }
+    };
+
+    const handleDeleteAccount = () => {
+        deleteAccount(currentUser.userid)
+            .then(() => {
+                navigate("/signup");
+                localStorage.clear();
+            })
+            .catch((error) => {
+                console.error("Error deleting account:", error);
+            });
     };
 
     return (
@@ -137,14 +153,16 @@ export default function ProfileCard({ onEdit, currentUser }) {
                             className='website'
                             target='_blank'
                             href={
-                                Object.values(currentProfile).length == 0
-                                    ? `${currentUser.website}`
-                                    : currentProfile?.website
+                                Object.values(currentProfile).length == 0 ||
+                                !currentProfile.website
+                                    ? currentUser.website
+                                    : currentProfile.website
                             }
                         >
-                            {Object.values(currentProfile).length == 0
-                                ? `${currentUser.website}`
-                                : currentProfile?.website}
+                            {Object.values(currentProfile).length == 0 ||
+                            !currentProfile.website
+                                ? currentUser.website
+                                : currentProfile.website}
                         </a>
                     </div>
 
@@ -217,6 +235,12 @@ export default function ProfileCard({ onEdit, currentUser }) {
                                     </>
                                 ) : null}
                             </p>
+                            <button
+                                className='delete-account-button'
+                                onClick={() => setConfirmDeleteOpen(true)}
+                            >
+                                Delete Account
+                            </button>
                         </div>
                     ) : (
                         <></>
@@ -233,6 +257,19 @@ export default function ProfileCard({ onEdit, currentUser }) {
                     );
                 })}
             </div>
+
+            {/* Delete account confirmation modal */}
+            <Modal
+                title='Confirm Delete Account'
+                visible={confirmDeleteOpen}
+                onOk={() => {
+                    handleDeleteAccount();
+                    setConfirmDeleteOpen(false);
+                }}
+                onCancel={() => setConfirmDeleteOpen(false)}
+            >
+                <p>Are you sure you want to delete your account?</p>
+            </Modal>
         </>
     );
 }

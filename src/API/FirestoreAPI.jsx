@@ -1,4 +1,4 @@
-import { db } from "../FirebaseConfig";
+import { db, auth } from "../FirebaseConfig";
 import {
     addDoc,
     collection,
@@ -8,7 +8,6 @@ import {
     query,
     where,
     getDocs,
-    getDoc,
     setDoc,
     deleteDoc,
 } from "firebase/firestore";
@@ -151,9 +150,9 @@ export const getLikesByUser = (userId, postId, setLiked, setLikesCount) => {
     }
 };
 
-export const postComment = (postId, comment, timeStamp, name) => {
+export const postComment = (postId, userId, comment, timeStamp, name) => {
     try {
-        addDoc(commentRef, { postId, comment, timeStamp, name });
+        addDoc(commentRef, { postId, userId, comment, timeStamp, name });
     } catch (err) {
         console.log(err);
     }
@@ -315,5 +314,70 @@ export const removeConnection = (userId, targetId) => {
         toast.success("Connection Removed");
     } catch (error) {
         console.log(error);
+    }
+};
+
+export const deleteFirestoreData = async (userId) => {
+    try {
+        const userDocRef = doc(collection(db, "users"), userId);
+        await deleteDoc(userDocRef);
+
+        const userPostsQuery = query(
+            collection(db, "posts"),
+            where("userID", "==", userId)
+        );
+        const userPostsSnapshot = await getDocs(userPostsQuery);
+        userPostsSnapshot.forEach(async (doc) => {
+            await deleteDoc(doc.ref);
+        });
+
+        const userLikesQuery = query(
+            collection(db, "likes"),
+            where("userId", "==", userId)
+        );
+        const userLikesSnapshot = await getDocs(userLikesQuery);
+        userLikesSnapshot.forEach(async (doc) => {
+            await deleteDoc(doc.ref);
+        });
+
+        const userCommentsQuery = query(
+            collection(db, "comments"),
+            where("userId", "==", userId)
+        );
+        const userCommentsSnapshot = await getDocs(userCommentsQuery);
+        userCommentsSnapshot.forEach(async (doc) => {
+            await deleteDoc(doc.ref);
+        });
+
+        const userConnectionsQuery = query(
+            collection(db, "connections"),
+            where("userId", "==", userId)
+        );
+        const userConnectionsSnapshot = await getDocs(userConnectionsQuery);
+        userConnectionsSnapshot.forEach(async (doc) => {
+            await deleteDoc(doc.ref);
+        });
+
+        const userMessagesQuery = query(
+            collection(db, "messages"),
+            where("senderId", "==", userId)
+        );
+        const userMessagesSnapshot = await getDocs(userMessagesQuery);
+        userMessagesSnapshot.forEach(async (doc) => {
+            await deleteDoc(doc.ref);
+        });
+
+        const receiverMessagesQuery = query(
+            collection(db, "messages"),
+            where("receiverId", "==", userId)
+        );
+        const receiverMessagesSnapshot = await getDocs(receiverMessagesQuery);
+        receiverMessagesSnapshot.forEach(async (doc) => {
+            await deleteDoc(doc.ref);
+        });
+
+        console.log("Firestore data deleted successfully");
+    } catch (error) {
+        console.error("Error deleting user data:", error);
     }
 };

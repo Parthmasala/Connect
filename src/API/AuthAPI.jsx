@@ -7,9 +7,10 @@ import {
     GoogleAuthProvider,
     signInWithPopup,
     updatePassword,
+    deleteUser,
 } from "firebase/auth";
-import { postUserData } from "./FirestoreAPI";
-
+import { postUserData, deleteFirestoreData } from "./FirestoreAPI";
+import { toast } from "react-toastify";
 // let authentication = getAuth();
 
 //API for login
@@ -51,6 +52,7 @@ export const GoogleAPI = (email, password) => {
                 };
 
                 postUserData(userData);
+                localStorage.setItem("userEmail", email);
                 toast.success("SignIn with Google Account");
             })
             .catch((error) => {
@@ -71,9 +73,22 @@ export const UpdatePassword = async (newPassword) => {
     }
 };
 
+export const deleteAccount = async (userId) => {
+    try {
+        await deleteUser(auth.currentUser);
+        await deleteFirestoreData(userId);
+        localStorage.clear();
+        toast.warning("Your account has been deleted successfully");
+    } catch (error) {
+        console.error("Error deleting account:", error);
+    }
+};
+
 export const onLogout = () => {
     try {
         signOut(auth);
+        localStorage.clear();
+        toast.info("You have logged out");
     } catch (error) {
         return error;
     }
