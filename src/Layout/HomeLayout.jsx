@@ -6,10 +6,11 @@ import { onAuthStateChanged, sendEmailVerification } from "firebase/auth";
 import { auth } from "../FirebaseConfig";
 import Loader from "../components/common/Loader/index.jsx";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export default function HomeLayout() {
     let navigate = useNavigate();
+    let location = useLocation();
     const [currentUser, setCurrentUser] = useState({});
     const [loading, setLoading] = useState(true);
     const [isEmailVerified, setIsEmailVerified] = useState(false);
@@ -44,7 +45,6 @@ export default function HomeLayout() {
     };
 
     const handleLogout = () => {
-        localStorage.clear();
         auth.signOut().then(() => {
             navigate("/login");
         });
@@ -58,6 +58,12 @@ export default function HomeLayout() {
             } else {
                 setIsEmailVerified(false);
                 setLoading(false);
+                if (
+                    location.pathname !== "/login" &&
+                    location.pathname !== "/signup"
+                ) {
+                    navigate("/login");
+                }
             }
         });
 
