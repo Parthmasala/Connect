@@ -7,8 +7,9 @@ import {
     GoogleAuthProvider,
     signInWithPopup,
     updatePassword,
+    deleteUser,
 } from "firebase/auth";
-import { postUserData } from "./FirestoreAPI";
+import { postUserData, deleteFirestoreData } from "./FirestoreAPI";
 import { toast } from "react-toastify";
 // let authentication = getAuth();
 
@@ -69,6 +70,17 @@ export const UpdatePassword = async (newPassword) => {
     } catch (error) {
         console.error("Error updating password:", error);
         throw error;
+    }
+};
+
+export const deleteAccount = async (userId) => {
+    try {
+        await deleteUser(auth.currentUser);
+        await deleteFirestoreData(userId);
+        localStorage.clear();
+        toast.warning("Your account has been deleted successfully");
+    } catch (error) {
+        console.error("Error deleting account:", error);
     }
 };
 

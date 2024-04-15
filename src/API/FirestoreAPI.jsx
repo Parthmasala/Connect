@@ -12,7 +12,6 @@ import {
     deleteDoc,
 } from "firebase/firestore";
 import { toast } from "react-toastify";
-import { signOut, deleteUser } from "firebase/auth";
 
 let dbRef = collection(db, "posts"); //this is the reference to the posts postRef
 let userRef = collection(db, "users");
@@ -318,7 +317,7 @@ export const removeConnection = (userId, targetId) => {
     }
 };
 
-const deleteFirestoreData = async (userId) => {
+export const deleteFirestoreData = async (userId) => {
     try {
         const userDocRef = doc(collection(db, "users"), userId);
         await deleteDoc(userDocRef);
@@ -380,16 +379,5 @@ const deleteFirestoreData = async (userId) => {
         console.log("Firestore data deleted successfully");
     } catch (error) {
         console.error("Error deleting user data:", error);
-    }
-};
-
-export const deleteAccount = async (userId) => {
-    try {
-        await deleteUser(auth.currentUser);
-        await deleteFirestoreData(userId);
-        localStorage.clear();
-        toast.warning("Your account has been deleted successfully");
-    } catch (error) {
-        console.error("Error deleting account:", error);
     }
 };

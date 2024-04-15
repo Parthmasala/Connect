@@ -1,13 +1,14 @@
 import React, { useState, useMemo, useEffect } from "react";
-import { getStatus, getConnections } from "../../../API/FirestoreAPI";
 import {
+    getStatus,
+    getConnections,
     getSingleStatus,
     getSingleUser,
     editProfile,
     addConnection,
     removeConnection,
-    deleteAccount as deleteAccountAPI,
 } from "../../../API/FirestoreAPI";
+import { deleteAccount } from "../../../API/AuthAPI";
 import PostsCard from "../PostsCard";
 import { useLocation } from "react-router-dom";
 import { uploadImage as uploadImageAPI } from "../../../API/ImageUpload";
@@ -77,7 +78,7 @@ export default function ProfileCard({ onEdit, currentUser }) {
     };
 
     const handleDeleteAccount = () => {
-        deleteAccountAPI(currentUser.userid)
+        deleteAccount(currentUser.userid)
             .then(() => {
                 navigate("/signup");
                 localStorage.clear();
