@@ -27,6 +27,7 @@ export default function LikeButton({ userId, postId, currentUser }) {
     const uploadComment = () => {
         postComment(
             postId,
+            userId,
             comment,
             getCurrentTimeStamp("LLL"),
             currentUser?.name

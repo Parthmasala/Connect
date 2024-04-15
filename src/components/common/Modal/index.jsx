@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import { Modal, Button, Progress, message } from "antd";
 import { GrGallery } from "react-icons/gr";
-import { AiOutlineClose } from "react-icons/ai"; // Import the close icon
+import { AiOutlineClose } from "react-icons/ai";
 import "./index.scss";
 
 const ModalComponent = ({
@@ -23,7 +23,7 @@ const ModalComponent = ({
 
     const removeImage = () => {
         setPostImage("");
-        setCurrentPost({ ...currentPost, postImage: "" }); // Update current post state
+        setCurrentPost({ ...currentPost, postImage: "" });
         message.success("Image removed successfully!");
     };
 
@@ -67,7 +67,7 @@ const ModalComponent = ({
                     {(postImage || currentPost.postImage) && (
                         <div className='image-container'>
                             <button
-                                className='remove-button' // Change class name
+                                className='remove-button'
                                 onClick={removeImage}
                             >
                                 <AiOutlineClose />
