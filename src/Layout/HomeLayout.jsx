@@ -44,6 +44,7 @@ export default function HomeLayout() {
     };
 
     const handleLogout = () => {
+        localStorage.clear();
         auth.signOut().then(() => {
             navigate("/login");
         });

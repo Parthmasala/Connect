@@ -387,6 +387,8 @@ export const deleteAccount = async (userId) => {
     try {
         await deleteUser(auth.currentUser);
         await deleteFirestoreData(userId);
+        localStorage.clear();
+        toast.warning("Your account has been deleted successfully");
     } catch (error) {
         console.error("Error deleting account:", error);
     }
