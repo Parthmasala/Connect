@@ -41,46 +41,46 @@ export default function MessagesComponent({ currentUser }) {
     }, [currentUser?.userid, messengerId]);
 
     return (
-        <div className='messages-component-container'>
+        <>
+        <div className="messages-component-container">
             {allMessages.length > 0 ? (
                 allMessages.map((Message, index) => (
-                    <div className='message-preview' key={index}>
-                        <div className='message-header'>
-                            <p className='message-sender'>
+                    <div className="message-preview" key={index}>
+                        <div className="message-header">
+                            <p className="message-sender">
                                 {Message?.senderName}
                             </p>
-                            <p className='message-timestamp'>
+                            <p className="message-timestamp">
                                 {Message?.timeStamp}
                             </p>
                         </div>
-                        <p className='message-text'>{Message?.message}</p>
+                        <p className="message-text">{Message?.message}</p>
                     </div>
                 ))
             ) : (
                 <></>
             )}
-            {messengerId?.length > 0 ? (
-                <>
+            {messengerId?.length > 0 && (
+                <div className="message-input-container">
                     <input
                         onChange={getMessage}
                         onKeyDown={handleKeyDown}
-                        name='Message'
-                        placeholder='Type a message...'
-                        className='Message-input'
+                        name="Message"
+                        placeholder="Type a message..."
+                        className="Message-input"
                         value={message}
                     ></input>
                     <button
-                        className='Message-btn'
+                        className="Message-btn"
                         onClick={uploadMessage}
-                        type='primary'
+                        type="primary"
                         disabled={message.length > 0 ? false : true}
                     >
                         Send
                     </button>
-                </>
-            ) : (
-                <></>
+                </div>
             )}
         </div>
+        </>
     );
 }
