@@ -1,50 +1,85 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Modal, Progress } from "antd";
 import "./index.scss";
 import { useLocation } from "react-router-dom";
 import usericon from "../../../assets/user-icon.png";
+
 export default function ProfileUploadModal({
     modalOpen,
     setModalOpen,
     getImage,
     uploadImage,
+    deleteImage,
     currentImage,
     progress,
     currentUser,
     currentProfile,
 }) {
     let location = useLocation();
+    const [uploadedImageUrl, setUploadedImageUrl] = useState(null);
+
+    useEffect(() => {
+        if (currentImage?.name) {
+            setUploadedImageUrl(URL.createObjectURL(currentImage));
+        }
+    }, [currentImage]);
+
+    const handleCloseModal = () => {
+        setUploadedImageUrl(null);
+        setModalOpen(false);
+    };
+
     const renderFooter = () => {
-        // if (currentProfile && currentUser && currentProfile.id === currentUser.id) {
-        if (location?.state?.id == currentUser.userid) {
+        if (location?.state?.id === currentUser.userid) {
             return (
-                <Button
-                    disabled={!currentImage.name}
-                    key='submit'
-                    type='primary'
-                    onClick={uploadImage}
-                >
-                    Upload Profile Picture
-                </Button>
+                <>
+                    <Button
+                        disabled={!currentImage?.name}
+                        key='submit'
+                        type='primary'
+                        onClick={uploadImage}
+                    >
+                        Upload Profile Picture
+                    </Button>
+                    {currentUser && currentUser.imageLink && (
+                        <Button
+                            key='delete'
+                            onClick={deleteCurrentProfileImage}
+                        >
+                            Delete Profile Picture
+                        </Button>
+                    )}
+                </>
             );
         }
         return null;
     };
 
     const profileImageSrc =
-        currentProfile && currentUser && currentProfile.id === currentUser.id
-            ? currentUser.imageLink
-            : currentProfile
-            ? currentProfile.imageLink
-            : "../../../assets/user-icon.png";
+        uploadedImageUrl ||
+        currentProfile?.imageLink ||
+        currentUser?.imageLink ||
+        usericon;
+
+    const deleteCurrentProfileImage = () => {
+        deleteImage(currentUser.imageLink);
+        setUploadedImageUrl(null);
+        setModalOpen(false);
+    };
+
+    const handleImageChange = (event) => {
+        const imageFile = event.target.files[0];
+        if (imageFile) {
+            getImage(event);
+        }
+    };
 
     return (
         <Modal
             title='Profile Image'
             centered
             visible={modalOpen}
-            onOk={() => setModalOpen(false)}
-            onCancel={() => setModalOpen(false)}
+            onCancel={handleCloseModal}
             footer={renderFooter()}
         >
             <div className='user-profile-pic'>
@@ -54,11 +89,14 @@ export default function ProfileUploadModal({
                     alt='no-image-available'
                 />
             </div>
-            {/* {currentProfile && currentUser && currentProfile.id === currentUser.id && ( */}
-            {location?.state?.id == currentUser.userid && (
+            {location?.state?.id === currentUser.userid && (
                 <div className='image-upload-main'>
-                    <p>{currentImage.name}</p>
-                    <label className='upload-btn' htmlFor='image-upload'>
+                    {/* <p>{currentImage.name}</p> */}
+                    <label
+                        className='upload-btn'
+                        htmlFor='image-upload'
+                        style={{ backgroundColor: "green" }}
+                    >
                         Add an Image
                     </label>
                     {progress !== 0 && (
@@ -70,7 +108,7 @@ export default function ProfileUploadModal({
                         hidden
                         id='image-upload'
                         type='file'
-                        onChange={getImage}
+                        onChange={handleImageChange}
                     />
                 </div>
             )}

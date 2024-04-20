@@ -28,9 +28,10 @@ export default function PostStatus({ currentUser }) {
             postImage: postImage,
         };
         await postStatus(object);
-        await setModalOpen(false);
+        setModalOpen(false);
         setIsEdit(false);
-        await setStatus("");
+        setStatus("");
+        setPostImage("");
     };
 
     const getEditData = (posts) => {
