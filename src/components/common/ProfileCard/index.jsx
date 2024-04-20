@@ -11,9 +11,12 @@ import {
 import { deleteAccount } from "../../../API/AuthAPI";
 import PostsCard from "../PostsCard";
 import { useLocation } from "react-router-dom";
-import { uploadImage as uploadImageAPI } from "../../../API/ImageUpload";
+import {
+    uploadImage as uploadImageAPI,
+    deleteImage as deleteImageAPI,
+} from "../../../API/ImageUpload"; // Import deleteImage function
 import ProfileUploadModal from "../ProfileUploadModal";
-import { Modal } from "antd"; // Import Ant Design Modal component
+import { Modal } from "antd";
 import "./index.scss";
 import { useNavigate } from "react-router-dom";
 import usericon from "../../../assets/user-icon.png";
@@ -27,7 +30,7 @@ export default function ProfileCard({ onEdit, currentUser }) {
     const [modalOpen, setModalOpen] = useState(false);
     const [progress, setProgress] = useState(0);
     const [isConnected, setIsConnected] = useState(false);
-    const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false); // State for delete account confirmation modal
+    const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
 
     const getImage = (event) => {
         setCurrentImage(event.target.files[0]);
@@ -40,6 +43,15 @@ export default function ProfileCard({ onEdit, currentUser }) {
             setModalOpen,
             setProgress,
             setCurrentImage
+        );
+    };
+
+    // Function to delete the current profile image
+    const deleteCurrentImage = () => {
+        deleteImageAPI(
+            currentUser.userid,
+            () => setCurrentImage({}), // Clear current image state
+            () => setCurrentProfile({ ...currentProfile, imageLink: "" }) // Update currentProfile state to remove imageLink
         );
     };
 
@@ -93,6 +105,7 @@ export default function ProfileCard({ onEdit, currentUser }) {
             <ProfileUploadModal
                 getImage={getImage}
                 uploadImage={uploadImage}
+                deleteImage={deleteCurrentImage} // Pass deleteImage function
                 modalOpen={modalOpen}
                 setModalOpen={setModalOpen}
                 currentImage={currentImage}

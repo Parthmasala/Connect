@@ -1,15 +1,22 @@
 import { storage } from "../FirebaseConfig";
-import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
+import {
+    ref,
+    getDownloadURL,
+    uploadBytesResumable,
+    deleteObject,
+} from "firebase/storage";
 import { editProfile } from "./FirestoreAPI";
 
+// Function to upload image and delete current image
 export const uploadImage = (
     file,
     id,
     setModalOpen,
     setProgress,
-    steCurrentImage
+    setCurrentImage,
+    currentImageLink // Pass current image link
 ) => {
-    const profilePicsRef = ref(storage, `profileImages/${file.name}`);
+    const profilePicsRef = ref(storage, `profileImages/${id}`);
     const uploadTask = uploadBytesResumable(profilePicsRef, file);
 
     uploadTask.on(
@@ -25,14 +32,44 @@ export const uploadImage = (
         },
         () => {
             getDownloadURL(uploadTask.snapshot.ref).then((response) => {
-                // console.log(response)
+                // Delete current image if exists
+                if (currentImageLink) {
+                    const currentImageRef = ref(storage, currentImageLink);
+                    deleteObject(currentImageRef)
+                        .then(() => {
+                            console.log("Current image deleted successfully");
+                        })
+                        .catch((error) => {
+                            console.error(
+                                "Error deleting current image:",
+                                error
+                            );
+                        });
+                }
+
+                // Update profile image link
                 editProfile(id, { imageLink: response });
                 setModalOpen(false);
-                steCurrentImage({});
+                setCurrentImage({});
                 setProgress(0);
             });
         }
     );
+};
+
+export const deleteImage = (id) => {
+    // Create a reference to the image in Firebase storage
+    const imageRef = ref(storage, `profileImages/${id}`);
+
+    // Delete the image from Firebase storage
+    return deleteObject(imageRef)
+        .then(() => {
+            console.log("Image deleted successfully");
+            editProfile(id, { imageLink: "" });
+        })
+        .catch((error) => {
+            console.error("Error deleting image:", error);
+        });
 };
 
 export const uploadPostImage = (file, setPostImage, setProgress) => {
