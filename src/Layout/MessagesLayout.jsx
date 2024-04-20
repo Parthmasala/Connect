@@ -14,8 +14,12 @@ export default function MessagesLayout() {
         <div>
             <Navbar currentUser={currentUser} />
             <div className='messages-layout'>
-                <Messengers currentUser={currentUser} />
-                <Messages currentUser={currentUser} />
+                <div className='MessengersComponent'>
+                    <Messengers currentUser={currentUser} />
+                </div>
+                <div className='MessagesComponent'>
+                    <Messages currentUser={currentUser} />
+                </div>
             </div>
         </div>
     );
