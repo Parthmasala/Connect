@@ -39,24 +39,24 @@ export default function LikeButton({ userId, postId, currentUser }) {
         getComments(postId, setShowComments);
     }, [userId, postId]);
     return (
-        <div className='like-container'>
+        <div className="like-container">
             <p>{likesCount} people like this post</p>
 
-            <div className='hr-line'>
+            <div className="hr-line">
                 <hr />
             </div>
 
-            <div className='like-comment-common'>
-                <div className='likes-comment-inner' onClick={handleLike}>
+            <div className="like-comment-common">
+                <div className="likes-comment-inner" onClick={handleLike}>
                     {liked ? (
-                        <BiSolidLike color='purple' size={30} />
+                        <BiSolidLike color="purple" size={30} />
                     ) : (
-                        <BiLike color='black' size={30} />
+                        <BiLike color="black" size={30} />
                     )}
                     <p className={liked ? "purple" : "black"}>Like</p>
                 </div>
                 <div
-                    className='likes-comment-inner'
+                    className="likes-comment-inner"
                     onClick={() => setshowCommentBox(!showCommentBox)}
                 >
                     <BiSolidCommentDots
@@ -72,17 +72,17 @@ export default function LikeButton({ userId, postId, currentUser }) {
                 <>
                     {showComments.length > 0 ? (
                         showComments.map((comment, index) => (
-                            <div className='comment-preview' key={index}>
-                                <div className='comment-header'>
-                                    <p className='comment-name'>
+                            <div className="comment-preview" key={index}>
+                                <div className="comment-header">
+                                    <p className="comment-name">
                                         {comment.name}
                                     </p>
-                                    <span className='dot'>•</span>
-                                    <p className='comment-timestamp'>
+                                    <span className="dot">•</span>
+                                    <p className="comment-timestamp">
                                         {comment.timeStamp}
                                     </p>
                                 </div>
-                                <p className='comment-text'>
+                                <p className="comment-text">
                                     {comment.comment}
                                 </p>
                             </div>
@@ -93,15 +93,15 @@ export default function LikeButton({ userId, postId, currentUser }) {
 
                     <input
                         onChange={getComment}
-                        name='comment'
-                        placeholder='Add a Comment'
-                        className='comment-input'
+                        name="comment"
+                        placeholder="Add a Comment"
+                        className="comment-input"
                         value={comment}
                     ></input>
                     <button
-                        className='comment-btn'
+                        className="comment-btn"
                         onClick={uploadComment}
-                        type='primary'
+                        type="primary"
                         disabled={comment.length > 0 ? false : true}
                     >
                         Comment

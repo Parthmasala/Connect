@@ -35,15 +35,15 @@ export default function ProfileUploadModal({
                 <>
                     <Button
                         disabled={!currentImage?.name}
-                        key='submit'
-                        type='primary'
+                        key="submit"
+                        type="primary"
                         onClick={uploadImage}
                     >
                         Upload Profile Picture
                     </Button>
                     {currentUser && currentUser.imageLink && (
                         <Button
-                            key='delete'
+                            key="delete"
                             onClick={deleteCurrentProfileImage}
                         >
                             Delete Profile Picture
@@ -76,38 +76,38 @@ export default function ProfileUploadModal({
 
     return (
         <Modal
-            title='Profile Image'
+            title="Profile Image"
             centered
             visible={modalOpen}
             onCancel={handleCloseModal}
             footer={renderFooter()}
         >
-            <div className='user-profile-pic'>
+            <div className="user-profile-pic">
                 <img
-                    className='post-image'
+                    className="post-image"
                     src={profileImageSrc}
-                    alt='no-image-available'
+                    alt="no-image-available"
                 />
             </div>
             {location?.state?.id === currentUser.userid && (
-                <div className='image-upload-main'>
+                <div className="image-upload-main">
                     {/* <p>{currentImage.name}</p> */}
                     <label
-                        className='upload-btn'
-                        htmlFor='image-upload'
+                        className="upload-btn"
+                        htmlFor="image-upload"
                         style={{ backgroundColor: "green" }}
                     >
                         Add an Image
                     </label>
                     {progress !== 0 && (
-                        <div className='progress-bar'>
-                            <Progress type='circle' percent={progress} />
+                        <div className="progress-bar">
+                            <Progress type="circle" percent={progress} />
                         </div>
                     )}
                     <input
                         hidden
-                        id='image-upload'
-                        type='file'
+                        id="image-upload"
+                        type="file"
                         onChange={handleImageChange}
                     />
                 </div>

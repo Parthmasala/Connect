@@ -13,15 +13,15 @@ export default function UserMessages({ user }) {
     };
 
     return (
-        <div className='searched-user' onClick={handleClick}>
+        <div className="searched-user" onClick={handleClick}>
             <img
                 src={user.imageLink || usericon}
                 alt={user.name}
                 style={{ color: "black" }}
             />
-            <div className='user-details'>
-                <p className='name'>{user.name}</p>
-                <p className='headline'>{user.headline}</p>
+            <div className="user-details">
+                <p className="name">{user.name}</p>
+                <p className="headline">{user.headline}</p>
             </div>
         </div>
     );

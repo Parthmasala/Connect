@@ -1,149 +1,154 @@
 body {
-  margin: 0;
-  padding: 0;
-  background-color: #35374B;
+    margin: 0;
+    padding: 0;
+    background-color: #35374b;
 }
 
 .login-wrapper {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-family: Helvetica;
-  max-width: 400px;
-  width: 100%;
-  padding: 20px;
-  box-sizing: border-box;
-  background-color: black;
-  .login-wrapper-inner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: Helvetica;
+    max-width: 400px;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: black;
+    .login-wrapper-inner {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .heading {
+        color: white;
+        font-weight: 200;
+        font-size: 30px;
+    }
+    .sub-heading {
+        color: white;
+        font-weight: 200;
+        font-size: 20px;
+        margin-top: -20px;
+    }
+}
+
+.auth-input {
+    margin-top: 10%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-  }
-  .heading {
-    color: white;
-    font-weight: 200;
-    font-size: 30px;
-  }
-  .sub-heading {
-    color: white;
-    font-weight: 200;
-    font-size: 20px;
-    margin-top: -20px;
-  }
-}
-
-.auth-input {
-  margin-top: 10%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  .common-input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 2px solid transparent; // Set initial border to transparent
-    border-radius: 5px;
-    background-color: #1f1f1f;
-    color: white;
-    font-size: 1em;
-    &:focus {
-      outline: none;
-      animation: blinkBorder 1s infinite alternate; // Apply animation only when focused
-      border-color: #0cf; // Change border color on focus
+    .common-input {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 2px solid transparent; // Set initial border to transparent
+        border-radius: 5px;
+        background-color: #1f1f1f;
+        color: white;
+        font-size: 1em;
+        &:focus {
+            outline: none;
+            animation: blinkBorder 1s infinite alternate; // Apply animation only when focused
+            border-color: #0cf; // Change border color on focus
+        }
     }
-  }
-  .common-input {
-    width: 80%;
-  }
+    .common-input {
+        width: 80%;
+    }
 }
 
 @keyframes blinkBorder {
-  from {
-    border-color: transparent; // Initial border color
-  }
-  to {
-    border-color: #0cf; // Final border color
-  }
+    from {
+        border-color: transparent; // Initial border color
+    }
+    to {
+        border-color: #0cf; // Final border color
+    }
 }
 
 .login-btn {
-  display: inline-block;
-  padding: .25em .75em;
-  border-radius: 5em;
-  color: #fff;
-  font-size: 1em;
-  letter-spacing: .15em;
-  transition: all .3s;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-  &:after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #0cf;
-    border-radius: 10em;
-    z-index: -2;
-  }
-  &:before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0%;
-    height: 100%;
-    background-color: darken(#0cf, 15%);
-    transition: all .3s;
-    border-radius: 10em;
-    z-index: -1;
-  }
-  &:hover {
+    display: inline-block;
+    padding: 0.25em 0.75em;
+    border-radius: 5em;
     color: #fff;
-    &:before {
-      width: 100%;
+    font-size: 1em;
+    letter-spacing: 0.15em;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    &:after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #0cf;
+        border-radius: 10em;
+        z-index: -2;
     }
-  }
+    &:before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0%;
+        height: 100%;
+        background-color: darken(#0cf, 15%);
+        transition: all 0.3s;
+        border-radius: 10em;
+        z-index: -1;
+    }
+    &:hover {
+        color: #fff;
+        &:before {
+            width: 100%;
+        }
+    }
 }
 
 .google-btn-container {
-  margin-top: 10%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  .google-btn {
-    width: 80% !important;
-  }
-  .signup-link {
-    margin-top: 5%;
-    font-size: 80%;
-  }
-  .register {
-    color: #0072b1;
-    font-family: system-ui;
-    cursor: pointer;
-  }
+    margin-top: 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .google-btn {
+        width: 80% !important;
+    }
+    .signup-link {
+        margin-top: 5%;
+        font-size: 80%;
+    }
+    .register {
+        color: #0072b1;
+        font-family: system-ui;
+        cursor: pointer;
+    }
 }
 
 .hr-text {
-  margin: 10% 0;
-  text-align: center;
-  &:before {
-    background: linear-gradient(to right, transparent, #818078, transparent);
-  }
-  &:after {
-    color: white;
-    background-color: transparent;
-  }
+    margin: 10% 0;
+    text-align: center;
+    &:before {
+        background: linear-gradient(
+            to right,
+            transparent,
+            #818078,
+            transparent
+        );
+    }
+    &:after {
+        color: white;
+        background-color: transparent;
+    }
 }
 
 .connectLogo {
-  width: 50%;
+    width: 50%;
 }

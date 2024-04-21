@@ -20,11 +20,11 @@ export default function ProfilePopup() {
     };
     // console.log(currentUser);
     return (
-        <div className='popup-card'>
-            <p className='name'>{currentUser?.name}</p>
-            <p className='headline'>{currentUser?.headline}</p>
-            <Button title='View Profile' onClick={onViewProfile} />
-            <Button title='Logout' onClick={onLogout} />
+        <div className="popup-card">
+            <p className="name">{currentUser?.name}</p>
+            <p className="headline">{currentUser?.headline}</p>
+            <Button title="View Profile" onClick={onViewProfile} />
+            <Button title="Logout" onClick={onLogout} />
         </div>
     );
 }
