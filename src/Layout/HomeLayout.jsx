@@ -98,7 +98,7 @@ export default function HomeLayout() {
                             Resend Verification Email
                         </button>{" "}
                         |{" "}
-                        <button onClick={handleLogout} title='Logout'>
+                        <button onClick={handleLogout} title="Logout">
                             Logout
                         </button>
                     </p>

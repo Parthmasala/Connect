@@ -24,7 +24,7 @@
         color: purple;
     }
 
-    .black{
+    .black {
         color: black;
     }
 
@@ -85,7 +85,7 @@
             display: flex;
             align-items: center;
         }
-        
+
         .comment-name {
             font-weight: bold;
             margin-right: 5px;
@@ -110,10 +110,9 @@
         }
     }
 
-    
     @media screen and (max-width: 768px) {
         .comment-btn {
-            width: 40%; 
+            width: 40%;
         }
     }
 
