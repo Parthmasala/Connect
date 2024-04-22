@@ -29,7 +29,7 @@ export default function LikeButton({ userId, postId, currentUser }) {
             postId,
             userId,
             comment,
-            getCurrentTimeStamp("LLL"),
+            getCurrentTimeStamp("LL LTS"),
             currentUser?.name
         );
         setComment("");
@@ -38,6 +38,11 @@ export default function LikeButton({ userId, postId, currentUser }) {
         getLikesByUser(userId, postId, setLiked, setLikesCount);
         getComments(postId, setShowComments);
     }, [userId, postId]);
+
+    const orderedComments = useMemo(() => {
+        return showComments.slice().sort((a, b) => new Date(a.timeStamp) - new Date(b.timeStamp));
+    }, [showComments]);
+    
     return (
         <div className="like-container">
             <p>{likesCount} people like this post</p>
@@ -70,8 +75,8 @@ export default function LikeButton({ userId, postId, currentUser }) {
             </div>
             {showCommentBox ? (
                 <>
-                    {showComments.length > 0 ? (
-                        showComments.map((comment, index) => (
+                    {orderedComments.length > 0 ? (
+                        orderedComments.map((comment, index) => (
                             <div className="comment-preview" key={index}>
                                 <div className="comment-header">
                                     <p className="comment-name">
