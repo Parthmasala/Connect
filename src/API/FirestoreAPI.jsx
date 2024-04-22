@@ -269,39 +269,22 @@ export const saveMessage = (
 
 export const getAllMessages = (senderId, receiverId, setMessages) => {
     try {
-        let message1Query = query(
+        let messageQuery = query(
             messageRef,
-            where("senderId", "==", senderId),
-            where("receiverId", "==", receiverId)
-        );
-        let message2Query = query(
-            messageRef,
-            where("senderId", "==", receiverId),
-            where("receiverId", "==", senderId)
-        );
-
-        // Array to hold all messages
-        let messages = [];
-
-        // Function to handle snapshot updates
-        const handleSnapshot = (snapshot) => {
-            const newMessages = snapshot.docs.map((doc) => ({
-                id: doc.id,
-                ...doc.data(),
-            }));
-
-            // Merge new messages with existing messages
-            messages = [...messages, ...newMessages];
-
-            // Update the state with the merged messages
+            where("senderId", "in", [senderId, receiverId]), // Use array comparison
+            where("receiverId", "in", [senderId, receiverId])
+          );
+        onSnapshot(messageQuery, (response) => {
+            // setComments(response.docs.map((doc) => doc.data()));
+            const messages = response.docs.map((doc) => {
+                return {
+                    id: doc.id,
+                    ...doc.data(),
+                };
+            });
             setMessages(messages);
-        };
+        });
 
-        // Listen for changes on message1Query
-        onSnapshot(message1Query, handleSnapshot);
-
-        // Listen for changes on message2Query
-        onSnapshot(message2Query, handleSnapshot);
     } catch (err) {
         console.log(err);
     }
