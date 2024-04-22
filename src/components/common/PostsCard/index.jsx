@@ -29,17 +29,17 @@ export default function PostsCard({ posts, id, getEditData }) {
     }, [currentUser?.userid, posts?.userID]);
 
     return isConnected || currentUser?.userid === posts?.userID ? (
-        <div className='posts-card' key={id}>
-            <div className='post-header'>
+        <div className="posts-card" key={id}>
+            <div className="post-header">
                 <img
                     src={
                         allUsers
                             .filter((item) => item.id === posts?.userID)
                             .map((item) => item.imageLink)[0] || dummyuser
                     }
-                    alt='profile image'
+                    alt="profile image"
                     style={{ color: "black", fontSize: "11px" }}
-                    className='user-profile'
+                    className="user-profile"
                     onClick={() =>
                         navigate("/profile", {
                             state: {
@@ -50,9 +50,9 @@ export default function PostsCard({ posts, id, getEditData }) {
                     }
                 />
 
-                <div className='name-timestamp'>
+                <div className="name-timestamp">
                     <p
-                        className='name'
+                        className="name"
                         onClick={() =>
                             navigate("/profile", {
                                 state: {
@@ -68,26 +68,26 @@ export default function PostsCard({ posts, id, getEditData }) {
                             )[0]?.name
                         }
                     </p>
-                    <p className='headline'>
+                    <p className="headline">
                         {
                             allUsers.filter(
                                 (user) => user.id === posts?.userID
                             )[0]?.headline
                         }
                     </p>
-                    <p className='timeStamp'> {posts?.timeStamp}</p>
+                    <p className="timeStamp"> {posts?.timeStamp}</p>
                 </div>
 
                 {currentUser?.userid === posts?.userID ? (
-                    <div className='action-container'>
+                    <div className="action-container">
                         <BsPencil
                             size={20}
-                            className='action-icon'
+                            className="action-icon"
                             onClick={() => getEditData(posts)}
                         />
                         <BsTrash
                             size={20}
-                            className='action-icon'
+                            className="action-icon"
                             onClick={() => deletePost(posts?.id)}
                         />
                     </div>
@@ -95,7 +95,7 @@ export default function PostsCard({ posts, id, getEditData }) {
             </div>
             {/* <p className='status'>{posts.status}</p> */}
             <div
-                className='status'
+                className="status"
                 dangerouslySetInnerHTML={{ __html: posts?.status }}
             ></div>
 
@@ -103,8 +103,8 @@ export default function PostsCard({ posts, id, getEditData }) {
                 <img
                     src={posts?.postImage}
                     onClick={() => setImageModal(true)}
-                    alt='post-image'
-                    className='post-image'
+                    alt="post-image"
+                    className="post-image"
                 />
             ) : null}
             <LikeButton
@@ -120,9 +120,9 @@ export default function PostsCard({ posts, id, getEditData }) {
             >
                 <img
                     src={posts?.postImage}
-                    alt='post-modal-image'
+                    alt="post-modal-image"
                     style={{ color: "black", fontSize: "11px" }}
-                    className='post-modal-image'
+                    className="post-modal-image"
                 />
             </Modal>
         </div>

@@ -13,11 +13,11 @@ export default function MessagesLayout() {
     return (
         <div>
             <Navbar currentUser={currentUser} />
-            <div className='messages-layout'>
-                <div className='MessengersComponent'>
+            <div className="messages-layout">
+                <div className="MessengersComponent">
                     <Messengers currentUser={currentUser} />
                 </div>
-                <div className='MessagesComponent'>
+                <div className="MessagesComponent">
                     <Messages currentUser={currentUser} />
                 </div>
             </div>

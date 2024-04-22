@@ -160,18 +160,18 @@ export default function ProfileEdit({ currentUser, onEdit }) {
                 />
                 <label>New Password</label>
                 <input
-                    type='password'
+                    type="password"
                     onChange={(e) => setNewPassword(e.target.value)}
-                    className='common-input'
-                    placeholder='New Password'
+                    className="common-input"
+                    placeholder="New Password"
                     value={newPassword}
                 />
                 <label>Confirm Password</label>
                 <input
-                    type='password'
+                    type="password"
                     onChange={(e) => setConfirmPassword(e.target.value)}
-                    className='common-input'
-                    placeholder='Confirm Password'
+                    className="common-input"
+                    placeholder="Confirm Password"
                     value={confirmPassword}
                 />
             </div>

@@ -27,7 +27,7 @@ export default function MessagesComponent({ currentUser }) {
             currentUser?.userid,
             currentUser?.name,
             messengerId,
-            getCurrentTimeStamp("LLL"),
+            getCurrentTimeStamp("LL LTS"),
             message
         );
 
@@ -40,47 +40,51 @@ export default function MessagesComponent({ currentUser }) {
         }
     }, [currentUser?.userid, messengerId]);
 
+    const orderedMessages = useMemo(() => {
+        return allMessages.slice().sort((a, b) => new Date(a.timeStamp) - new Date(b.timeStamp));
+    }, [allMessages]);
+
     return (
         <>
-        <div className="messages-component-container">
-            {allMessages.length > 0 ? (
-                allMessages.map((Message, index) => (
-                    <div className="message-preview" key={index}>
-                        <div className="message-header">
-                            <p className="message-sender">
-                                {Message?.senderName}
-                            </p>
-                            <p className="message-timestamp">
-                                {Message?.timeStamp}
-                            </p>
+            <div className="messages-component-container">
+                {orderedMessages.length > 0 ? (
+                    orderedMessages.map((Message, index) => (
+                        <div className="message-preview" key={index}>
+                            <div className="message-header">
+                                <p className="message-sender">
+                                    {Message?.senderName}
+                                </p>
+                                <p className="message-timestamp">
+                                    {Message?.timeStamp}
+                                </p>
+                            </div>
+                            <p className="message-text">{Message?.message}</p>
                         </div>
-                        <p className="message-text">{Message?.message}</p>
+                    ))
+                ) : (
+                    <></>
+                )}
+                {messengerId?.length > 0 && (
+                    <div className="message-input-container">
+                        <input
+                            onChange={getMessage}
+                            onKeyDown={handleKeyDown}
+                            name="Message"
+                            placeholder="Type a message..."
+                            className="Message-input"
+                            value={message}
+                        ></input>
+                        <button
+                            className="Message-btn"
+                            onClick={uploadMessage}
+                            type="primary"
+                            disabled={message.length > 0 ? false : true}
+                        >
+                            Send
+                        </button>
                     </div>
-                ))
-            ) : (
-                <></>
-            )}
-            {messengerId?.length > 0 && (
-                <div className="message-input-container">
-                    <input
-                        onChange={getMessage}
-                        onKeyDown={handleKeyDown}
-                        name="Message"
-                        placeholder="Type a message..."
-                        className="Message-input"
-                        value={message}
-                    ></input>
-                    <button
-                        className="Message-btn"
-                        onClick={uploadMessage}
-                        type="primary"
-                        disabled={message.length > 0 ? false : true}
-                    >
-                        Send
-                    </button>
-                </div>
-            )}
-        </div>
+                )}
+            </div>
         </>
     );
 }

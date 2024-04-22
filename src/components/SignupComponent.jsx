@@ -46,14 +46,14 @@ export default function SignupComponent() {
     };
 
     return (
-        <div className='login-wrapper'>
-            <img src={ConnectLogo} className='connectLogo' />
+        <div className="login-wrapper">
+            <img src={ConnectLogo} className="connectLogo" />
 
-            <div className='login-wrapper-inner'>
-                <h1 className='heading'>Sign Up</h1>
-                <p className='sub-heading'>Let's get started</p>
+            <div className="login-wrapper-inner">
+                <h1 className="heading">Sign Up</h1>
+                <p className="sub-heading">Let's get started</p>
 
-                <div className='auth-input'>
+                <div className="auth-input">
                     <input
                         onChange={(e) =>
                             setCredentials({
@@ -61,9 +61,9 @@ export default function SignupComponent() {
                                 name: e.target.value,
                             })
                         }
-                        type='text'
-                        className='common-input'
-                        placeholder='Name'
+                        type="text"
+                        className="common-input"
+                        placeholder="Name"
                         required
                     />
 
@@ -74,9 +74,9 @@ export default function SignupComponent() {
                                 email: e.target.value,
                             })
                         }
-                        type='email'
-                        className='common-input'
-                        placeholder='Email'
+                        type="email"
+                        className="common-input"
+                        placeholder="Email"
                         required
                     />
 
@@ -87,23 +87,23 @@ export default function SignupComponent() {
                                 password: e.target.value,
                             })
                         }
-                        type='password'
-                        className='common-input'
-                        placeholder='Password (6 or more characters)'
+                        type="password"
+                        className="common-input"
+                        placeholder="Password (6 or more characters)"
                         required
                     />
                 </div>
 
-                <button className='login-btn' onClick={register}>
+                <button className="login-btn" onClick={register}>
                     Create Account
                 </button>
             </div>
-            <hr className='hr-text' data-content='or' />
-            <div className='google-btn-container'>
-                <GoogleButton className='google-btn' onClick={googleLogin} />
-                <p className='signup-link'>
+            <hr className="hr-text" data-content="or" />
+            <div className="google-btn-container">
+                <GoogleButton className="google-btn" onClick={googleLogin} />
+                <p className="signup-link">
                     Already have an account?{" "}
-                    <span className='register' onClick={() => navigate("/")}>
+                    <span className="register" onClick={() => navigate("/")}>
                         Log In
                     </span>
                 </p>

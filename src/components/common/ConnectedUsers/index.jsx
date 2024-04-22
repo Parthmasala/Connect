@@ -34,7 +34,7 @@ export default function ConnectedUsers({
         getConnections(currentUser.userid, user.id, setIsConnected);
     }, [currentUser.userid, user.id]);
 
-    return (
+    return !isConnected ? (
         <div className="connected-user" onClick={handleClick}>
             <img
                 src={user.imageLink || usericon}
@@ -65,5 +65,7 @@ export default function ConnectedUsers({
                 </>
             )}
         </div>
-    );
+    ):
+    <></>
+    ;
 }

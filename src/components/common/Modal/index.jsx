@@ -29,7 +29,7 @@ const ModalComponent = ({
 
     return (
         <Modal
-            title='Create a Post'
+            title="Create a Post"
             centered
             visible={modalOpen}
             onOk={() => {
@@ -46,50 +46,50 @@ const ModalComponent = ({
             }}
             footer={[
                 <Button
-                    key='submit'
+                    key="submit"
                     onClick={isEdit ? updateStatus : sendStatus}
-                    type='primary'
+                    type="primary"
                     disabled={status.length === 0}
                 >
                     {isEdit ? "Update" : "Post"}
                 </Button>,
             ]}
         >
-            <div className='post-container'>
-                <div className='textarea-container'>
+            <div className="post-container">
+                <div className="textarea-container">
                     <ReactQuill
-                        className='modal-input'
-                        placeholder='What is on your mind?'
-                        theme='snow'
+                        className="modal-input"
+                        placeholder="What is on your mind?"
+                        theme="snow"
                         value={status}
                         onChange={setStatus}
                     />
                     {(postImage || currentPost.postImage) && (
-                        <div className='image-container'>
+                        <div className="image-container">
                             <button
-                                className='remove-button'
+                                className="remove-button"
                                 onClick={removeImage}
                             >
                                 <AiOutlineClose />
                             </button>
                             <img
                                 src={postImage || currentPost.postImage}
-                                alt='postImage'
-                                className='preview-post-image'
+                                alt="postImage"
+                                className="preview-post-image"
                             />
                         </div>
                     )}
                     {progress > 0 && progress < 100 && (
-                        <div className='progress-bar'>
-                            <Progress type='circle' percent={progress} />
+                        <div className="progress-bar">
+                            <Progress type="circle" percent={progress} />
                         </div>
                     )}
-                    <label htmlFor='upload-pic' className='upload-label'>
-                        <GrGallery size={30} className='upload-pic' />
+                    <label htmlFor="upload-pic" className="upload-label">
+                        <GrGallery size={30} className="upload-pic" />
                     </label>
                     <input
-                        id='upload-pic'
-                        type='file'
+                        id="upload-pic"
+                        type="file"
                         hidden
                         onChange={(event) =>
                             uploadPostImage(
