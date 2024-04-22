@@ -27,7 +27,7 @@ export default function MessagesComponent({ currentUser }) {
             currentUser?.userid,
             currentUser?.name,
             messengerId,
-            getCurrentTimeStamp("LLL"),
+            getCurrentTimeStamp("LL LTS"),
             message
         );
 
@@ -40,11 +40,15 @@ export default function MessagesComponent({ currentUser }) {
         }
     }, [currentUser?.userid, messengerId]);
 
+    const orderedMessages = useMemo(() => {
+        return allMessages.slice().sort((a, b) => new Date(a.timeStamp) - new Date(b.timeStamp));
+    }, [allMessages]);
+
     return (
         <>
             <div className="messages-component-container">
-                {allMessages.length > 0 ? (
-                    allMessages.map((Message, index) => (
+                {orderedMessages.length > 0 ? (
+                    orderedMessages.map((Message, index) => (
                         <div className="message-preview" key={index}>
                             <div className="message-header">
                                 <p className="message-sender">
