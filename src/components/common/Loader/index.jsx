@@ -1,6 +1,6 @@
 import React from "react";
 import { Space, Spin } from "antd";
-// import './common.scss';
+import "./index.scss";
 
 export default function Loader() {
     return (

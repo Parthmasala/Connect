@@ -1,5 +1,9 @@
 @import url("./components/common/Loader/index.scss");
 
+$first: #0C0C0F;
+$second: #31363F;
+$third: #af52fe;
+
 :root {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
@@ -8,21 +12,13 @@
     color-scheme: light dark;
     color: white;
     /* bg color */
-    background-color: rgba(255, 255, 255, 0.87);
+    background-color: $second;
 
-    // font-synthesis: none;
-    // text-rendering: optimizeLegibility;
-    // -webkit-font-smoothing: antialiased;
-    // -moz-osx-font-smoothing: grayscale;
 }
 
 body {
     margin: 0;
     display: flex;
-    /* justify-content: center; */
-    /* align-items: center; */
-    /* place-items: center; */
-    /* min-width: 320px; */
     min-height: 100vh;
 }
 
@@ -30,14 +26,23 @@ body {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
-    border: 2px solid transparent; // Set initial border to transparent
+    border: 2px solid transparent; 
     border-radius: 5px;
     background-color: #1f1f1f;
     color: white;
     font-size: 1em;
     &:focus {
         outline: none;
-        animation: blinkBorder 1s infinite alternate; // Apply animation only when focused
-        border-color: #0cf; // Change border color on focus
+        animation: blinkBorder 1s infinite alternate;
+        border-color: #0cf; 
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+    }
+    .common-input {
+        width: calc(100% - 20px);
     }
 }
