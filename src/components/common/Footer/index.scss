@@ -1,0 +1,32 @@
+$first: #0C0C0F;
+$second: #31363F;
+$third: #af52fe;
+
+html {
+    margin: 0;
+  }
+  
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+  }
+  
+  .main-content {
+    flex: 1;
+  }
+  
+  .footer {
+    background-color: $third;
+    color: white;
+    text-align: center;
+    padding: 7px 0;
+    width: 100%;
+    height: 2.5%;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+  }
+  
