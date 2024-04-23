@@ -1,6 +1,4 @@
-$first: #0C0C0F;
-$second: #31363F;
-$third: #af52fe;
+@import "../../../GeneralTheme.scss";
 
 .search-main {
     display: flex;
@@ -35,10 +33,10 @@ $third: #af52fe;
 
     .close-icon {
         margin-left: -30px;
-        color: orange;
+        color: $third;
         cursor: pointer;
     }
     .close-icon:hover {
-        color: darkorange; 
+        color: darken($third , 25%); 
     }
 }
