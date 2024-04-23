@@ -1,7 +1,11 @@
+$first: #0C0C0F;
+$second: #31363F;
+$third: #af52fe;
+
 .navbar-master {
-    width: 96.3vw;
+    width: 99%;
     height: 10vh;
-    background-color: black;
+    background-color: #0c0c0f;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -15,7 +19,7 @@
 }
 
 .user-logo {
-    width: 70%; 
+    width: 70%;
     max-width: 60px;
     height: 70%;
     border-radius: 50%;
@@ -29,7 +33,18 @@
     &:hover {
         transform: translateY(-50%) scale(1.1);
     }
+
+    @media screen and (max-width: 768px) {
+        position: static;
+        transform: none;
+        margin: 10px 0;
+    }
 }
+
+.user-logo:hover {
+    background-color: lighten($third , 1%);
+}
+
 
 .connect-logo {
     width: auto;
@@ -51,11 +66,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-left: 30px;
+    margin-left: -230px;
 
     @media screen and (max-width: 768px) {
         justify-content: space-around;
         margin: 10px 0;
+        width: 100%;
     }
 }
 
@@ -64,44 +80,15 @@
 }
 
 .icon-scss:hover {
-    color: #717a71;
+    color: lighten($third, 20%);
+
 }
 
-// .search-results{
-//     position: absolute;
-//     left: 330px;
-//     top: 70px;
-//     width: 550px;
-//     height: 300px;
-//     background-color: black;
-//     border-radius: 10px;
-//     height: auto;
-//     border: 5px solid purple;
-
-//     .search-inner{
-//         display: flex;
-//         // justify-content: space-evenly;
-//         gap: 20px;
-//         padding: 10px;
-//         align-items: center;
-//         cursor: pointer;
-//         // border-radius: 10px;
-//         img{
-//             width:60px;
-//             height: 60px;
-//             border-radius: 50%;
-//             object-fit: cover;
-//         }
-//         .name{
-//             font: Helvetica;
-//             font-size: 20px;
-//         }
-//     }
-//     .search-inner:hover{
-//         background-color: rgb(39, 34, 34);
-//     }
-// }
-
+.icon-scss.active {
+    border-bottom: 5px solid $third;
+    padding-bottom: 1%;
+  }
+  
 .search-results {
     position: absolute;
     left: 330px;
@@ -112,6 +99,13 @@
     border-radius: 10px;
     border: 5px solid purple;
     overflow: auto; /* Add overflow property */
+
+    @media screen and (max-width: 768px) {
+        width: calc(100% - 20px);
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
 }
 
 .search-inner {

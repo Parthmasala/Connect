@@ -16,22 +16,19 @@ export default function Navbar({ currentUser }) {
     const [searchInput, setSearchInput] = useState("");
     const [users, setUsers] = useState([]);
     const [filteredUsers, setFilteredUsers] = useState([]);
+    const [activeIcon, setActiveIcon] = useState("");
     const userLogoRef = useRef(null);
     const menuRef = useRef(null);
-
-    const Route = (path) => {
-        navigate(path);
-    };
 
     useEffect(() => {
         getAllUsers(setUsers);
     }, []);
 
     useEffect(() => {
-        let debounded = setTimeout(() => {
+        let debounced = setTimeout(() => {
             handleSearch();
         }, 1000);
-        return () => clearTimeout(debounded);
+        return () => clearTimeout(debounced);
     }, [searchInput]);
 
     const handleSearch = () => {
@@ -63,7 +60,6 @@ export default function Navbar({ currentUser }) {
         const handleClickOutside = (event) => {
             if (menuRef.current && !menuRef.current.contains(event.target)) {
                 setSearchInput("");
-                // setIsSearch(!isSearch);
                 setIsSearch(false);
             }
         };
@@ -91,13 +87,34 @@ export default function Navbar({ currentUser }) {
         };
     }, []);
 
+    useEffect(() => {
+        const pathname = window.location.pathname;
+        switch (pathname) {
+            case "/Home":
+                setActiveIcon("home");
+                break;
+            case "/Connections":
+                setActiveIcon("connections");
+                break;
+            case "/Messages":
+                setActiveIcon("messages");
+                break;
+            case "/ResumeBuilder":
+                setActiveIcon("resumeBuilder");
+                break;
+            default:
+                setActiveIcon("");
+                break;
+        }
+    }, [window.location.pathname]);
+
     return (
         <div className="navbar-master">
             <img
                 className="connect-logo"
                 src={ConnectLogo}
                 alt="Connect Logo"
-                onClick={() => Route("/home")}
+                onClick={() => navigate("/home")}
             />
             {isSearch ? (
                 <Search
@@ -109,33 +126,48 @@ export default function Navbar({ currentUser }) {
                 <div className="icons">
                     <IoMdHome
                         size={40}
-                        className="icon-scss"
-                        onClick={() => Route("/Home")}
+                        className={
+                            activeIcon === "home"
+                                ? "icon-scss active"
+                                : "icon-scss"
+                        }
+                        onClick={() => navigate("/Home")}
                     />
                     <FaUserPlus
                         size={30}
-                        className="icon-scss"
-                        onClick={() => Route("/Connections")}
-                    />
-                    <IoIosBriefcase
-                        size={40}
-                        className="icon-scss"
-                        onClick={() => Route("/Jobs")}
+                        className={
+                            activeIcon === "connections"
+                                ? "icon-scss active"
+                                : "icon-scss"
+                        }
+                        onClick={() => navigate("/Connections")}
                     />
                     <FaSearch
                         size={30}
-                        className="icon-scss"
+                        className={
+                            activeIcon === "search"
+                                ? "icon-scss active"
+                                : "icon-scss"
+                        }
                         onClick={() => setIsSearch(true)}
                     />
                     <FaComments
                         size={30}
-                        className="icon-scss"
-                        onClick={() => Route("/Messages")}
+                        className={
+                            activeIcon === "messages"
+                                ? "icon-scss active"
+                                : "icon-scss"
+                        }
+                        onClick={() => navigate("/Messages")}
                     />
-                    <IoMdNotifications
-                        size={40}
-                        className="icon-scss"
-                        onClick={() => Route("/Notifications")}
+                    <MdEditDocument
+                        size={30}
+                        className={
+                            activeIcon === "resumeBuilder"
+                                ? "icon-scss active"
+                                : "icon-scss"
+                        }
+                        onClick={() => navigate("/ResumeBuilder")}
                     />
                     <FaFileAlt
                         size={30}

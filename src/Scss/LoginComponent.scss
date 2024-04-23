@@ -1,7 +1,11 @@
+$first: #0C0C0F;
+$second: #31363F;
+$third: #af52fe;
+
 body {
     margin: 0;
     padding: 0;
-    background-color: #35374b;
+    background-color: $second;
 }
 
 .login-wrapper {
@@ -14,7 +18,7 @@ body {
     width: 100%;
     padding: 20px;
     box-sizing: border-box;
-    background-color: black;
+    background-color: $first;
     .login-wrapper-inner {
         display: flex;
         flex-direction: column;
@@ -47,7 +51,7 @@ body {
         margin: 10px 0;
         border: 2px solid transparent; // Set initial border to transparent
         border-radius: 5px;
-        background-color: #1f1f1f;
+        background-color: $second;
         color: white;
         font-size: 1em;
         &:focus {
@@ -88,7 +92,7 @@ body {
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: #0cf;
+        background-color: $third;
         border-radius: 10em;
         z-index: -2;
     }
@@ -99,7 +103,7 @@ body {
         left: 0;
         width: 0%;
         height: 100%;
-        background-color: darken(#0cf, 15%);
+        background-color: darken($third, 15%);
         transition: all 0.3s;
         border-radius: 10em;
         z-index: -1;
@@ -126,7 +130,7 @@ body {
         font-size: 80%;
     }
     .register {
-        color: #0072b1;
+        color: $third;
         font-family: system-ui;
         cursor: pointer;
     }
