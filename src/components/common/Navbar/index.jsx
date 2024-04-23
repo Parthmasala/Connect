@@ -4,7 +4,7 @@ import ConnectLogo from "../../../assets/ConnectLogo.png";
 import Search from "../Search";
 import usericon from "../../../assets/user-icon.png";
 import { IoMdHome, IoIosBriefcase, IoMdNotifications } from "react-icons/io";
-import { FaUserPlus, FaSearch, FaComments } from "react-icons/fa";
+import { FaUserPlus, FaSearch, FaComments, FaFileAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { getAllUsers } from "../../../API/FirestoreAPI";
 import ProfilePopup from "../ProfilePopup";
@@ -136,6 +136,11 @@ export default function Navbar({ currentUser }) {
                         size={40}
                         className="icon-scss"
                         onClick={() => Route("/Notifications")}
+                    />
+                    <FaFileAlt
+                        size={30}
+                        className="icon-scss"
+                        onClick={() => Route("/resumeBuilder")}
                     />
                 </div>
             )}
