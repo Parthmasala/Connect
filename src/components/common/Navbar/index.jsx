@@ -160,19 +160,10 @@ export default function Navbar({ currentUser }) {
                         }
                         onClick={() => navigate("/Messages")}
                     />
-                    <MdEditDocument
-                        size={30}
-                        className={
-                            activeIcon === "resumeBuilder"
-                                ? "icon-scss active"
-                                : "icon-scss"
-                        }
-                        onClick={() => navigate("/ResumeBuilder")}
-                    />
                     <FaFileAlt
                         size={30}
                         className="icon-scss"
-                        onClick={() => Route("/resumeBuilder")}
+                        onClick={() => navigate("/ResumeBuilder")}
                     />
                 </div>
             )}
