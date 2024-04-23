@@ -1,6 +1,4 @@
-$first: #0C0C0F;
-$second: #31363F;
-$third: #af52fe;
+@import "../GeneralTheme.scss";
 
 body {
     margin: 0;
@@ -56,8 +54,7 @@ body {
         font-size: 1em;
         &:focus {
             outline: none;
-            animation: blinkBorder 1s infinite alternate; // Apply animation only when focused
-            border-color: #0cf; // Change border color on focus
+            animation: blinkBorder 1s infinite alternate;
         }
     }
     .common-input {
@@ -67,10 +64,10 @@ body {
 
 @keyframes blinkBorder {
     from {
-        border-color: transparent; // Initial border color
+        border-color: transparent;
     }
     to {
-        border-color: #0cf; // Final border color
+        border-color: $third; 
     }
 }
 

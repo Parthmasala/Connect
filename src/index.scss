@@ -1,8 +1,5 @@
 @import url("./components/common/Loader/index.scss");
-
-$first: #0C0C0F;
-$second: #31363F;
-$third: #af52fe;
+@import "./GeneralTheme.scss";
 
 :root {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
