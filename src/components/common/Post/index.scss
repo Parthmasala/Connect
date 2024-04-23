@@ -1,4 +1,5 @@
-/* Styles for post creation section */
+@import "../../../GeneralTheme.scss";
+
 .post-status-parent {
     display: flex;
     justify-content: center;
@@ -6,7 +7,7 @@
     flex-direction: column;
 
     .post-status {
-        width: 80%;
+        width: 100%;
         max-width: 500px;
         height: 120px;
         background-color: #f0f5f5;
@@ -36,23 +37,23 @@
         }
 
         .create-post {
-            width: 70%;
+            width: 100%;
             height: 40px;
-            text-align: left;
+            text-align: center;
             font-family: Arial, sans-serif;
-            color: #333;
+            color: #fff;
             font-size: 16px;
-            background-color: #4caf50;
+            background-color: $third;
             border: none;
-            border-radius: 20px;
+            border-radius: 10px;
             cursor: pointer;
             padding: 0 20px;
             font-weight: bold;
             transition: background-color 0.3s ease;
             box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
-
+            margin-right: 5%;
             &:hover {
-                background-color: #45a049;
+                background-color: darken($color: $third, $amount: 15%);
             }
         }
     }

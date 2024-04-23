@@ -19,8 +19,8 @@ export default function LikeButton({ userId, postId, currentUser }) {
     const getComment = (event) => {
         setComment(event.target.value);
     };
+
     const handleLike = () => {
-        // console.log(currentUser);
         likePost(userId, postId, liked);
     };
 
@@ -34,15 +34,24 @@ export default function LikeButton({ userId, postId, currentUser }) {
         );
         setComment("");
     };
+
+    const handleKeyPress = (event) => {
+        if (event.key === "Enter" && comment.trim() !== "") {
+            uploadComment();
+        }
+    };
+
     useMemo(() => {
         getLikesByUser(userId, postId, setLiked, setLikesCount);
         getComments(postId, setShowComments);
     }, [userId, postId]);
 
     const orderedComments = useMemo(() => {
-        return showComments.slice().sort((a, b) => new Date(a.timeStamp) - new Date(b.timeStamp));
+        return showComments
+            .slice()
+            .sort((a, b) => new Date(a.timeStamp) - new Date(b.timeStamp));
     }, [showComments]);
-    
+
     return (
         <div className="like-container">
             <p>{likesCount} people like this post</p>
@@ -98,6 +107,7 @@ export default function LikeButton({ userId, postId, currentUser }) {
 
                     <input
                         onChange={getComment}
+                        onKeyPress={handleKeyPress} // Listen for Enter key press
                         name="comment"
                         placeholder="Add a Comment"
                         className="comment-input"
