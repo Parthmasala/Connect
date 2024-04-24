@@ -1,7 +1,6 @@
 @import "../../../GeneralTheme.scss";
 
 
-
 .following-inner {
     display: flex;
     gap: 20px;
@@ -10,14 +9,19 @@
     cursor: pointer;
 
     .name {
-        font-size: calc(1em - 0.15vw);
+        font-size: calc(14px + 0.2vw); 
+        color: #333; 
+        font-weight: bold; 
     }
 
     img {
         width: 40px;
+        height: 40px; 
+        border-radius: 50%; 
+        object-fit: cover; 
     }
 }
 
 .following-inner:hover {
-    background-color: lighten($first, 10%);
+    background-color: rgb(205, 205, 205);
 }

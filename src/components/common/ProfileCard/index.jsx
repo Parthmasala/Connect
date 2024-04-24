@@ -8,7 +8,7 @@ import {
     addConnection,
     removeConnection,
     getAllFollowers,
-    getAllFollowing
+    getAllFollowing,
 } from "../../../API/FirestoreAPI";
 import { deleteAccount } from "../../../API/AuthAPI";
 import PostsCard from "../PostsCard";
@@ -16,7 +16,7 @@ import { useLocation } from "react-router-dom";
 import {
     uploadImage as uploadImageAPI,
     deleteImage as deleteImageAPI,
-} from "../../../API/ImageUpload"; // Import deleteImage function
+} from "../../../API/ImageUpload";
 import ProfileUploadModal from "../ProfileUploadModal";
 import { Modal } from "antd";
 import "./index.scss";
@@ -54,12 +54,11 @@ export default function ProfileCard({ onEdit, currentUser }) {
         );
     };
 
-    // Function to delete the current profile image
     const deleteCurrentImage = () => {
         deleteImageAPI(
             currentUser.userid,
-            () => setCurrentImage({}), // Clear current image state
-            () => setCurrentProfile({ ...currentProfile, imageLink: "" }) // Update currentProfile state to remove imageLink
+            () => setCurrentImage({}),
+            () => setCurrentProfile({ ...currentProfile, imageLink: "" })
         );
     };
 
@@ -121,7 +120,7 @@ export default function ProfileCard({ onEdit, currentUser }) {
             <ProfileUploadModal
                 getImage={getImage}
                 uploadImage={uploadImage}
-                deleteImage={deleteCurrentImage} // Pass deleteImage function
+                deleteImage={deleteCurrentImage}
                 modalOpen={modalOpen}
                 setModalOpen={setModalOpen}
                 currentImage={currentImage}
@@ -142,9 +141,7 @@ export default function ProfileCard({ onEdit, currentUser }) {
                         <img
                             className="profile-image"
                             onClick={() => {
-                                // if (location?.state?.id == currentUser.userid) {
                                 setModalOpen(true);
-                                // }
                             }}
                             src={
                                 currentProfile.imageLink ||
@@ -196,41 +193,6 @@ export default function ProfileCard({ onEdit, currentUser }) {
                     </div>
 
                     <div className="right-info">
-                        {location?.state?.id !== currentUser.userid ? (
-                            <>
-                                {isConnected ? (
-                                    <>
-                                        <button
-                                            className="unfollow-button"
-                                            onClick={() =>
-                                                removeCurrentUser(
-                                                    location?.state?.id
-                                                )
-                                            }
-                                        >
-                                            Unfollow
-                                        </button>
-                                        <button
-                                            className="message-button"
-                                            onClick={handleClick}
-                                        >
-                                            Message
-                                        </button>
-                                    </>
-                                ) : (
-                                    <button
-                                        className="connect-button"
-                                        onClick={() =>
-                                            getCurrentUser(location?.state?.id)
-                                        }
-                                    >
-                                        Follow
-                                    </button>
-                                )}
-                            </>
-                        ) : (
-                            <></>
-                        )}
                         <p className="college">
                             {Object.values(currentProfile).length == 0
                                 ? currentUser.college
@@ -272,7 +234,70 @@ export default function ProfileCard({ onEdit, currentUser }) {
                                     </>
                                 ) : null}
                             </p>
-                            <div className="delete-modal">
+                            <div className="buttons">
+                                {location?.state?.id !== currentUser.userid ? (
+                                    <>
+                                        {isConnected ? (
+                                            <>
+                                                <button
+                                                    className="message-button"
+                                                    onClick={handleClick}
+                                                >
+                                                    Message
+                                                </button>
+                                                <button
+                                                    className="unfollow-button"
+                                                    onClick={() =>
+                                                        removeCurrentUser(
+                                                            location?.state?.id
+                                                        )
+                                                    }
+                                                >
+                                                    Unfollow
+                                                </button>
+                                            </>
+                                        ) : (
+                                            <button
+                                                className="connect-button"
+                                                onClick={() =>
+                                                    getCurrentUser(
+                                                        location?.state?.id
+                                                    )
+                                                }
+                                            >
+                                                Follow
+                                            </button>
+                                        )}
+                                    </>
+                                ) : (
+                                    <></>
+                                )}
+                                <>
+                                    {location?.state?.id ==
+                                        currentUser.userid && (
+                                        <button
+                                            className="followers-button"
+                                            onClick={() =>
+                                                setShowFollowers(true)
+                                            }
+                                        >
+                                            Followers
+                                        </button>
+                                    )}
+
+                                    {location?.state?.id ==
+                                        currentUser.userid && (
+                                        <button
+                                            className="following-button"
+                                            onClick={() =>
+                                                setShowFollowing(true)
+                                            }
+                                        >
+                                            Following
+                                        </button>
+                                    )}
+                                </>
+                                {/* Delete account button */}
                                 {location?.state?.id == currentUser.userid && (
                                     <div className="delete-btn">
                                         <button
@@ -284,28 +309,6 @@ export default function ProfileCard({ onEdit, currentUser }) {
                                             Delete Account
                                         </button>
                                     </div>
-                                )}
-                            </div>
-
-                            <div className="followers-modal">
-                                {location?.state?.id == currentUser.userid && (
-                                    <button
-                                        className="followers-button"
-                                        onClick={() => setShowFollowers(true)}
-                                    >
-                                        Followers
-                                    </button>
-                                )}
-                            </div>
-
-                            <div className="following-modal">
-                                {location?.state?.id == currentUser.userid && (
-                                    <button
-                                        className="following-button"
-                                        onClick={() => setShowFollowing(true)}
-                                    >
-                                        Following
-                                    </button>
                                 )}
                             </div>
                         </div>
@@ -337,7 +340,6 @@ export default function ProfileCard({ onEdit, currentUser }) {
             >
                 <p>Are you sure you want to delete your account?</p>
             </Modal>
-
             <FollowersModal
                 currentUser={currentUser}
                 showFollowers={showFollowers}

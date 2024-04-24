@@ -115,6 +115,7 @@ export default function Navbar({ currentUser }) {
                 src={ConnectLogo}
                 alt="Connect Logo"
                 onClick={() => navigate("/home")}
+                title="Home"
             />
             {isSearch ? (
                 <Search
@@ -132,6 +133,7 @@ export default function Navbar({ currentUser }) {
                                 : "icon-scss"
                         }
                         onClick={() => navigate("/Home")}
+                        title="Home"
                     />
                     <FaUserPlus
                         size={30}
@@ -141,6 +143,7 @@ export default function Navbar({ currentUser }) {
                                 : "icon-scss"
                         }
                         onClick={() => navigate("/Connections")}
+                        title="Connection Page"
                     />
                     <FaSearch
                         size={30}
@@ -150,6 +153,7 @@ export default function Navbar({ currentUser }) {
                                 : "icon-scss"
                         }
                         onClick={() => setIsSearch(true)}
+                        title="Search"
                     />
                     <FaComments
                         size={30}
@@ -159,11 +163,13 @@ export default function Navbar({ currentUser }) {
                                 : "icon-scss"
                         }
                         onClick={() => navigate("/Messages")}
+                        title="Message"
                     />
                     <FaFileAlt
                         size={30}
                         className="icon-scss"
                         onClick={() => navigate("/ResumeBuilder")}
+                        title="Resume Builder"
                     />
                 </div>
             )}
@@ -172,6 +178,7 @@ export default function Navbar({ currentUser }) {
                     className="user-logo"
                     src={currentUser?.imageLink || usericon}
                     alt="User Icon"
+                    title="Profile"
                 />
                 {showPopup && <ProfilePopup currentUser={currentUser} />}
             </div>
@@ -189,7 +196,7 @@ export default function Navbar({ currentUser }) {
                                 onClick={() => openUser(user)}
                             >
                                 <img
-                                    src={usericon || user?.imageLink}
+                                    src={user?.imageLink || usericon}
                                     alt={user.name}
                                 />
                                 <p className="name">{user?.name}</p>
