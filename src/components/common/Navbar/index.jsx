@@ -196,7 +196,7 @@ export default function Navbar({ currentUser }) {
                                 onClick={() => openUser(user)}
                             >
                                 <img
-                                    src={usericon || user?.imageLink}
+                                    src={user?.imageLink || usericon}
                                     alt={user.name}
                                 />
                                 <p className="name">{user?.name}</p>

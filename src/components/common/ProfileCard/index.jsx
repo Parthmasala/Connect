@@ -8,7 +8,7 @@ import {
     addConnection,
     removeConnection,
     getAllFollowers,
-    getAllFollowing
+    getAllFollowing,
 } from "../../../API/FirestoreAPI";
 import { deleteAccount } from "../../../API/AuthAPI";
 import PostsCard from "../PostsCard";
@@ -272,9 +272,32 @@ export default function ProfileCard({ onEdit, currentUser }) {
                                 ) : (
                                     <></>
                                 )}
-                                {/* Delete account button */}
+                                <>
+                                    {location?.state?.id ==
+                                        currentUser.userid && (
+                                        <button
+                                            className="followers-button"
+                                            onClick={() =>
+                                                setShowFollowers(true)
+                                            }
+                                        >
+                                            Followers
+                                        </button>
+                                    )}
 
-                            <div className="delete-modal">
+                                    {location?.state?.id ==
+                                        currentUser.userid && (
+                                        <button
+                                            className="following-button"
+                                            onClick={() =>
+                                                setShowFollowing(true)
+                                            }
+                                        >
+                                            Following
+                                        </button>
+                                    )}
+                                </>
+                                {/* Delete account button */}
                                 {location?.state?.id == currentUser.userid && (
                                     <div className="delete-btn">
                                         <button
@@ -286,28 +309,6 @@ export default function ProfileCard({ onEdit, currentUser }) {
                                             Delete Account
                                         </button>
                                     </div>
-                                )}
-                            </div>
-
-                            <div className="followers-modal">
-                                {location?.state?.id == currentUser.userid && (
-                                    <button
-                                        className="followers-button"
-                                        onClick={() => setShowFollowers(true)}
-                                    >
-                                        Followers
-                                    </button>
-                                )}
-                            </div>
-
-                            <div className="following-modal">
-                                {location?.state?.id == currentUser.userid && (
-                                    <button
-                                        className="following-button"
-                                        onClick={() => setShowFollowing(true)}
-                                    >
-                                        Following
-                                    </button>
                                 )}
                             </div>
                         </div>
@@ -339,7 +340,6 @@ export default function ProfileCard({ onEdit, currentUser }) {
             >
                 <p>Are you sure you want to delete your account?</p>
             </Modal>
-
             <FollowersModal
                 currentUser={currentUser}
                 showFollowers={showFollowers}
