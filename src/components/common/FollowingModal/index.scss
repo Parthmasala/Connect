@@ -1,0 +1,23 @@
+@import "../../../GeneralTheme.scss";
+
+
+
+.following-inner {
+    display: flex;
+    gap: 20px;
+    padding: 10px;
+    align-items: center;
+    cursor: pointer;
+
+    .name {
+        font-size: calc(1em - 0.15vw);
+    }
+
+    img {
+        width: 40px;
+    }
+}
+
+.following-inner:hover {
+    background-color: lighten($first, 10%);
+}
