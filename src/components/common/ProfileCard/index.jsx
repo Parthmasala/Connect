@@ -8,7 +8,7 @@ import {
     addConnection,
     removeConnection,
     getAllFollowers,
-    getAllFollowing
+    getAllFollowing,
 } from "../../../API/FirestoreAPI";
 import { deleteAccount } from "../../../API/AuthAPI";
 import PostsCard from "../PostsCard";
@@ -273,8 +273,6 @@ export default function ProfileCard({ onEdit, currentUser }) {
                                     <></>
                                 )}
                                 {/* Delete account button */}
-
-                            <div className="delete-modal">
                                 {location?.state?.id == currentUser.userid && (
                                     <div className="delete-btn">
                                         <button
@@ -288,7 +286,6 @@ export default function ProfileCard({ onEdit, currentUser }) {
                                     </div>
                                 )}
                             </div>
-
                             <div className="followers-modal">
                                 {location?.state?.id == currentUser.userid && (
                                     <button
@@ -339,7 +336,6 @@ export default function ProfileCard({ onEdit, currentUser }) {
             >
                 <p>Are you sure you want to delete your account?</p>
             </Modal>
-
             <FollowersModal
                 currentUser={currentUser}
                 showFollowers={showFollowers}
