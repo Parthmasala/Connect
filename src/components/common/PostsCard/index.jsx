@@ -18,6 +18,8 @@ export default function PostsCard({ posts, id, getEditData }) {
     const [allUsers, setAllUsers] = useState([]);
     const [imageModal, setImageModal] = useState(false);
     const [isConnected, setIsConnected] = useState(false);
+    const [deleteConfirmationVisible, setDeleteConfirmationVisible] =
+        useState(false);
 
     useMemo(() => {
         getCurrentUser(setCurrentUser);
@@ -88,7 +90,7 @@ export default function PostsCard({ posts, id, getEditData }) {
                         <BsTrash
                             size={20}
                             className="action-icon"
-                            onClick={() => deletePost(posts?.id)}
+                            onClick={() => setDeleteConfirmationVisible(true)}
                         />
                     </div>
                 ) : null}
@@ -112,6 +114,17 @@ export default function PostsCard({ posts, id, getEditData }) {
                 postId={posts?.id}
                 currentUser={currentUser}
             />
+            <Modal
+                centered
+                visible={deleteConfirmationVisible}
+                onCancel={() => setDeleteConfirmationVisible(false)}
+                onOk={() => {
+                    deletePost(posts?.id);
+                    setDeleteConfirmationVisible(false);
+                }}
+            >
+                <p>Are you sure you want to delete this post?</p>
+            </Modal>
             <Modal
                 centered
                 open={imageModal}
