@@ -43,10 +43,10 @@ export default function FollowingModal({
                                 openUser(user), setShowFollowing(false);
                             }}
                         >
-                            {/* <img
-                                src={usericon || user?.imageLink}
+                            <img
+                                src={user?.imageLink || usericon}
                                 alt={user.name}
-                            /> */}
+                            />
                             <p className="name">{user?.name}</p>
                         </div>
                     ))

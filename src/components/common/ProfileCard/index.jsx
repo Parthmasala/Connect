@@ -272,6 +272,31 @@ export default function ProfileCard({ onEdit, currentUser }) {
                                 ) : (
                                     <></>
                                 )}
+                                <>
+                                    {location?.state?.id ==
+                                        currentUser.userid && (
+                                        <button
+                                            className="followers-button"
+                                            onClick={() =>
+                                                setShowFollowers(true)
+                                            }
+                                        >
+                                            Followers
+                                        </button>
+                                    )}
+
+                                    {location?.state?.id ==
+                                        currentUser.userid && (
+                                        <button
+                                            className="following-button"
+                                            onClick={() =>
+                                                setShowFollowing(true)
+                                            }
+                                        >
+                                            Following
+                                        </button>
+                                    )}
+                                </>
                                 {/* Delete account button */}
                                 {location?.state?.id == currentUser.userid && (
                                     <div className="delete-btn">
@@ -284,27 +309,6 @@ export default function ProfileCard({ onEdit, currentUser }) {
                                             Delete Account
                                         </button>
                                     </div>
-                                )}
-                            </div>
-                            <div className="followers-modal">
-                                {location?.state?.id == currentUser.userid && (
-                                    <button
-                                        className="followers-button"
-                                        onClick={() => setShowFollowers(true)}
-                                    >
-                                        Followers
-                                    </button>
-                                )}
-                            </div>
-
-                            <div className="following-modal">
-                                {location?.state?.id == currentUser.userid && (
-                                    <button
-                                        className="following-button"
-                                        onClick={() => setShowFollowing(true)}
-                                    >
-                                        Following
-                                    </button>
                                 )}
                             </div>
                         </div>
