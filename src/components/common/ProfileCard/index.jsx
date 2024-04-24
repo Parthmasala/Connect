@@ -7,6 +7,8 @@ import {
     editProfile,
     addConnection,
     removeConnection,
+    getAllFollowers,
+    getAllFollowing
 } from "../../../API/FirestoreAPI";
 import { deleteAccount } from "../../../API/AuthAPI";
 import PostsCard from "../PostsCard";
@@ -20,6 +22,8 @@ import { Modal } from "antd";
 import "./index.scss";
 import { useNavigate } from "react-router-dom";
 import usericon from "../../../assets/user-icon.png";
+import FollowersModal from "../FollowersModal";
+import FollowingModal from "../FollowingModal";
 
 export default function ProfileCard({ onEdit, currentUser }) {
     let location = useLocation();
@@ -31,6 +35,10 @@ export default function ProfileCard({ onEdit, currentUser }) {
     const [progress, setProgress] = useState(0);
     const [isConnected, setIsConnected] = useState(false);
     const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
+    const [showFollowers, setShowFollowers] = useState(false);
+    const [showFollowing, setShowFollowing] = useState(false);
+    const [followers, setFollowers] = useState([]);
+    const [following, setFollowing] = useState([]);
 
     const getImage = (event) => {
         setCurrentImage(event.target.files[0]);
@@ -98,6 +106,14 @@ export default function ProfileCard({ onEdit, currentUser }) {
                 console.error("Error deleting account:", error);
             });
     };
+
+    useEffect(() => {
+        getAllFollowers(currentUser.userid, setFollowers);
+    }, [currentUser.userid]);
+
+    useEffect(() => {
+        getAllFollowing(currentUser.userid, setFollowing);
+    }, [currentUser.userid]);
 
     return (
         <>
@@ -257,6 +273,8 @@ export default function ProfileCard({ onEdit, currentUser }) {
                                     <></>
                                 )}
                                 {/* Delete account button */}
+
+                            <div className="delete-modal">
                                 {location?.state?.id == currentUser.userid && (
                                     <div className="delete-btn">
                                         <button
@@ -268,6 +286,28 @@ export default function ProfileCard({ onEdit, currentUser }) {
                                             Delete Account
                                         </button>
                                     </div>
+                                )}
+                            </div>
+
+                            <div className="followers-modal">
+                                {location?.state?.id == currentUser.userid && (
+                                    <button
+                                        className="followers-button"
+                                        onClick={() => setShowFollowers(true)}
+                                    >
+                                        Followers
+                                    </button>
+                                )}
+                            </div>
+
+                            <div className="following-modal">
+                                {location?.state?.id == currentUser.userid && (
+                                    <button
+                                        className="following-button"
+                                        onClick={() => setShowFollowing(true)}
+                                    >
+                                        Following
+                                    </button>
                                 )}
                             </div>
                         </div>
@@ -299,6 +339,22 @@ export default function ProfileCard({ onEdit, currentUser }) {
             >
                 <p>Are you sure you want to delete your account?</p>
             </Modal>
+
+            <FollowersModal
+                currentUser={currentUser}
+                showFollowers={showFollowers}
+                // visible={showFollowers}
+                setShowFollowers={setShowFollowers}
+                followers={followers}
+            />
+
+            <FollowingModal
+                currentUser={currentUser}
+                showFollowing={showFollowing}
+                // visible={showFollowers}
+                setShowFollowing={setShowFollowing}
+                following={following}
+            />
         </>
     );
 }

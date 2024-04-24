@@ -40,10 +40,9 @@
 }
 
 .user-logo:hover {
-    background-color: lighten($third , 1%);
+    background-color: lighten($third, 1%);
     padding: 0.25%;
 }
-
 
 .connect-logo {
     width: auto;
@@ -80,36 +79,35 @@
 
 .icon-scss:hover {
     color: lighten($third, 20%);
-
 }
 
 .icon-scss.active {
     color: $third;
-  }
-  
-.search-results {
-width: 26%;
-height: auto;
-max-width: 1000px;
-max-height: 300px;
-background-color: $first;
-border-radius: 8px;
-border: 5px solid $third;
-overflow: auto;
-position: absolute;
-top: 100%;
-margin-left: 35%;
+}
 
-@media screen and (max-width: 1080px) {
-    width: 80%;
-    max-width: max-content;
-}
-@media screen and (max-width: 768px) {
-    width: 80%;
-    top: unset;
-    position: relative;
-    margin-left: 0%;
-}
+.search-results {
+    width: 26%;
+    height: auto;
+    max-width: 1000px;
+    max-height: 300px;
+    background-color: $first;
+    border-radius: 8px;
+    border: 5px solid $third;
+    overflow: auto;
+    position: absolute;
+    top: 100%;
+    margin-left: 35%;
+
+    @media screen and (max-width: 1080px) {
+        width: 80%;
+        max-width: max-content;
+    }
+    @media screen and (max-width: 768px) {
+        width: 80%;
+        top: unset;
+        position: relative;
+        margin-left: 0%;
+    }
 }
 
 .search-inner {
@@ -129,5 +127,5 @@ margin-left: 35%;
 }
 
 .search-inner:hover {
-background-color: lighten($first, 10%);
+    background-color: lighten($first, 10%);
 }

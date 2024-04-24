@@ -273,7 +273,7 @@ export const getAllMessages = (senderId, receiverId, setMessages) => {
             messageRef,
             where("senderId", "in", [senderId, receiverId]), // Use array comparison
             where("receiverId", "in", [senderId, receiverId])
-          );
+        );
         onSnapshot(messageQuery, (response) => {
             // setComments(response.docs.map((doc) => doc.data()));
             const messages = response.docs.map((doc) => {
@@ -284,7 +284,6 @@ export const getAllMessages = (senderId, receiverId, setMessages) => {
             });
             setMessages(messages);
         });
-
     } catch (err) {
         console.log(err);
     }
@@ -362,5 +361,70 @@ export const deleteFirestoreData = async (userId) => {
         console.log("Firestore data deleted successfully");
     } catch (error) {
         console.error("Error deleting user data:", error);
+    }
+};
+
+// export const getAllUsers = (setAllUsers) => {
+//     onSnapshot(userRef, (response) => {
+//         setAllUsers(
+//             response.docs.map((docs) => {
+//                 return { ...docs.data(), id: docs.id };
+//             })
+//         );
+//     });
+// };
+
+export const getAllFollowers = async (userId, setFollowers) => {
+    try {
+        const followersQuery = query(
+            connectionRef,
+            where("targetId", "==", userId)
+        );
+        onSnapshot(followersQuery, (response) => {
+            const matchingUsers = response.docs.map((doc) =>
+                doc.data().userId
+            );
+
+            onSnapshot(userRef, (response) => {
+                const followers = response.docs.filter((doc) =>
+                  matchingUsers.includes(doc.id)
+                );
+              
+                setFollowers(
+                  followers.map((doc) => ({ ...doc.data(), id: doc.id }))
+                );
+              });
+
+        });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const getAllFollowing = async (userId, setFollowing) => {
+    try {
+        const followingQuery = query(
+            connectionRef,
+            where("userId", "==", userId)
+        );
+        onSnapshot(followingQuery, (response) => {
+            const matchingUsers = response.docs.map((doc) =>
+                doc.data().targetId
+            );
+            console.log(matchingUsers);
+
+            onSnapshot(userRef, (response) => {
+                const following = response.docs.filter((doc) =>
+                  matchingUsers.includes(doc.id)
+                );
+              
+                setFollowing(
+                  following.map((doc) => ({ ...doc.data(), id: doc.id }))
+                );
+              });
+
+        });
+    } catch (error) {
+        console.log(error);
     }
 };
