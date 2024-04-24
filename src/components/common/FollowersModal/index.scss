@@ -1,0 +1,22 @@
+@import "../../../GeneralTheme.scss";
+
+
+.followers-inner {
+    display: flex;
+    gap: 20px;
+    padding: 10px;
+    align-items: center;
+    cursor: pointer;
+
+    .name {
+        font-size: calc(1em - 0.15vw);
+    }
+
+    img {
+        width: 40px;
+    }
+}
+
+.followers-inner:hover {
+    background-color: lighten($first, 10%);
+}
