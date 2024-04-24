@@ -162,7 +162,7 @@
     }
 
     .delete-account-button {
-        background-color: #f44336; 
+        background-color: #f44336;
         color: #fff;
         border: none;
         border-radius: 50px;
@@ -170,7 +170,7 @@
         cursor: pointer;
         font-weight: 600;
         transition: background-color 0.3s ease;
-        margin-top: 10px; 
+        margin-top: 10px;
 
         &:hover {
             background-color: #d32f2f;
@@ -192,6 +192,7 @@
         }
     }
 }
+
 
 // .post-status-parent {
 //     display: flex;
