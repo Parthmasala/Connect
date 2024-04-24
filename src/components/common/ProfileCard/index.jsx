@@ -14,7 +14,7 @@ import { useLocation } from "react-router-dom";
 import {
     uploadImage as uploadImageAPI,
     deleteImage as deleteImageAPI,
-} from "../../../API/ImageUpload"; // Import deleteImage function
+} from "../../../API/ImageUpload";
 import ProfileUploadModal from "../ProfileUploadModal";
 import { Modal } from "antd";
 import "./index.scss";
@@ -46,12 +46,11 @@ export default function ProfileCard({ onEdit, currentUser }) {
         );
     };
 
-    // Function to delete the current profile image
     const deleteCurrentImage = () => {
         deleteImageAPI(
             currentUser.userid,
-            () => setCurrentImage({}), // Clear current image state
-            () => setCurrentProfile({ ...currentProfile, imageLink: "" }) // Update currentProfile state to remove imageLink
+            () => setCurrentImage({}),
+            () => setCurrentProfile({ ...currentProfile, imageLink: "" })
         );
     };
 
@@ -105,7 +104,7 @@ export default function ProfileCard({ onEdit, currentUser }) {
             <ProfileUploadModal
                 getImage={getImage}
                 uploadImage={uploadImage}
-                deleteImage={deleteCurrentImage} // Pass deleteImage function
+                deleteImage={deleteCurrentImage}
                 modalOpen={modalOpen}
                 setModalOpen={setModalOpen}
                 currentImage={currentImage}
@@ -114,41 +113,39 @@ export default function ProfileCard({ onEdit, currentUser }) {
                 currentProfile={currentProfile}
             />
 
-            <div className='profile-card'>
+            <div className="profile-card">
                 {location?.state?.id == currentUser.userid && (
-                    <div className='edit-btn'>
+                    <div className="edit-btn">
                         <button onClick={onEdit}>Edit</button>
                     </div>
                 )}
 
-                <div className='profile-info'>
+                <div className="profile-info">
                     <div>
                         <img
-                            className='profile-image'
+                            className="profile-image"
                             onClick={() => {
-                                // if (location?.state?.id == currentUser.userid) {
                                 setModalOpen(true);
-                                // }
                             }}
                             src={
                                 currentProfile.imageLink ||
                                 currentUser.imageLink ||
                                 usericon
                             }
-                            alt='profile-image'
+                            alt="profile-image"
                         />
 
-                        <h3 className='userName'>
+                        <h3 className="userName">
                             {Object.values(currentProfile).length == 0
                                 ? currentUser.name
                                 : currentProfile?.name}
                         </h3>
-                        <p className='heading'>
+                        <p className="heading">
                             {Object.values(currentProfile).length == 0
                                 ? currentUser.headline
                                 : currentProfile?.headline}
                         </p>
-                        <p className='location'>
+                        <p className="location">
                             {Object.values(currentProfile).length === 0
                                 ? currentUser.city && currentUser.country
                                     ? `${currentUser.city}, ${currentUser.country}`
@@ -163,8 +160,8 @@ export default function ProfileCard({ onEdit, currentUser }) {
                         </p>
 
                         <a
-                            className='website'
-                            target='_blank'
+                            className="website"
+                            target="_blank"
                             href={
                                 Object.values(currentProfile).length == 0 ||
                                 !currentProfile.website
@@ -179,48 +176,13 @@ export default function ProfileCard({ onEdit, currentUser }) {
                         </a>
                     </div>
 
-                    <div className='right-info'>
-                        {location?.state?.id !== currentUser.userid ? (
-                            <>
-                                {isConnected ? (
-                                    <>
-                                        <button
-                                            className='unfollow-button'
-                                            onClick={() =>
-                                                removeCurrentUser(
-                                                    location?.state?.id
-                                                )
-                                            }
-                                        >
-                                            Unfollow
-                                        </button>
-                                        <button
-                                            className='message-button'
-                                            onClick={handleClick}
-                                        >
-                                            Message
-                                        </button>
-                                    </>
-                                ) : (
-                                    <button
-                                        className='connect-button'
-                                        onClick={() =>
-                                            getCurrentUser(location?.state?.id)
-                                        }
-                                    >
-                                        Follow
-                                    </button>
-                                )}
-                            </>
-                        ) : (
-                            <></>
-                        )}
-                        <p className='college'>
+                    <div className="right-info">
+                        <p className="college">
                             {Object.values(currentProfile).length == 0
                                 ? currentUser.college
                                 : currentProfile?.college}
                         </p>
-                        <p className='company'>
+                        <p className="company">
                             {Object.values(currentProfile).length == 0
                                 ? currentUser.company
                                 : currentProfile?.company}
@@ -231,17 +193,17 @@ export default function ProfileCard({ onEdit, currentUser }) {
                     //only when skills or aboutme is present otherwise there is horizontal line
                     currentProfile.skills != "" ||
                     currentProfile.aboutme != "" ? (
-                        <div className='extra-info'>
-                            <p className='aboutme'>
+                        <div className="extra-info">
+                            <p className="aboutme">
                                 {Object.values(currentProfile).length == 0
                                     ? currentUser.aboutme
                                     : currentProfile?.aboutme}
                             </p>
-                            <p className='skills'>
+                            <p className="skills">
                                 {location?.state?.id === currentUser.userid ? (
                                     currentUser.skills ? (
                                         <>
-                                            <span className='skills-label'>
+                                            <span className="skills-label">
                                                 Skills :{" "}
                                             </span>
                                             &nbsp;{currentUser.skills}
@@ -249,18 +211,56 @@ export default function ProfileCard({ onEdit, currentUser }) {
                                     ) : null
                                 ) : currentProfile.skills ? (
                                     <>
-                                        <span className='skills-label'>
+                                        <span className="skills-label">
                                             Skills :{" "}
                                         </span>
                                         &nbsp;{currentProfile.skills}
                                     </>
                                 ) : null}
                             </p>
-                            <div className='delete-modal'>
+                            <div className="buttons">
+                                {location?.state?.id !== currentUser.userid ? (
+                                    <>
+                                        {isConnected ? (
+                                            <>
+                                                <button
+                                                    className="message-button"
+                                                    onClick={handleClick}
+                                                >
+                                                    Message
+                                                </button>
+                                                <button
+                                                    className="unfollow-button"
+                                                    onClick={() =>
+                                                        removeCurrentUser(
+                                                            location?.state?.id
+                                                        )
+                                                    }
+                                                >
+                                                    Unfollow
+                                                </button>
+                                            </>
+                                        ) : (
+                                            <button
+                                                className="connect-button"
+                                                onClick={() =>
+                                                    getCurrentUser(
+                                                        location?.state?.id
+                                                    )
+                                                }
+                                            >
+                                                Follow
+                                            </button>
+                                        )}
+                                    </>
+                                ) : (
+                                    <></>
+                                )}
+                                {/* Delete account button */}
                                 {location?.state?.id == currentUser.userid && (
-                                    <div className='delete-btn'>
+                                    <div className="delete-btn">
                                         <button
-                                            className='delete-account-button'
+                                            className="delete-account-button"
                                             onClick={() =>
                                                 setConfirmDeleteOpen(true)
                                             }
@@ -277,7 +277,7 @@ export default function ProfileCard({ onEdit, currentUser }) {
                 }
             </div>
 
-            <div className='post-status-parent'>
+            <div className="post-status-parent">
                 {allStatuses?.map((posts) => {
                     return (
                         <div key={posts.id}>
@@ -289,7 +289,7 @@ export default function ProfileCard({ onEdit, currentUser }) {
 
             {/* Delete account confirmation modal */}
             <Modal
-                title='Confirm Delete Account'
+                title="Confirm Delete Account"
                 visible={confirmDeleteOpen}
                 onOk={() => {
                     handleDeleteAccount();
