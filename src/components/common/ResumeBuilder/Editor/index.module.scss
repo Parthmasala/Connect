@@ -1,3 +1,5 @@
+@import "../../../../GeneralTheme.scss";
+
 .container {
     min-width: 550px;
     min-height: 450px;
@@ -37,8 +39,8 @@
 }
 
 .header .active {
-    border-bottom: 2px solid #239ce2;
-    color: #239ce2;
+    border-bottom: 2px solid $third;
+    color: $third;
 }
 
 .body {
