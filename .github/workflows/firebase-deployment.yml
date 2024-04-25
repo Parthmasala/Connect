@@ -1,0 +1,33 @@
+name: Deploy to Firebase
+
+on:
+  push:
+    branches: [ main ] 
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest  
+
+    steps:
+      - uses: actions/checkout@v3 
+
+      - name: Use Node.js 16
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16  
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build for production
+        run: npm run build
+
+      - uses: Firebase/firebase-tools@v12  
+
+      - name: Login to Firebase
+        run: |
+          echo "FIREBASE_TOKEN=$FIREBASE_TOKEN" >> $GITHUB_ENV  # Add your Firebase token as a secret env variable
+          firebase login --token "$FIREBASE_TOKEN"
+
+      - name: Deploy to Firebase Hosting
+        run: firebase deploy --only hosting
