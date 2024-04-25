@@ -3,6 +3,7 @@ import { Button, Modal, Progress } from "antd";
 import "./index.scss";
 import usericon from "../../../assets/user-icon.png";
 import { useNavigate } from "react-router-dom";
+import { removeConnection } from "../../../API/FirestoreAPI";
 
 export default function FollowingModal({
     currentUser,
@@ -10,7 +11,7 @@ export default function FollowingModal({
     setShowFollowing,
     following,
 }) {
-    console.log(following);
+    // console.log(following);
 
     const navigate = useNavigate();
 
@@ -23,6 +24,20 @@ export default function FollowingModal({
         });
         window.location.reload();
     };
+
+    const handleClick = (event, user) => {
+        event.preventDefault();
+
+        if (event.target.classList.contains("button")) {
+            removeConnection(currentUser?.userid, user.id);
+            // const updatedFollowers = followers.filter(user => user.id !== id);
+            // setFollowers(updatedFollowers);
+        } else {
+            openUser(user);
+            setShowFollowing(false);
+        }
+    };
+
     return (
         <Modal
             title="People whom you follow"
@@ -39,8 +54,9 @@ export default function FollowingModal({
                     following.map((user) => (
                         <div
                             className="following-inner"
-                            onClick={() => {
-                                openUser(user), setShowFollowing(false);
+                            onClick={(event) => {
+                                // console.log(user);
+                                handleClick(event, user);
                             }}
                         >
                             <img
@@ -48,6 +64,10 @@ export default function FollowingModal({
                                 alt={user.name}
                             />
                             <p className="name">{user?.name}</p>
+                            <button className="button">
+                                {" "}
+                                Unfollow
+                            </button>
                         </div>
                     ))
                 )}
