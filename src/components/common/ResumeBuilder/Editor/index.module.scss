@@ -1,6 +1,7 @@
 @import "../../../../GeneralTheme.scss";
 
 .container {
+    background-color: $forth;
     min-width: 550px;
     min-height: 450px;
     max-width: 750px;
@@ -49,6 +50,11 @@
     flex-direction: column;
     gap: 20px;
     padding-top: 0;
+
+    input{
+        background-color: $forth;
+        color: $font-color1;
+    }
 }
 
 .detail {
@@ -78,7 +84,7 @@
 }
 
 .chips .new {
-    color: #239ce2;
+    color: $third;
     font-weight: bold;
     letter-spacing: 1px;
     cursor: pointer;
@@ -107,14 +113,14 @@
 }
 
 .chips .active {
-    background-color: #239ce2;
+    background-color: $third;
 }
 
 .body button {
     width: fit-content;
     padding: 8px 16px;
     border-radius: 5px;
-    background-color: #239ce2;
+    background-color: $third;
     color: #fff;
     outline: none;
     border: none;
