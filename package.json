@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "antd": "^5.15.3",
+    "axios": "^1.6.8",
+    "cors": "^2.8.5",
     "firebase": "^10.8.1",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.4",
