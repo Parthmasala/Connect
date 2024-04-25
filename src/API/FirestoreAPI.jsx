@@ -364,15 +364,6 @@ export const deleteFirestoreData = async (userId) => {
     }
 };
 
-// export const getAllUsers = (setAllUsers) => {
-//     onSnapshot(userRef, (response) => {
-//         setAllUsers(
-//             response.docs.map((docs) => {
-//                 return { ...docs.data(), id: docs.id };
-//             })
-//         );
-//     });
-// };
 
 export const getAllFollowers = async (userId, setFollowers) => {
     try {

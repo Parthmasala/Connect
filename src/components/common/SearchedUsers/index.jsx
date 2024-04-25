@@ -12,12 +12,6 @@ export default function SearchedUsers({
 }) {
     let navigate = useNavigate();
 
-    // const handleClick = () => {
-    //     navigate("/profile", {
-    //         state: { id: user.id, email: user.email },
-    //     });
-    // };
-
     const handleClick = (event) => {
         event.preventDefault();
 
@@ -74,17 +68,4 @@ export default function SearchedUsers({
             )}
         </div>
     );
-    // : (
-    //     <div className="searched-user" onClick={handleClick}>
-    //         <img
-    //             src={user.imageLink || usericon}
-    //             alt={user.name}
-    //             style={{ color: "black" }}
-    //         />
-    //         <div className="user-details">
-    //             <p className="name">{user.name}</p>
-    //             <p className="headline">{user.headline}</p>
-    //         </div>
-    //     </div>
-    // );
 }

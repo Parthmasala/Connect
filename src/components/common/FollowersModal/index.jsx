@@ -11,9 +11,6 @@ export default function FollowersModal({
     setShowFollowers,
     followers,
 }) {
-    // console.log(followers);
-    // console.log(currentUser);
-
     const navigate = useNavigate();
 
     const openUser = (user) => {
@@ -65,10 +62,7 @@ export default function FollowersModal({
                                 alt={user.name}
                             />
                             <p className="name">{user?.name}</p>
-                            <button className="button">
-                                {" "}
-                                Remove
-                            </button>
+                            <button className="button"> Remove</button>
                         </div>
                     ))
                 )}

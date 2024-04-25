@@ -64,10 +64,7 @@ export default function FollowingModal({
                                 alt={user.name}
                             />
                             <p className="name">{user?.name}</p>
-                            <button className="button">
-                                {" "}
-                                Unfollow
-                            </button>
+                            <button className="button"> Unfollow</button>
                         </div>
                     ))
                 )}

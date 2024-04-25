@@ -21,7 +21,14 @@ export default function MessagingUser({ user, getCurrentUser, currentUser }) {
     };
 
     return isConnected ? (
-        <div className= {user.id === messengerId ? "messaging-user active": "messaging-user"} onClick={handleClick}>
+        <div
+            className={
+                user.id === messengerId
+                    ? "messaging-user active"
+                    : "messaging-user"
+            }
+            onClick={handleClick}
+        >
             <img
                 src={user.imageLink || usericon}
                 alt={user.name}
