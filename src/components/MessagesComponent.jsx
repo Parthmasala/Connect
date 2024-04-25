@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useRef, useMemo } from "react";
 import "../Scss/MessagesComponent.scss";
 import { useLocation } from "react-router-dom";
 import { saveMessage, getAllMessages } from "../API/FirestoreAPI";
@@ -11,6 +11,7 @@ export default function MessagesComponent({ currentUser }) {
 
     const [message, setMessage] = useState("");
     const [allMessages, setAllMessages] = useState([]);
+    const messagesListRef = useRef(null);
 
     const getMessage = (event) => {
         setMessage(event.target.value);
@@ -34,57 +35,62 @@ export default function MessagesComponent({ currentUser }) {
         setMessage("");
     };
 
-    useMemo(() => {
+    useEffect(() => {
         if (messengerId?.length > 0) {
             getAllMessages(currentUser?.userid, messengerId, setAllMessages);
         }
     }, [currentUser?.userid, messengerId]);
 
+    useEffect(() => {
+        const messagesList = messagesListRef.current;
+        if (messagesList) {
+            messagesList.scrollTop = messagesList.scrollHeight;
+        }
+    }, [allMessages]);
+
     const orderedMessages = useMemo(() => {
-        return allMessages.slice().sort((a, b) => new Date(a.timeStamp) - new Date(b.timeStamp));
+        return allMessages
+            .slice()
+            .sort((a, b) => new Date(a.timeStamp) - new Date(b.timeStamp));
     }, [allMessages]);
 
     return (
-        <>
-            <div className="messages-component-container">
-                {orderedMessages.length > 0 ? (
-                    orderedMessages.map((Message, index) => (
-                        <div className="message-preview" key={index}>
-                            <div className="message-header">
-                                <p className="message-sender">
-                                    {Message?.senderName}
-                                </p>
-                                <p className="message-timestamp">
-                                    {Message?.timeStamp}
-                                </p>
-                            </div>
-                            <p className="message-text">{Message?.message}</p>
+        <div className="messages-component-container">
+            <div className="messages-list" ref={messagesListRef}>
+                {orderedMessages.map((message, index) => (
+                    <div className="message-preview" key={index}>
+                        <div className="message-header">
+                            <p className="message-sender">
+                                {message.senderName}
+                            </p>
+                            <p className="message-timestamp">
+                                {message.timeStamp}
+                            </p>
                         </div>
-                    ))
-                ) : (
-                    <></>
-                )}
-                {messengerId?.length > 0 && (
-                    <div className="message-input-container">
-                        <input
-                            onChange={getMessage}
-                            onKeyDown={handleKeyDown}
-                            name="Message"
-                            placeholder="Type a message..."
-                            className="Message-input"
-                            value={message}
-                        ></input>
-                        <button
-                            className="Message-btn"
-                            onClick={uploadMessage}
-                            type="primary"
-                            disabled={message.length > 0 ? false : true}
-                        >
-                            Send
-                        </button>
+                        <p className="message-text">{message.message}</p>
                     </div>
-                )}
+                ))}
             </div>
-        </>
+            {messengerId?.length > 0 && (
+                <div className="message-input-container">
+                    <input
+                        onChange={getMessage}
+                        onKeyDown={handleKeyDown}
+                        name="Message"
+                        placeholder="Type a message..."
+                        className="Message-input"
+                        value={message}
+                    />
+                    <button
+                        className="Message-btn"
+                        onClick={uploadMessage}
+                        type="button"
+                        disabled={!message.trim()}
+                    >
+                        Send
+                    </button>
+                </div>
+            )}
+        </div>
     );
 }
