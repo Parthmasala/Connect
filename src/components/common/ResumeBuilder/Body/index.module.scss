@@ -43,7 +43,7 @@
 .toolbar button {
     padding: 8px 16px;
     border-radius: 5px;
-    background-color: #239ce2;
+    background-color: $third;
     color: #fff;
     outline: none;
     border: none;
@@ -62,7 +62,7 @@
 }
 
 .main {
-    background-color: white;
+    background-color: $second;
     color: black;
     display: flex;
     flex-direction: column;

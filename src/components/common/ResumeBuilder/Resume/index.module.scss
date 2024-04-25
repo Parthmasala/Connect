@@ -1,5 +1,9 @@
+@import "../../../../GeneralTheme.scss";
+
 .container {
     --color: #239ce2;
+    background-color: $forth;
+    color: black;
     min-width: 700px;
     max-width: 850px;
     margin: 0 auto;
