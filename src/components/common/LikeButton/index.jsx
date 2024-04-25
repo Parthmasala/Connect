@@ -63,9 +63,9 @@ export default function LikeButton({ userId, postId, currentUser }) {
             <div className="like-comment-common">
                 <div className="likes-comment-inner" onClick={handleLike}>
                     {liked ? (
-                        <BiSolidLike color="purple" size={30} />
+                        <BiSolidLike className="purple" size={30} />
                     ) : (
-                        <BiLike color="black" size={30} />
+                        <BiLike className="black" size={30} />
                     )}
                     <p className={liked ? "purple" : "black"}>Like</p>
                 </div>
@@ -74,7 +74,7 @@ export default function LikeButton({ userId, postId, currentUser }) {
                     onClick={() => setshowCommentBox(!showCommentBox)}
                 >
                     <BiSolidCommentDots
-                        color={showCommentBox ? "purple" : "black"}
+                        className={showCommentBox ? "purple" : "black"}
                         size={30}
                     />
                     <p className={showCommentBox ? "purple" : "black"}>

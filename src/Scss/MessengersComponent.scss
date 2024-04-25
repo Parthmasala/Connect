@@ -133,10 +133,11 @@
 
 .MessengersComponent {
     
-    height: 35vw; /* Occupy full height of the viewport */
+    height: 42vw; /* Occupy full height of the viewport */
     overflow-y: auto; /* Enable vertical scrolling */
     padding: 20px;
-    background-color: #f8f9fa;
+    // background-color: #f8f9fa;
+    background-color: white;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     max-width: 300px; /* Adjust width as needed */
@@ -175,6 +176,10 @@
                 margin: 0;
             }
         }
+        
+    }
+    .messaging-user.active{
+        background-color: #e2e6ea;
     }
 
     @media (max-width: 768px) {
