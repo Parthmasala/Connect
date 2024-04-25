@@ -1,93 +1,93 @@
 @import "../GeneralTheme.scss";
 
 .messages-component-container {
-  display: flex;
-  flex-direction: column;
-  height: 44vw; 
-  padding: 0;
-  @media (max-width: 768px) {
-    padding: 10px; 
-  }
+    display: flex;
+    flex-direction: column;
+    height: 44vw;
+    padding: 0;
+    @media (max-width: 768px) {
+        padding: 10px;
+    }
 }
 
 .messages-list {
-  flex: 1;
-  overflow-y: auto;
-  margin-bottom: 20px; 
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 20px;
 
     @media (max-width: 768px) {
-      margin-bottom: 10px; 
+        margin-bottom: 10px;
     }
 }
 
 .message-preview {
-  margin-bottom: 20px;
-  padding: 10px;
-  border: 1px solid $fifth;
-  border-radius: 5px;
-  background-color: white;
-  color: $font-color1;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid $fifth;
+    border-radius: 5px;
+    background-color: white;
+    color: $font-color1;
 
-  .message-header {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 5px;
-  }
+    .message-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 5px;
+    }
 
-  .message-sender {
-    font-weight: bold;
-  }
+    .message-sender {
+        font-weight: bold;
+    }
 
-  .message-timestamp {
-    color: $font-color2;
-  }
+    .message-timestamp {
+        color: $font-color2;
+    }
 
-  .message-text {
-    margin-top: 5px;
-    word-wrap: break-word;
-  }
+    .message-text {
+        margin-top: 5px;
+        word-wrap: break-word;
+    }
 }
 
 .message-input-container {
-  margin-top: auto; 
-  display: flex;
-  align-items: center;
-  padding-top: 20px; 
-
-  @media (max-width: 768px) {
-    padding-top: 10px; 
-  }
-
-  input.Message-input {
-    flex: 1;
-    padding: 10px;
-    color: $font-color1;
-    border: 1px solid $fifth;
-    background-color: white;
-    border-radius: 5px;
-    margin-right: 10px;
-    font-size: 16px;
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    padding-top: 20px;
 
     @media (max-width: 768px) {
-        font-size: 14px;
-      }
-  }
-
-  button.Message-btn {
-    padding: 10px 20px;
-    background-color: $third; 
-    border: none;
-    color: #fff;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-
-    @media (max-width: 768px) {
-        font-size: 14px; 
-      }
-    &:disabled {
-      background-color: $fifth;
-      cursor: not-allowed;
+        padding-top: 10px;
     }
-  }
+
+    input.Message-input {
+        flex: 1;
+        padding: 10px;
+        color: $font-color1;
+        border: 1px solid $fifth;
+        background-color: white;
+        border-radius: 5px;
+        margin-right: 10px;
+        font-size: 16px;
+
+        @media (max-width: 768px) {
+            font-size: 14px;
+        }
+    }
+
+    button.Message-btn {
+        padding: 10px 20px;
+        background-color: $third;
+        border: none;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+
+        @media (max-width: 768px) {
+            font-size: 14px;
+        }
+        &:disabled {
+            background-color: $fifth;
+            cursor: not-allowed;
+        }
+    }
 }

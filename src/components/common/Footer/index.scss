@@ -2,21 +2,21 @@
 
 html {
     margin: 0;
-  }
-  
-  body {
+}
+
+body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     margin: 0;
     margin-bottom: 5%;
-  }
-  
-  .main-content {
+}
+
+.main-content {
     flex: 1;
-  }
-  
-  .footer {
+}
+
+.footer {
     background-color: $first;
     color: white;
     text-align: center;
@@ -27,5 +27,4 @@ html {
     position: fixed;
     bottom: 0;
     left: 0;
-  }
-  
+}
