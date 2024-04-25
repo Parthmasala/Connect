@@ -81,7 +81,7 @@
         transition: background-color 0.3s ease;
 
         &:hover {
-            background-color: darken( $third, 15%);
+            background-color: darken($third, 15%);
         }
 
         @media screen and (max-width: 768px) {

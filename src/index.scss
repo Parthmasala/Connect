@@ -10,7 +10,6 @@
     color: white;
     /* bg color */
     background-color: $second;
-
 }
 
 body {
@@ -23,7 +22,7 @@ body {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
-    border: 2px solid transparent; 
+    border: 2px solid transparent;
     border-radius: 5px;
     background-color: #1f1f1f;
     color: white;
@@ -31,7 +30,7 @@ body {
     &:focus {
         outline: none;
         animation: blinkBorder 1s infinite alternate;
-        border-color: #0cf; 
+        border-color: #0cf;
     }
 }
 
