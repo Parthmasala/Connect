@@ -411,7 +411,7 @@ export const getAllFollowing = async (userId, setFollowing) => {
             const matchingUsers = response.docs.map((doc) =>
                 doc.data().targetId
             );
-            console.log(matchingUsers);
+            // console.log(matchingUsers);
 
             onSnapshot(userRef, (response) => {
                 const following = response.docs.filter((doc) =>
