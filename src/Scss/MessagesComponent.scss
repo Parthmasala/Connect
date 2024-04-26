@@ -86,8 +86,12 @@
             font-size: 14px;
         }
         &:disabled {
-            background-color: $fifth;
+            // background-color: $fifth;
             cursor: not-allowed;
+            padding: 8px 18px;
+            border: $third 2px solid;
+            background-color: $forth;
+            color: $third;
         }
     }
 }

@@ -23,8 +23,8 @@
         transition: border-color 0.3s;
     }
     input:focus {
-        border-color: $third;
-        animation: blinkBorder 1s infinite alternate;
+        border: $third 4px solid;
+        // animation: blinkBorder 1s infinite alternate;
     }
     ::placeholder {
         font: Helvetica;

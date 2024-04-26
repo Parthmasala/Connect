@@ -16,7 +16,7 @@
 
 .connected-user {
     background-color: $forth;
-    border: 2px solid #333;
+    border: 2px solid $fifth;
     border-radius: 10px;
     padding: 20px;
     display: grid;
@@ -89,14 +89,6 @@
         }
     }
 
-    .unfollow-button,
-    .message-button {
-        background-color: rgb(255, 166, 0);
-
-        &:hover {
-            background-color: rgb(192, 125, 0);
-        }
-    }
 
     &:hover {
         background-color: #cacaca;

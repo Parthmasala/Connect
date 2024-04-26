@@ -44,18 +44,20 @@ body {
     justify-content: center;
     align-items: center;
     .common-input {
+        color: $font-color1;
         width: 100%;
         padding: 10px;
         margin: 10px 0;
-        border: 2px solid transparent;
+        border: 3px solid transparent;
         border-radius: 5px;
         background-color: $second;
-        color: white;
         font-size: 1em;
-        &:focus {
+        &:focus, &:hover {
             outline: none;
-            animation: blinkBorder 1s infinite alternate;
+            border: 3px solid $third;
+            // animation: blinkBorder 1s infinite alternate;
         }
+        
     }
     .common-input {
         width: 80%;
@@ -72,45 +74,63 @@ body {
 }
 
 .login-btn {
-    display: inline-block;
-    padding: 0.25em 0.75em;
-    border-radius: 5em;
+    width: 50%;
+    // align-items: center;
+    background-color: $third;
     color: #fff;
-    font-size: 1em;
-    letter-spacing: 0.15em;
-    transition: all 0.3s;
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-    &:after {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: $third;
-        border-radius: 10em;
-        z-index: -2;
-    }
-    &:before {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 0%;
-        height: 100%;
-        background-color: darken($third, 15%);
-        transition: all 0.3s;
-        border-radius: 10em;
-        z-index: -1;
-    }
+    border: none;
+    border-radius: 50px;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+
     &:hover {
-        color: #fff;
-        &:before {
-            width: 100%;
-        }
+        background-color: darken($third, 15%);
     }
+
+    @media screen and (max-width: 768px) {
+        padding: 6px 12px;
+    }
+    // display: inline-block;
+    // padding: 0.25em 0.75em;
+    // border-radius: 5em;
+    // color: #fff;
+    // font-size: 1em;
+    // letter-spacing: 0.15em;
+    // transition: all 0.3s;
+    // position: relative;
+    // overflow: hidden;
+    // z-index: 1;
+    // &:after {
+    //     content: "";
+    //     position: absolute;
+    //     bottom: 0;
+    //     left: 0;
+    //     width: 100%;
+    //     height: 100%;
+    //     background-color: $third;
+    //     border-radius: 10em;
+    //     z-index: -2;
+    // }
+    // &:before {
+    //     content: "";
+    //     position: absolute;
+    //     bottom: 0;
+    //     left: 0;
+    //     width: 0%;
+    //     height: 100%;
+    //     background-color: darken($third, 15%);
+    //     transition: all 0.3s;
+    //     border-radius: 10em;
+    //     z-index: -1;
+    // }
+    // &:hover {
+    //     color: #fff;
+    //     &:before {
+    //         width: 100%;
+    //     }
+    // }
 }
 
 .google-btn-container {
@@ -136,6 +156,7 @@ body {
 .hr-text {
     margin: 10% 0;
     text-align: center;
+    color: $second;
     &:before {
         background: linear-gradient(
             to right,

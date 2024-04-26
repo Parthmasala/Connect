@@ -62,7 +62,7 @@ export default function FollowersModal({
                                 alt={user.name}
                             />
                             <p className="name">{user?.name}</p>
-                            <button className="button"> Remove</button>
+                            <button className="remove-btn"> Remove</button>
                         </div>
                     ))
                 )}
