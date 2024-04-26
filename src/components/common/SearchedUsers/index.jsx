@@ -53,7 +53,7 @@ export default function SearchedUsers({
                     className="connect-button"
                     onClick={() => getCurrentUser(user.id)}
                 >
-                    Connect
+                    Follow
                 </button>
             ) : (
                 <>

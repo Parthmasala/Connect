@@ -93,12 +93,12 @@
             font-size: 14px;
         }
         &:disabled {
-            // background-color: $fifth;
+            background-color: #ffffff;
             cursor: not-allowed;
             padding: 8px 18px;
-            border: $third 2px solid;
-            background-color: $forth;
-            color: $third;
+            border: $fifth 2px solid;
+            // background-color: $forth;
+            color: $forth;
         }
     }
 }
