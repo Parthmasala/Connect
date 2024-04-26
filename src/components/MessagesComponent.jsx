@@ -54,15 +54,24 @@ export default function MessagesComponent({ currentUser }) {
             .sort((a, b) => new Date(a.timeStamp) - new Date(b.timeStamp));
     }, [allMessages]);
 
+    console.log(orderedMessages);
+
     return (
         <div className="messages-component-container">
             <div className="messages-list" ref={messagesListRef}>
                 {orderedMessages.map((message, index) => (
-                    <div className="message-preview" key={index}>
+                    <div
+                        className={
+                            message.senderId === currentUser?.userid
+                                ? "message-preview"
+                                : "message-preview left"
+                        }
+                        key={index}
+                    >
                         <div className="message-header">
-                            <p className="message-sender">
+                            {/* <p className="message-sender">
                                 {message.senderName}
-                            </p>
+                            </p> */}
                             <p className="message-timestamp">
                                 {message.timeStamp}
                             </p>
