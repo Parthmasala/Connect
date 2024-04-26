@@ -26,7 +26,7 @@ export default function FollowersModal({
     const handleClick = (event, user) => {
         event.preventDefault();
 
-        if (event.target.classList.contains("button")) {
+        if (event.target.classList.contains("remove-btn")) {
             removeConnection(user.id, currentUser?.userid);
             // const updatedFollowers = followers.filter(user => user.id !== id);
             // setFollowers(updatedFollowers);
@@ -40,10 +40,8 @@ export default function FollowersModal({
         <Modal
             title="People who follow you"
             open={showFollowers}
-            onOk={() => {
-                setShowFollowers(false);
-            }}
             onCancel={() => setShowFollowers(false)}
+            footer={null} // Remove the default footer
         >
             <div className="followers-results">
                 {followers.length === 0 ? (
@@ -62,7 +60,7 @@ export default function FollowersModal({
                                 alt={user.name}
                             />
                             <p className="name">{user?.name}</p>
-                            <button className="button"> Remove</button>
+                            <button className="remove-btn"> Remove</button>
                         </div>
                     ))
                 )}

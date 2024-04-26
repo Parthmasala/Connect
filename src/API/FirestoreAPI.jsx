@@ -47,7 +47,7 @@ export const postUserData = async (obj) => {
             query(userRef, where("email", "==", obj.email))
         );
         if (!userSnapshot.empty) {
-            toast.info("Welcome Back");
+            toast.success("Welcome Back");
             return;
         }
 
