@@ -130,14 +130,8 @@ export default function ProfileCard({ onEdit, currentUser }) {
             />
 
             <div className="profile-card">
-                {location?.state?.id == currentUser.userid && (
-                    <div className="edit-btn">
-                        <button onClick={onEdit}>Edit</button>
-                    </div>
-                )}
-
                 <div className="profile-info">
-                    <div>
+                    <div className = "left-info">
                         <img
                             className="profile-image"
                             onClick={() => {
@@ -193,6 +187,11 @@ export default function ProfileCard({ onEdit, currentUser }) {
                     </div>
 
                     <div className="right-info">
+                        {location?.state?.id == currentUser.userid && (
+                            <div className="edit-btn">
+                                <button onClick={onEdit}>Edit</button>
+                            </div>
+                        )}
                         <p className="college">
                             {Object.values(currentProfile).length == 0
                                 ? currentUser.college
