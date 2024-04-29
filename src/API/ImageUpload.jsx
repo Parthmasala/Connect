@@ -6,6 +6,8 @@ import {
     deleteObject,
 } from "firebase/storage";
 import { editProfile } from "./FirestoreAPI";
+import { getUniqueID } from "../helpers/getUniqueID";
+import { toast } from "react-toastify";
 
 // Function to upload image and delete current image
 export const uploadImage = (
@@ -73,7 +75,8 @@ export const deleteImage = (id) => {
 };
 
 export const uploadPostImage = (file, setPostImage, setProgress) => {
-    const postPicsRef = ref(storage, `postImages/${file.name}`);
+    // const postPicsRef = ref(storage, `postImages/${file.name}`);
+    const postPicsRef = ref(storage, `postImages/${getUniqueID()}`);
     const uploadTask = uploadBytesResumable(postPicsRef, file);
 
     uploadTask.on(
@@ -115,6 +118,46 @@ export const uploadResume = (file, id, setProgress, setResume) => {
             getDownloadURL(uploadTask.snapshot.ref).then(() => {
                 setResume(null);
                 setProgress(0);
+            });
+        }
+    );
+};
+
+export const deleteMessageFile = (fileUrl) => {
+    // Create a reference to the image in Firebase storage
+    const fileRef = ref(storage, fileUrl);
+
+    // Delete the image from Firebase storage
+    return deleteObject(fileRef)
+        .then(() => {
+            toast.success("File removed successfully");
+        })
+        .catch((error) => {
+            console.error("Error deleting image:", error);
+        });
+};
+
+
+export const uploadMessageFile = (file, setFileUrl, setProgress) => {
+    const fileRef = ref(storage, `files/${getUniqueID()}`);
+    const uploadTask = uploadBytesResumable(fileRef, file);
+
+    uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+            const progress = Math.round(
+                (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+            );
+            // console.log(progress);
+            setProgress(progress);
+        },
+        (err) => {
+            console.error(err);
+        },
+        () => {
+            getDownloadURL(uploadTask.snapshot.ref).then((response) => {
+                setFileUrl(response);
+                toast.success("File uploaded successfully");
             });
         }
     );
