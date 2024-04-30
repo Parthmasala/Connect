@@ -48,16 +48,18 @@
         width: 99.5%;
         height: 27px;
         background-color: $second;
+        
         border-radius: 30px;
         // padding-left: 20px;
         color: $font-color1;
         font-size: 16px;
         margin-top: 10px;
-        border: 3px solid transparent;
+        // border: 3px solid transparent;
         outline: none;
         &:focus {
             outline: none;
-            animation: blinkBorder 1s infinite alternate;
+            border: $third 2px solid;
+            // animation: blinkBorder 1s infinite alternate;
         }
     }
 

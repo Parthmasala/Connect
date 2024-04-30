@@ -88,7 +88,7 @@ export const onLogout = () => {
     try {
         signOut(auth);
         localStorage.clear();
-        toast.info("You have logged out");
+        toast.success("You have logged out");
     } catch (error) {
         return error;
     }

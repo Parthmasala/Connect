@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./index.scss";
-import ConnectLogo from "../../../assets/ConnectLogo2.png";
+import ConnectLogo from "../../../assets/ConnectLogo.png";
 import Search from "../Search";
 import usericon from "../../../assets/user-icon.png";
 import { IoMdHome, IoIosBriefcase, IoMdNotifications } from "react-icons/io";

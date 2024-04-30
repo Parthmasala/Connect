@@ -24,13 +24,13 @@ body {
     margin: 10px 0;
     border: 2px solid transparent;
     border-radius: 5px;
-    background-color: #1f1f1f;
-    color: white;
+    background-color: $forth;
+    color: $font-color1;
     font-size: 1em;
     &:focus {
         outline: none;
-        animation: blinkBorder 1s infinite alternate;
-        border-color: #0cf;
+        // animation: blinkBorder 1s infinite alternate;
+        border-color: $third;
     }
 }
 

@@ -1,3 +1,5 @@
+@import "../../../GeneralTheme.scss";
+
 .loader {
     display: flex;
     justify-content: center;
@@ -14,6 +16,6 @@
         font-family: "Helvetica", sans-serif;
         font-weight: 500;
         font-size: 20px;
-        color: whitesmoke;
+        color: $font-color1;
     }
 }

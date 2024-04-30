@@ -28,7 +28,7 @@ export default function FollowingModal({
     const handleClick = (event, user) => {
         event.preventDefault();
 
-        if (event.target.classList.contains("button")) {
+        if (event.target.classList.contains("unfollow-btn")) {
             removeConnection(currentUser?.userid, user.id);
             // const updatedFollowers = followers.filter(user => user.id !== id);
             // setFollowers(updatedFollowers);
@@ -42,10 +42,8 @@ export default function FollowingModal({
         <Modal
             title="People whom you follow"
             open={showFollowing}
-            onOk={() => {
-                setShowFollowing(false);
-            }}
             onCancel={() => setShowFollowing(false)}
+            footer={null} // Remove the default footer
         >
             <div className="following-results">
                 {following.length === 0 ? (
@@ -64,7 +62,7 @@ export default function FollowingModal({
                                 alt={user.name}
                             />
                             <p className="name">{user?.name}</p>
-                            <button className="button"> Unfollow</button>
+                            <button className="unfollow-btn"> Unfollow</button>
                         </div>
                     ))
                 )}

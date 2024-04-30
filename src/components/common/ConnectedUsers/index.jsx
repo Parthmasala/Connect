@@ -51,7 +51,7 @@ export default function ConnectedUsers({
                     className="connect-button"
                     onClick={() => getCurrentUser(user.id)}
                 >
-                    Connect
+                    Follow
                 </button>
             ) : (
                 <>
