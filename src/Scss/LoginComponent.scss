@@ -82,7 +82,7 @@ body {
     color: #fff;
     border: none;
     border-radius: 50px;
-    padding: 8px 16px;
+    padding: 2%;
     cursor: pointer;
     font-weight: 600;
     transition: background-color 0.3s ease;
@@ -175,4 +175,19 @@ body {
 
 .connectLogo {
     width: 50%;
+}
+
+.forgot-password-btn {
+    margin: 3% 0;
+    background-color: $second;
+    color: $third;
+    border: none;
+    padding: auto;
+    cursor: pointer;
+    font-weight: 550;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: darken($third, 15%);
+    }
 }

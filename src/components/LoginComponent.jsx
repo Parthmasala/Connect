@@ -2,37 +2,63 @@ import React, { useState } from "react";
 import { LoginAPI, GoogleAPI } from "../API/AuthAPI";
 import ConnectLogo from "../assets/ConnectLogo.png";
 import GoogleButton from "react-google-button";
+import { Modal, Input, Button, message } from "antd";
 import "../Scss/LoginComponent.scss";
-import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { sendPasswordResetEmail } from "firebase/auth";
+import { auth } from "../FirebaseConfig";
 
 export default function LoginComponent() {
-    const [credentails, setCredentials] = useState({});
+    const [credentials, setCredentials] = useState({});
+    const [forgotPasswordEmail, setForgotPasswordEmail] = useState("");
+    const [forgotPasswordModalVisible, setForgotPasswordModalVisible] =
+        useState(false);
 
     let navigate = useNavigate();
 
     const login = async () => {
         try {
             let response = await LoginAPI(
-                credentails.email,
-                credentails.password
+                credentials.email,
+                credentials.password
             );
             toast.success("Login Successfully");
-            // console.log(response);
             localStorage.setItem("userEmail", response.user.email);
             navigate("/home");
         } catch (error) {
             toast.error("Invalid Email or Password");
         }
     };
+
     const googleLogin = () => {
         try {
             let response = GoogleAPI();
-            // console.log("Google Response : ", response);
-            // toast.success("Login Successfully");
         } catch (error) {
-            toast.error("Invalid Email or Password");
+            message.error("Invalid Email or Password");
         }
+    };
+
+    const showForgotPasswordModal = () => {
+        setForgotPasswordModalVisible(true);
+    };
+
+    const handleForgotPassword = async () => {
+        try {
+            await sendPasswordResetEmail(auth, forgotPasswordEmail);
+            toast.success("Password reset link is sent to your email");
+            handleCancel();
+        } catch (error) {
+            console.error("Error sending password reset email:", error);
+            toast.error(
+                "Failed to send password reset instructions. Please try again later."
+            );
+        }
+    };
+
+    const handleCancel = () => {
+        setForgotPasswordEmail("");
+        setForgotPasswordModalVisible(false);
     };
 
     return (
@@ -44,10 +70,10 @@ export default function LoginComponent() {
                 <p className="sub-heading">Welcome to Connect</p>
 
                 <div className="auth-input">
-                    <input
+                    <Input
                         onChange={(e) =>
                             setCredentials({
-                                ...credentails,
+                                ...credentials,
                                 email: e.target.value,
                             })
                         }
@@ -56,24 +82,24 @@ export default function LoginComponent() {
                         placeholder="Email or Phone"
                     />
 
-                    <input
+                    <Input.Password
                         onChange={(e) =>
                             setCredentials({
-                                ...credentails,
+                                ...credentials,
                                 password: e.target.value,
                             })
                         }
-                        type="password"
                         className="common-input"
                         placeholder="Enter your Password"
                     />
                 </div>
 
-                <button className="login-btn" onClick={login}>
+                <Button className="login-btn" onClick={login}>
                     Log In
-                </button>
+                </Button>
             </div>
             <hr className="hr-text" data-content="or" />
+
             <div className="google-btn-container">
                 <GoogleButton className="google-btn" onClick={googleLogin} />
                 <p className="signup-link">
@@ -86,6 +112,32 @@ export default function LoginComponent() {
                     </span>
                 </p>
             </div>
+            <Button
+                className="forgot-password-btn"
+                onClick={showForgotPasswordModal}
+            >
+                Forgot Password?
+            </Button>
+
+            <Modal
+                title="Forgot Your Password?"
+                visible={forgotPasswordModalVisible}
+                onOk={handleForgotPassword}
+                onCancel={handleCancel}
+                okText="Reset your password"
+                cancelText="Cancel"
+            >
+                <p>
+                    Enter your email address below and we'll send you
+                    instructions on how to reset your password.
+                </p>
+                <Input
+                    type="email"
+                    placeholder="Enter your email"
+                    value={forgotPasswordEmail}
+                    onChange={(e) => setForgotPasswordEmail(e.target.value)}
+                />
+            </Modal>
         </div>
     );
 }
