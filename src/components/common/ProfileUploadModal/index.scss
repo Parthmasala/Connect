@@ -1,3 +1,4 @@
+@import "../../../GeneralTheme.scss";
 .user-profile-pic {
     display: flex;
     justify-content: center;
@@ -21,7 +22,7 @@
 .upload-btn {
     cursor: pointer;
     color: #fff;
-    background-color: #1890ff;
+    background-color: $third;
     border: none;
     border-radius: 5px;
     padding: 10px 20px;
@@ -31,7 +32,7 @@
 }
 
 .upload-btn:hover {
-    background-color: #40a9ff;
+    background-color: darken($third, 15%);
 }
 
 .progress-bar {

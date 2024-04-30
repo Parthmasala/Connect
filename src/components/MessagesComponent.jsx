@@ -3,6 +3,9 @@ import "../Scss/MessagesComponent.scss";
 import { useLocation } from "react-router-dom";
 import { saveMessage, getAllMessages } from "../API/FirestoreAPI";
 import { getCurrentTimeStamp } from "../helpers/useMoment";
+import { GoPaperclip } from "react-icons/go";
+import MessageFileUpload from "./common/MessageFileUpload";
+import { getUniqueID } from "../helpers/getUniqueID";
 
 export default function MessagesComponent({ currentUser }) {
     const location = useLocation();
@@ -10,8 +13,13 @@ export default function MessagesComponent({ currentUser }) {
     const messengerEmail = location.state?.messengerEmail;
 
     const [message, setMessage] = useState("");
+
+    const [file, setFile] = useState(null);
+    const [fileUrl, setFileUrl] = useState("");
     const [allMessages, setAllMessages] = useState([]);
     const messagesListRef = useRef(null);
+    const [modalOpen, setModalOpen] = useState(false);
+    const [progress, setProgress] = useState(0);
 
     const getMessage = (event) => {
         setMessage(event.target.value);
@@ -29,10 +37,13 @@ export default function MessagesComponent({ currentUser }) {
             currentUser?.name,
             messengerId,
             getCurrentTimeStamp("LL LTS"),
-            message
+            message,
+            fileUrl
         );
 
         setMessage("");
+        setFile(null);
+        setFileUrl("");
     };
 
     useEffect(() => {
@@ -54,7 +65,7 @@ export default function MessagesComponent({ currentUser }) {
             .sort((a, b) => new Date(a.timeStamp) - new Date(b.timeStamp));
     }, [allMessages]);
 
-    console.log(orderedMessages);
+    // console.log(orderedMessages);
 
     return (
         <div className="messages-component-container">
@@ -76,11 +87,25 @@ export default function MessagesComponent({ currentUser }) {
                                 {message.timeStamp}
                             </p>
                         </div>
-                        <p className="message-text">{message.message}</p>
+
+                        {message.message && (
+                            <p className="message-text">{message.message}</p>
+                        )}
+                        {message.fileUrl && (
+                            <div className="message-file">
+                                <a
+                                    href={message.fileUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    Linked File
+                                </a>
+                            </div>
+                        )}
                     </div>
                 ))}
             </div>
-            {messengerId?.length > 0 && (
+            {(messengerId?.length > 0 || fileUrl?.length > 0) && (
                 <div className="message-input-container">
                     <input
                         onChange={getMessage}
@@ -90,14 +115,30 @@ export default function MessagesComponent({ currentUser }) {
                         className="Message-input"
                         value={message}
                     />
+                    <GoPaperclip
+                        className="Message-attachment"
+                        onClick={() => setModalOpen(true)}
+                    />
+
                     <button
                         className="Message-btn"
                         onClick={uploadMessage}
                         type="button"
-                        disabled={!message.trim()}
+                        disabled={!message.trim() && !fileUrl}
                     >
-                        Send
+                        {fileUrl ? ( message.trim() ? "Send" : "Send only file") : ("Send")}
                     </button>
+
+                    <MessageFileUpload
+                        modalOpen={modalOpen}
+                        setModalOpen={setModalOpen}
+                        progress={progress}
+                        setProgress={setProgress}
+                        setFile={setFile}
+                        file={file}
+                        fileUrl={fileUrl}
+                        setFileUrl={setFileUrl}
+                    />
                 </div>
             )}
         </div>
