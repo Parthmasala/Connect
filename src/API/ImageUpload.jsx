@@ -123,7 +123,7 @@ export const uploadResume = (file, id, setProgress, setResume) => {
     );
 };
 
-export const deleteMessageFile = (fileUrl) => {
+export const deleteFile = (fileUrl) => {
     // Create a reference to the image in Firebase storage
     const fileRef = ref(storage, fileUrl);
 

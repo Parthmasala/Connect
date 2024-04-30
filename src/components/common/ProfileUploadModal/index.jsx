@@ -95,7 +95,7 @@ export default function ProfileUploadModal({
                     <label
                         className="upload-btn"
                         htmlFor="image-upload"
-                        style={{ backgroundColor: "green" }}
+                        style={{ backgroundColor: "blue" }}
                     >
                         Add an Image
                     </label>

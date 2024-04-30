@@ -11,7 +11,7 @@ import {
     setDoc,
     deleteDoc,
 } from "firebase/firestore";
-import { deleteMessageFile } from "./ImageUpload";
+import { deleteFile } from "./ImageUpload";
 import { toast } from "react-toastify";
 
 let dbRef = collection(db, "posts"); //this is the reference to the posts postRef
@@ -313,7 +313,7 @@ export const deleteFirestoreData = async (userId) => {
         );
         const userPostsSnapshot = await getDocs(userPostsQuery);
         userPostsSnapshot.forEach(async (doc) => {
-            await deleteMessageFile(doc.data().postImage);
+            await deleteFile(doc.data().postImage);
             await deleteDoc(doc.ref);
         });
 
