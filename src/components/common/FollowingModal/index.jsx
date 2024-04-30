@@ -43,7 +43,7 @@ export default function FollowingModal({
             title="People whom you follow"
             open={showFollowing}
             onCancel={() => setShowFollowing(false)}
-            footer={null} // Remove the default footer
+            footer={null}
         >
             <div className="following-results">
                 {following.length === 0 ? (

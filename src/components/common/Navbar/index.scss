@@ -45,12 +45,16 @@
 }
 
 .connect-logo {
-    width: auto;
-    height: 80%;
+    width: auto; 
+    height: 80%; 
+    max-width: 200px;
     margin-left: 10px;
     cursor: pointer;
+
     @media screen and (max-width: 768px) {
-        margin: 10px;
+        height: 60%; 
+        max-width: 150px;
+        margin: 10px; 
     }
 }
 
