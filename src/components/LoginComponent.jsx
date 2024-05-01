@@ -25,7 +25,7 @@ export default function LoginComponent() {
             );
             toast.success("Login Successfully");
             localStorage.setItem("userEmail", response.user.email);
-            navigate("/home");
+            navigate("/Home");
         } catch (error) {
             toast.error("Invalid Email or Password");
         }
