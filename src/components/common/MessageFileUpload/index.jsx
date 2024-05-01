@@ -4,7 +4,7 @@ import "./index.scss";
 import { uploadMessageFile } from "../../../API/ImageUpload";
 import { getUniqueID } from "../../../helpers/getUniqueID";
 import { toast } from "react-toastify";
-import { deleteMessageFile } from "../../../API/ImageUpload";
+import { deleteFile } from "../../../API/ImageUpload";
 
 export default function MessageFileUploadModal({
     MessageID,
@@ -38,7 +38,7 @@ export default function MessageFileUploadModal({
     const handleFileRemoval = () => {
         // setModalOpen(false);
         if (fileUrl) {
-            deleteMessageFile(fileUrl);
+            deleteFile(fileUrl);
         }
 
         setFileUrl("");
@@ -49,7 +49,10 @@ export default function MessageFileUploadModal({
     const renderFooter = () => {
         return (
             <>
-                <Button disabled={!fileUrl && !file} onClick={handleFileRemoval}>
+                <Button
+                    disabled={!fileUrl && !file}
+                    onClick={handleFileRemoval}
+                >
                     Remove File
                 </Button>
                 <Button disabled={fileUrl || !file} onClick={uploadFile}>

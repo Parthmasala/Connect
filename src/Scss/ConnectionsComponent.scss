@@ -94,3 +94,32 @@
         background-color: #cacaca;
     }
 }
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    list-style: none;
+    padding: 0;
+}
+
+.page-item {
+    margin: 0 5px;
+}
+
+.page-link {
+    padding: 8px 16px;
+    border: 1px solid $first;
+    background-color: $forth;
+    color: #333;
+    cursor: pointer;
+    
+    &:hover {
+        transition: background-color 0.3s ease;
+        background-color: #cacaca;
+    }
+    &.active {
+        background-color: $first; 
+        color: #fff; 
+    }
+}

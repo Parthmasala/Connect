@@ -151,9 +151,9 @@ export const getLikesByUser = (userId, postId, setLiked, setLikesCount) => {
     }
 };
 
-export const postComment = (postId, userId, comment, timeStamp, name) => {
+export const postComment = (postId, userId, comment, timeStamp, email) => {
     try {
-        addDoc(commentRef, { postId, userId, comment, timeStamp, name });
+        addDoc(commentRef, { postId, userId, comment, timeStamp, email });
     } catch (err) {
         console.log(err);
     }
@@ -263,7 +263,7 @@ export const saveMessage = (
             receiverId,
             timeStamp,
             message,
-            fileUrl
+            fileUrl,
         });
     } catch (err) {
         console.log(err);
@@ -368,7 +368,6 @@ export const deleteFirestoreData = async (userId) => {
     }
 };
 
-
 export const getAllFollowers = async (userId, setFollowers) => {
     try {
         const followersQuery = query(
@@ -376,20 +375,17 @@ export const getAllFollowers = async (userId, setFollowers) => {
             where("targetId", "==", userId)
         );
         onSnapshot(followersQuery, (response) => {
-            const matchingUsers = response.docs.map((doc) =>
-                doc.data().userId
-            );
+            const matchingUsers = response.docs.map((doc) => doc.data().userId);
 
             onSnapshot(userRef, (response) => {
                 const followers = response.docs.filter((doc) =>
-                  matchingUsers.includes(doc.id)
+                    matchingUsers.includes(doc.id)
                 );
-              
-                setFollowers(
-                  followers.map((doc) => ({ ...doc.data(), id: doc.id }))
-                );
-              });
 
+                setFollowers(
+                    followers.map((doc) => ({ ...doc.data(), id: doc.id }))
+                );
+            });
         });
     } catch (error) {
         console.log(error);
@@ -403,23 +399,35 @@ export const getAllFollowing = async (userId, setFollowing) => {
             where("userId", "==", userId)
         );
         onSnapshot(followingQuery, (response) => {
-            const matchingUsers = response.docs.map((doc) =>
-                doc.data().targetId
+            const matchingUsers = response.docs.map(
+                (doc) => doc.data().targetId
             );
             // console.log(matchingUsers);
 
             onSnapshot(userRef, (response) => {
                 const following = response.docs.filter((doc) =>
-                  matchingUsers.includes(doc.id)
+                    matchingUsers.includes(doc.id)
                 );
-              
-                setFollowing(
-                  following.map((doc) => ({ ...doc.data(), id: doc.id }))
-                );
-              });
 
+                setFollowing(
+                    following.map((doc) => ({ ...doc.data(), id: doc.id }))
+                );
+            });
         });
     } catch (error) {
         console.log(error);
+    }
+};
+
+export const getUserById = async (email) => {
+    try {
+        // get userdata from userRef comparing emailid
+        const userDoc = await getDocs(
+            query(userRef, where("email", "==", email))
+        );
+        return userDoc.docs[0].data();
+    } catch (error) {
+        console.error("Error fetching user by ID:", error);
+        throw error; // Propagate the error to the caller
     }
 };
