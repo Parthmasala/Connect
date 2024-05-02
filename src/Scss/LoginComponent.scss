@@ -17,6 +17,7 @@ body {
     padding: 20px;
     box-sizing: border-box;
     background-color: $first;
+    text-align: center; 
     .login-wrapper-inner {
         display: flex;
         flex-direction: column;
@@ -47,7 +48,7 @@ body {
         color: $font-color1;
         width: 100%;
         padding: 10px;
-        margin: 10px 0;
+        margin: 2% 0;
         border: 3px solid transparent;
         border-radius: 5px;
         background-color: $second;
@@ -76,11 +77,12 @@ body {
 .login-btn {
     width: 50%;
     // align-items: center;
+    margin: 3%;
     background-color: $third;
     color: #fff;
     border: none;
     border-radius: 50px;
-    padding: 8px 16px;
+    padding: 2%;
     cursor: pointer;
     font-weight: 600;
     transition: background-color 0.3s ease;
@@ -154,7 +156,7 @@ body {
 }
 
 .hr-text {
-    margin: 10% 0;
+    margin: 5% 0;
     text-align: center;
     color: $second;
     &:before {
@@ -173,4 +175,19 @@ body {
 
 .connectLogo {
     width: 50%;
+}
+
+.forgot-password-btn {
+    margin: 3% 0;
+    background-color: $second;
+    color: $third;
+    border: none;
+    padding: auto;
+    cursor: pointer;
+    font-weight: 550;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: darken($third, 15%);
+    }
 }

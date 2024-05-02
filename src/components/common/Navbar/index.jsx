@@ -91,7 +91,7 @@ export default function Navbar({ currentUser }) {
         const pathname = window.location.pathname;
         switch (pathname) {
             case "/Home":
-                setActiveIcon("home");
+                setActiveIcon("Home");
                 break;
             case "/Connections":
                 setActiveIcon("connections");
@@ -114,7 +114,7 @@ export default function Navbar({ currentUser }) {
                 className="connect-logo"
                 src={ConnectLogo}
                 alt="Connect Logo"
-                onClick={() => navigate("/home")}
+                onClick={() => navigate("/Home")}
                 title="Home"
             />
             {isSearch ? (
@@ -128,7 +128,7 @@ export default function Navbar({ currentUser }) {
                     <IoMdHome
                         size={40}
                         className={
-                            activeIcon === "home"
+                            activeIcon === "Home"
                                 ? "icon-scss active"
                                 : "icon-scss"
                         }
@@ -167,7 +167,11 @@ export default function Navbar({ currentUser }) {
                     />
                     <FaFileAlt
                         size={30}
-                        className="icon-scss"
+                        className={
+                            activeIcon === "resumeBuilder"
+                                ? "icon-scss active"
+                                : "icon-scss"
+                        }
                         onClick={() => navigate("/ResumeBuilder")}
                         title="Resume Builder"
                     />

@@ -3,7 +3,7 @@ import "../Scss/MessagesComponent.scss";
 import { useLocation } from "react-router-dom";
 import { saveMessage, getAllMessages } from "../API/FirestoreAPI";
 import { getCurrentTimeStamp } from "../helpers/useMoment";
-import { GoPaperclip } from "react-icons/go";
+import { ImAttachment } from "react-icons/im";
 import MessageFileUpload from "./common/MessageFileUpload";
 import { getUniqueID } from "../helpers/getUniqueID";
 
@@ -115,7 +115,7 @@ export default function MessagesComponent({ currentUser }) {
                         className="Message-input"
                         value={message}
                     />
-                    <GoPaperclip
+                    <ImAttachment
                         className="Message-attachment"
                         onClick={() => setModalOpen(true)}
                     />
@@ -126,7 +126,11 @@ export default function MessagesComponent({ currentUser }) {
                         type="button"
                         disabled={!message.trim() && !fileUrl}
                     >
-                        {fileUrl ? ( message.trim() ? "Send" : "Send only file") : ("Send")}
+                        {fileUrl
+                            ? message.trim()
+                                ? "Send"
+                                : "Send only file"
+                            : "Send"}
                     </button>
 
                     <MessageFileUpload

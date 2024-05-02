@@ -1,8 +1,8 @@
 @import "../../../GeneralTheme.scss";
 
 .navbar-master {
-    width: 98.5%;
-    height: 10vh;
+    width: 97.35%;
+    height: 4.5vw;
     background-color: $first;
     display: flex;
     align-items: center;
@@ -18,9 +18,10 @@
 
 .user-logo {
     width: 70%;
-    max-width: 60px;
     height: 70%;
-    border-radius: 50%;
+    max-width: 60px;
+    max-height: 60px;
+    border-radius: 100%;
     object-fit: cover;
     cursor: pointer;
     position: absolute;
@@ -45,12 +46,16 @@
 }
 
 .connect-logo {
-    width: auto;
-    height: 80%;
+    width: auto; 
+    height: 80%; 
+    max-width: 200px;
     margin-left: 10px;
     cursor: pointer;
+
     @media screen and (max-width: 768px) {
-        margin: 10px;
+        height: 60%; 
+        max-width: 150px;
+        margin: 10px; 
     }
 }
 
