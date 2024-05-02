@@ -53,6 +53,7 @@ export const postUserData = async (obj) => {
         }
 
         await addDoc(userRef, obj);
+        addConnection();
         toast.info("User Created");
     } catch (error) {
         console.log(error);

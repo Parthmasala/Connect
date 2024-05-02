@@ -135,16 +135,6 @@ export default function Navbar({ currentUser }) {
                         onClick={() => navigate("/Home")}
                         title="Home"
                     />
-                    <FaUserPlus
-                        size={30}
-                        className={
-                            activeIcon === "connections"
-                                ? "icon-scss active"
-                                : "icon-scss"
-                        }
-                        onClick={() => navigate("/Connections")}
-                        title="Connection Page"
-                    />
                     <FaSearch
                         size={30}
                         className={
@@ -154,6 +144,16 @@ export default function Navbar({ currentUser }) {
                         }
                         onClick={() => setIsSearch(true)}
                         title="Search"
+                    />
+                    <FaUserPlus
+                        size={30}
+                        className={
+                            activeIcon === "connections"
+                                ? "icon-scss active"
+                                : "icon-scss"
+                        }
+                        onClick={() => navigate("/Connections")}
+                        title="Connection Page"
                     />
                     <FaComments
                         size={30}

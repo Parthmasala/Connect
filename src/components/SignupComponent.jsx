@@ -26,8 +26,12 @@ export default function SignupComponent() {
                 name: credentails.name,
                 email: credentails.email,
                 userID: getUniqueID(),
+                college: "Add Institute Name",
+                headline: "Add Headline",
+                city: "Add City",
+                country: "Add Country",
             });
-            navigate("/home");
+            navigate("/Home");
             // console.log(response) ;
             localStorage.setItem("userEmail", response.user.email);
         } catch (error) {

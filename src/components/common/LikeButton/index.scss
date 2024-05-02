@@ -8,8 +8,11 @@
     padding: 10px;
     cursor: pointer;
 
+    .like-count{
+        margin: 1%;
+    }
     .hr-line {
-        margin-top: -20px;
+        margin-top: -2%;
         hr {
             border: 1px solid $third;
         }

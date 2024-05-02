@@ -77,7 +77,7 @@ export default function LikeButton({ userId, postId, currentUser }) {
 
     return (
         <div className="like-container">
-            <p>
+            <p className="like-count">
                 {likesCount === 0 ? "" : likesCount}{" "}
                 {likesCount === 0 ? "" : likesCount === 1 ? "like" : "likes"}
             </p>

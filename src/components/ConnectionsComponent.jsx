@@ -11,7 +11,7 @@ import ConnectedUsers from "./common/ConnectedUsers";
 export default function ConnectionsComponent({ currentUser }) {
     const [users, setUsers] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [usersPerPage] = useState(13);
+    const [usersPerPage] = useState(10);
 
     const getCurrentUser = (id) => {
         addConnection(currentUser?.userid, id);
@@ -66,15 +66,18 @@ export default function ConnectionsComponent({ currentUser }) {
     return (
         <>
             <div className="connections-container">
-                {currentUsers.map((user) => (
-                    <ConnectedUsers
-                        user={user}
-                        key={user.id}
-                        getCurrentUser={getCurrentUser}
-                        currentUser={currentUser}
-                        removeCurrentUser={removeCurrentUser}
-                    />
-                ))}
+                {currentUsers.map(
+                    (user) =>
+                        user.id !== currentUser?.userid && (
+                            <ConnectedUsers
+                                user={user}
+                                key={user.id}
+                                getCurrentUser={getCurrentUser}
+                                currentUser={currentUser}
+                                removeCurrentUser={removeCurrentUser}
+                            />
+                        )
+                )}
             </div>
             <Pagination
                 usersPerPage={usersPerPage}

@@ -49,6 +49,10 @@ export const GoogleAPI = (email, password) => {
                     email: email,
                     name: name,
                     imageLink: photoUrl,
+                    college: "Add Institute Name",
+                    headline: "Add Headline",
+                    city: "Add City",
+                    country: "Add Country",
                 };
 
                 postUserData(userData);

@@ -27,6 +27,13 @@ export default function HomeLayout() {
             user.reload().then(() => {
                 setIsEmailVerified(user.emailVerified);
                 setLoading(false);
+                navigate("/profile", {
+                    state: {
+                        id: currentUser?.userid,
+                        email: currentUser.userEmail,
+                    },
+                });
+                window.location.reload();
             });
         }
     };
@@ -81,13 +88,13 @@ export default function HomeLayout() {
                 </>
             ) : (
                 <div>
-                    <p>
+                    <p style={{ color: "red" }}>
                         Please verify your email to access the home page.{" "}
                         <span
                             onClick={refreshVerificationStatus}
                             style={{
                                 cursor: "pointer",
-                                color: "cyan",
+                                color: "blue",
                                 textDecoration: "underline",
                             }}
                         >
