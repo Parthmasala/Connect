@@ -16,24 +16,6 @@ export default function SearchResultsComponent({ currentUser }) {
     const location = useLocation();
     const searchInput = location.state?.searchInput;
 
-    useEffect(() => {
-        const handleSearch = () => {
-            if (searchInput !== "") {
-                let searched = users.filter((user) => {
-                    return Object.values(user)
-                        .join("")
-                        .toLowerCase()
-                        .includes(searchInput.toLowerCase());
-                });
-                setFilteredUsers(searched);
-            } else {
-                setFilteredUsers(users);
-            }
-        };
-
-        handleSearch();
-    }, [searchInput, users]);
-
     const getCurrentUser = (id) => {
         addConnection(currentUser?.userid, id);
     };
@@ -46,33 +28,47 @@ export default function SearchResultsComponent({ currentUser }) {
         getAllUsers(setUsers);
     }, []);
 
-    // Logic for pagination
+    useEffect(() => {
+        if (searchInput !== "") {
+            const searched = users.filter((user) =>
+                Object.values(user)
+                    .join("")
+                    .toLowerCase()
+                    .includes(searchInput.toLowerCase())
+            );
+            setFilteredUsers(searched);
+        } else {
+            setFilteredUsers(users);
+        }
+    }, [searchInput, users]);
+
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
     const indexOfLastUser = currentPage * usersPerPage;
     const indexOfFirstUser = indexOfLastUser - usersPerPage;
     const currentUsers = filteredUsers.slice(indexOfFirstUser, indexOfLastUser);
 
-    const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
-    return searchInput.length === 0 ? (
-        <></>
-    ) : (
+    return (
         <div className="searched-results">
-            {currentUsers.length === 0 ? (
-                <div className="search-inner">No results</div>
-            ) : (
-                currentUsers.map((user) => (
-                    <SearchedUsers
-                        user={user}
-                        key={user.id}
-                        getCurrentUser={getCurrentUser}
-                        currentUser={currentUser}
-                        removeCurrentUser={removeCurrentUser}
-                    />
-                ))
-            )}
-
-            {/* Pagination */}
-            <nav>
+            <div className="search-results-grid">
+                {currentUsers.length === 0 ? (
+                    <div className="search-inner">No results</div>
+                ) : (
+                    currentUsers.map(
+                        (user) =>
+                            user.id !== currentUser.userid && (
+                                <SearchedUsers
+                                    key={user.id}
+                                    user={user}
+                                    getCurrentUser={getCurrentUser}
+                                    currentUser={currentUser}
+                                    removeCurrentUser={removeCurrentUser}
+                                />
+                            )
+                    )
+                )}
+            </div>
+            <nav className="pagination-container">
                 <ul className="pagination">
                     {Array.from(
                         {
