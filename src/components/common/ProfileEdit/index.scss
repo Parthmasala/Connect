@@ -25,7 +25,8 @@
             box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
 
             &:hover {
-                background-color: #45a049;
+                background-color: darken($third, 15%);
+                // background-color: red;
             }
         }
     }

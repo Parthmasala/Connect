@@ -23,8 +23,8 @@ export default function ProfilePopup() {
         <div className="popup-card">
             <p className="name">{currentUser?.name}</p>
             <p className="headline">{currentUser?.headline}</p>
-            <Button title="View Profile" onClick={onViewProfile} />
-            <Button title="Logout" onClick={onLogout} />
+            <Button className = "btn" title="View Profile" onClick={onViewProfile} />
+            <Button className = "btn" title="Logout" onClick={onLogout} />
         </div>
     );
 }
