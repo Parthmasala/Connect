@@ -184,11 +184,6 @@ export default function ProfileCard({ onEdit, currentUser }) {
                 </div>
                 <div className="profile-info">
                     <div className="left-info">
-                        <p className="heading">
-                            {Object.values(currentProfile).length == 0
-                                ? currentUser.headline
-                                : currentProfile?.headline}
-                        </p>
                         <p className="location">
                             {Object.values(currentProfile).length === 0
                                 ? currentUser.city && currentUser.country
@@ -207,16 +202,13 @@ export default function ProfileCard({ onEdit, currentUser }) {
                             className="website"
                             target="_blank"
                             href={
-                                Object.values(currentProfile).length == 0 ||
+                                Object.values(currentProfile).length === 0 ||
                                 !currentProfile.website
                                     ? currentUser.website
                                     : currentProfile.website
                             }
                         >
-                            {Object.values(currentProfile).length == 0 ||
-                            !currentProfile.website
-                                ? currentUser.website
-                                : currentProfile.website}
+                            {"Website Link"}
                         </a>
                     </div>
 

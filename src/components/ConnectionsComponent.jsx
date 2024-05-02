@@ -11,7 +11,7 @@ import ConnectedUsers from "./common/ConnectedUsers";
 export default function ConnectionsComponent({ currentUser }) {
     const [users, setUsers] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [usersPerPage] = useState(13);
+    const [usersPerPage] = useState(10);
 
     const getCurrentUser = (id) => {
         addConnection(currentUser?.userid, id);

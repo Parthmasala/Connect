@@ -152,9 +152,9 @@
     }
 
     .extra-info {
-        border-top: 1px solid #e1e4e8;
-        padding-top: 20px;
-        margin-top: 20px;
+        // border-top: 1px solid #e1e4e8;
+        padding-top: 10px;
+        // margin-top: 10px;
 
         .aboutme, .skills {
             margin: 10px 0;
@@ -164,7 +164,7 @@
             display: flex;
             justify-content: flex-start;  
             gap: 5%; 
-            margin-top: 20px;
+            // margin-top: 20px;
 
             button {
                 padding: 10px 20px;
