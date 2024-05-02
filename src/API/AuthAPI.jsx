@@ -53,7 +53,7 @@ export const GoogleAPI = (email, password) => {
 
                 postUserData(userData);
                 localStorage.setItem("userEmail", email);
-                toast.success("SignIn with Google Account");
+                toast.info("SignIn with Google Account");
             })
             .catch((error) => {
                 console.error("Error signing in with Google:", error);
@@ -88,7 +88,7 @@ export const onLogout = () => {
     try {
         signOut(auth);
         localStorage.clear();
-        toast.success("You have logged out");
+        toast.info("You have logged out");
     } catch (error) {
         return error;
     }

@@ -130,13 +130,12 @@ export const deleteFile = (fileUrl) => {
     // Delete the image from Firebase storage
     return deleteObject(fileRef)
         .then(() => {
-            toast.success("File removed successfully");
+            toast.info("File removed successfully");
         })
         .catch((error) => {
             console.error("Error deleting image:", error);
         });
 };
-
 
 export const uploadMessageFile = (file, setFileUrl, setProgress) => {
     const fileRef = ref(storage, `files/${getUniqueID()}`);
@@ -157,7 +156,7 @@ export const uploadMessageFile = (file, setFileUrl, setProgress) => {
         () => {
             getDownloadURL(uploadTask.snapshot.ref).then((response) => {
                 setFileUrl(response);
-                toast.success("File uploaded successfully");
+                toast.info("File uploaded successfully");
             });
         }
     );

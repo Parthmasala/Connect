@@ -36,7 +36,7 @@ export default function HomeLayout() {
         if (user) {
             sendEmailVerification(user)
                 .then(() => {
-                    toast.success("Verification email sent!");
+                    toast.info("Verification email sent!");
                 })
                 .catch((error) => {
                     toast.error("Error sending verification email:", error);
