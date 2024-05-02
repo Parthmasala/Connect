@@ -11,6 +11,8 @@ import { useLocation } from "react-router-dom";
 export default function SearchResultsComponent({ currentUser }) {
     const [users, setUsers] = useState([]);
     const [filteredUsers, setFilteredUsers] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [usersPerPage] = useState(10);
     const location = useLocation();
     const searchInput = location.state?.searchInput;
 
@@ -44,26 +46,55 @@ export default function SearchResultsComponent({ currentUser }) {
         getAllUsers(setUsers);
     }, []);
 
+    // Logic for pagination
+    const indexOfLastUser = currentPage * usersPerPage;
+    const indexOfFirstUser = indexOfLastUser - usersPerPage;
+    const currentUsers = filteredUsers.slice(indexOfFirstUser, indexOfLastUser);
+
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
     return searchInput.length === 0 ? (
         <></>
     ) : (
         <div className="searched-results">
-            {filteredUsers.length === 0 ? (
+            {currentUsers.length === 0 ? (
                 <div className="search-inner">No results</div>
             ) : (
-                filteredUsers.map((user) => {
-                    return (
-                        user.id !== currentUser.userid && (
-                            <SearchedUsers
-                                user={user}
-                                getCurrentUser={getCurrentUser}
-                                currentUser={currentUser}
-                                removeCurrentUser={removeCurrentUser}
-                            />
-                        )
-                    );
-                })
+                currentUsers.map((user) => (
+                    <SearchedUsers
+                        user={user}
+                        key={user.id}
+                        getCurrentUser={getCurrentUser}
+                        currentUser={currentUser}
+                        removeCurrentUser={removeCurrentUser}
+                    />
+                ))
             )}
+
+            {/* Pagination */}
+            <nav>
+                <ul className="pagination">
+                    {Array.from(
+                        {
+                            length: Math.ceil(
+                                filteredUsers.length / usersPerPage
+                            ),
+                        },
+                        (_, i) => (
+                            <li key={i} className="page-item">
+                                <button
+                                    onClick={() => paginate(i + 1)}
+                                    className={`page-link ${
+                                        currentPage === i + 1 ? "active" : ""
+                                    }`}
+                                >
+                                    {i + 1}
+                                </button>
+                            </li>
+                        )
+                    )}
+                </ul>
+            </nav>
         </div>
     );
 }
