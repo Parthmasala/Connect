@@ -188,10 +188,11 @@
                 color: #007bff;
                 border: 2px solid #007bff;
             }
-
             .delete-account-button {
                 background-color: #dc3545;
                 color: white;
+            &:hover {
+                background-color: darken(#f44336, 15%);
             }
         }
     }

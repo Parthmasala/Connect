@@ -23,7 +23,7 @@ export default function LoginComponent() {
                 credentials.email,
                 credentials.password
             );
-            toast.success("Login Successfully");
+            toast.info("Login Successfully");
             localStorage.setItem("userEmail", response.user.email);
             navigate("/Home");
         } catch (error) {
@@ -46,7 +46,7 @@ export default function LoginComponent() {
     const handleForgotPassword = async () => {
         try {
             await sendPasswordResetEmail(auth, forgotPasswordEmail);
-            toast.success("Password reset link is sent to your email");
+            toast.info("Password reset link is sent to your email");
             handleCancel();
         } catch (error) {
             console.error("Error sending password reset email:", error);

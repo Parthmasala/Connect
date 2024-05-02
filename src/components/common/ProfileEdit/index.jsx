@@ -42,7 +42,7 @@ export default function ProfileEdit({ currentUser, onEdit }) {
         if (changePassword && newPassword !== "") {
             try {
                 await updatePassword(auth.currentUser, newPassword);
-                toast.success("Password updated successfully");
+                toast.info("Password updated successfully");
             } catch (error) {
                 console.error("Error updating password:", error);
                 toast.error(`${error.message}`);
