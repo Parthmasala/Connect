@@ -66,15 +66,18 @@ export default function ConnectionsComponent({ currentUser }) {
     return (
         <>
             <div className="connections-container">
-                {currentUsers.map((user) => (
-                    <ConnectedUsers
-                        user={user}
-                        key={user.id}
-                        getCurrentUser={getCurrentUser}
-                        currentUser={currentUser}
-                        removeCurrentUser={removeCurrentUser}
-                    />
-                ))}
+                {currentUsers.map(
+                    (user) =>
+                        user.id !== currentUser?.userid && (
+                            <ConnectedUsers
+                                user={user}
+                                key={user.id}
+                                getCurrentUser={getCurrentUser}
+                                currentUser={currentUser}
+                                removeCurrentUser={removeCurrentUser}
+                            />
+                        )
+                )}
             </div>
             <Pagination
                 usersPerPage={usersPerPage}
