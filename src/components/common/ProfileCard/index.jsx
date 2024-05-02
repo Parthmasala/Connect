@@ -130,31 +130,60 @@ export default function ProfileCard({ onEdit, currentUser }) {
             />
 
             <div className="profile-card">
-                <div className="profile-info">
-                    <div className = "left-info">
-                        <img
-                            className="profile-image"
-                            onClick={() => {
-                                setModalOpen(true);
-                            }}
-                            src={
-                                currentProfile.imageLink ||
-                                currentUser.imageLink ||
-                                usericon
-                            }
-                            alt="profile-image"
-                        />
-
+                <div className="card-content">
+                    <img
+                        className="profile-image"
+                        onClick={() => setModalOpen(true)}
+                        src={
+                            currentProfile.imageLink ||
+                            currentUser.imageLink ||
+                            usericon
+                        }
+                        alt="Profile"
+                    />
+                    <div className="profile-details">
                         <h3 className="userName">
                             {Object.values(currentProfile).length == 0
                                 ? currentUser.name
                                 : currentProfile?.name}
                         </h3>
-                        <p className="heading">
+                        <p className="role">
                             {Object.values(currentProfile).length == 0
                                 ? currentUser.headline
                                 : currentProfile?.headline}
                         </p>
+                        <div className="action-buttons">
+                            {location?.state?.id == currentUser.userid && (
+                                <button
+                                    className="follow-button"
+                                    onClick={() => setShowFollowers(true)}
+                                >
+                                    Followers
+                                </button>
+                            )}
+                            {location?.state?.id == currentUser.userid && (
+                                <button
+                                    className="following-button"
+                                    onClick={() => setShowFollowing(true)}
+                                >
+                                    Following
+                                </button>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="profile-card">
+                <div className="action-buttons">
+                    {location?.state?.id === currentUser.userid && (
+                        <button className="edit-profile" onClick={onEdit}>
+                            Edit Profile
+                        </button>
+                    )}
+                </div>
+                <div className="profile-info">
+                    <div className="left-info">
                         <p className="location">
                             {Object.values(currentProfile).length === 0
                                 ? currentUser.city && currentUser.country
@@ -173,25 +202,17 @@ export default function ProfileCard({ onEdit, currentUser }) {
                             className="website"
                             target="_blank"
                             href={
-                                Object.values(currentProfile).length == 0 ||
+                                Object.values(currentProfile).length === 0 ||
                                 !currentProfile.website
                                     ? currentUser.website
                                     : currentProfile.website
                             }
                         >
-                            {Object.values(currentProfile).length == 0 ||
-                            !currentProfile.website
-                                ? currentUser.website
-                                : currentProfile.website}
+                            {"Website Link"}
                         </a>
                     </div>
 
                     <div className="right-info">
-                        {location?.state?.id == currentUser.userid && (
-                            <div className="edit-btn">
-                                <button onClick={onEdit}>Edit</button>
-                            </div>
-                        )}
                         <p className="college">
                             {Object.values(currentProfile).length == 0
                                 ? currentUser.college
@@ -271,31 +292,6 @@ export default function ProfileCard({ onEdit, currentUser }) {
                                 ) : (
                                     <></>
                                 )}
-                                <>
-                                    {location?.state?.id ==
-                                        currentUser.userid && (
-                                        <button
-                                            className="followers-button"
-                                            onClick={() =>
-                                                setShowFollowers(true)
-                                            }
-                                        >
-                                            Followers
-                                        </button>
-                                    )}
-
-                                    {location?.state?.id ==
-                                        currentUser.userid && (
-                                        <button
-                                            className="following-button"
-                                            onClick={() =>
-                                                setShowFollowing(true)
-                                            }
-                                        >
-                                            Following
-                                        </button>
-                                    )}
-                                </>
                                 {/* Delete account button */}
                                 {location?.state?.id == currentUser.userid && (
                                     <div className="delete-btn">

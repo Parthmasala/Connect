@@ -1,5 +1,12 @@
 @import "../../../GeneralTheme.scss";
 
+.followers-results, .following-results { 
+    max-height: 400px; 
+    overflow-y: auto; 
+    overflow-x:hidden;
+}
+
+
 .following-inner {
     display: flex;
     gap: 20px;
@@ -31,7 +38,6 @@
     }
 
     .unfollow-btn {
-        // justify-self: right; /* Remove this line */
         border: $third 2px solid;
         background-color: #ffffff;
         color: $third;
@@ -40,10 +46,10 @@
         cursor: pointer;
         font-weight: 600;
         transition: background-color 0.3s ease;
-        // margin-right: 2%; /* Remove this line */
-    
-        margin-left: auto; /* Add this line */
-    
+        margin-left: auto; 
+        margin-right: 5%; 
+
+        
         &:hover {
             background-color: darken($forth, 15%);
         }
