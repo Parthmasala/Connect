@@ -1,11 +1,11 @@
 @import "../../../GeneralTheme.scss";
 
-.followers-results, .following-results { 
-    max-height: 400px; 
-    overflow-y: auto; 
-    overflow-x:auto;
+.followers-results,
+.following-results {
+    max-height: 400px;
+    overflow-y: auto;
+    overflow-x: auto;
 }
-
 
 .followers-inner {
     display: flex;
@@ -46,19 +46,18 @@
         cursor: pointer;
         font-weight: 600;
         transition: background-color 0.3s ease;
-        margin-right: 5%; 
-    
+        margin-right: 5%;
+
         margin-left: auto;
-    
+
         &:hover {
             background-color: darken($forth, 15%);
         }
-    
+
         @media screen and (max-width: 768px) {
             padding: 6px 12px;
         }
     }
-    
 }
 
 .followers-inner:hover {

@@ -1,67 +1,198 @@
 @import "../../../GeneralTheme.scss";
 
-.post-status-parent {
+.main {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-
-    .post-status {
-        width: 100%;
-        max-width: 500px;
-        height: 120px;
-        background-color: $forth;
-        margin-top: 20px;
-        border: 2px solid #dbe3e3;
-        border-radius: 10px;
+    justify-content: space-evenly;
+    .left-info,
+    .right-info {
         display: flex;
-        justify-content: center;
+        // justify-content: center;
         align-items: center;
-        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+        flex-direction: column;
+        color: $font-color1;
 
-        .profile-image {
-            background-color: #333;
-            width: 25%;
-            height: 70%;
-            border-radius: 50%;
-            overflow: hidden;
-            margin-right: 5%;
-            margin-left: 5%;
-            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
-            // object-fit: contain;
-        }
-        .profile-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .create-post {
-            width: 100%;
-            height: 40px;
-            text-align: center;
-            font-family: Arial, sans-serif;
-            color: #fff;
-            font-size: 16px;
-            background-color: $third;
-            border: none;
+        .post-status {
+            display: flex;
+            flex-direction: column;
+            width: 250px;
+            max-width: 500px;
+            height: 400px;
+            background-color: $forth;
+            margin-top: 20px;
+            border: 2px solid #dbe3e3;
             border-radius: 10px;
-            cursor: pointer;
-            padding: 0 20px;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
-            box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
-            margin-right: 5%;
-            &:hover {
-                background-color: darken($color: $third, $amount: 15%);
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+
+            .name {
+                display: flex;
+                justify-content: center;
+                font-weight: 600;
+                font-size: 18px;
+                margin-left: auto;
+            }
+            .headline {
+                display: flex;
+                justify-content: center;
+                color: rgba(0, 0, 0, 0.6);
+                font-weight: 400;
+                margin-left: auto;
+            }
+
+            .profile-image {
+                background-color: #333;
+                width: 45%;
+                height: 30%;
+                border-radius: 50%;
+                overflow: hidden;
+                margin-right: 5%;
+                margin-left: 5%;
+                box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+                // object-fit: contain;
+            }
+            .profile-image img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        // Media query for smaller screens
+        @media screen and (max-width: 768px) {
+            .post-status {
+                width: 90%;
             }
         }
     }
+    .right-info {
+        .followers-results,
+        .following-results {
+            max-height: 100px;
+            width: 100%;
+        }
 
-    // Media query for smaller screens
-    @media screen and (max-width: 768px) {
+        .followers-inner {
+            display: flex;
+            gap: 20px;
+            padding: 10px;
+            align-items: center;
+            cursor: pointer;
+
+            .name {
+                font-size: calc(14px + 0.2vw);
+                color: #333;
+                font-weight: bold;
+            }
+
+            img {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                object-fit: cover;
+                background-color: #333;
+            }
+
+            button {
+                border: none;
+                padding: 5px 10px;
+                border-radius: 5px;
+                background-color: $first;
+                color: white;
+                cursor: pointer;
+            }
+            .remove-btn {
+                // justify-self: right; /* Remove this line */
+                border: $third 2px solid;
+                background-color: #ffffff;
+                color: $third;
+                border-radius: 50px;
+                padding: 6px 16px;
+                cursor: pointer;
+                font-weight: 600;
+                transition: background-color 0.3s ease;
+                margin-right: 5%;
+
+                margin-left: auto;
+
+                &:hover {
+                    background-color: darken($forth, 15%);
+                }
+
+                @media screen and (max-width: 768px) {
+                    padding: 6px 12px;
+                }
+            }
+        }
+
+        .followers-inner:hover {
+            background-color: rgb(205, 205, 205);
+        }
+    }
+
+    .post-status-parent {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
         .post-status {
-            width: 90%;
+            width: 100%;
+            max-width: 500px;
+            height: 120px;
+            background-color: $forth;
+            margin-top: 20px;
+            border: 2px solid #dbe3e3;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+
+            .profile-image {
+                background-color: #333;
+                width: 25%;
+                height: 70%;
+                border-radius: 50%;
+                overflow: hidden;
+                margin-right: 5%;
+                margin-left: 5%;
+                box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+                // object-fit: contain;
+            }
+            .profile-image img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .create-post {
+                width: 100%;
+                height: 40px;
+                text-align: center;
+                font-family: Arial, sans-serif;
+                color: #fff;
+                font-size: 16px;
+                background-color: $third;
+                border: none;
+                border-radius: 10px;
+                cursor: pointer;
+                padding: 0 20px;
+                font-weight: bold;
+                transition: background-color 0.3s ease;
+                box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+                margin-right: 5%;
+                &:hover {
+                    background-color: darken($color: $third, $amount: 15%);
+                }
+            }
+        }
+
+        // Media query for smaller screens
+        @media screen and (max-width: 768px) {
+            .post-status {
+                width: 90%;
+            }
         }
     }
 }

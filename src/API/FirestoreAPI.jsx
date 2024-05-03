@@ -25,7 +25,7 @@ let messageRef = collection(db, "messages");
 export const postStatus = (obj) => {
     addDoc(dbRef, obj)
         .then(() => {
-            toast.success("Post Created");
+            toast.info("Post Created");
         })
         .catch((err) => {
             console.log(err);
@@ -48,13 +48,13 @@ export const postUserData = async (obj) => {
             query(userRef, where("email", "==", obj.email))
         );
         if (!userSnapshot.empty) {
-            toast.success("Welcome Back");
+            toast.info("Welcome Back");
             return;
         }
 
         await addDoc(userRef, obj);
         addConnection();
-        toast.success("User Created");
+        toast.info("User Created");
     } catch (error) {
         console.log(error);
     }
@@ -80,7 +80,7 @@ export const editProfile = (userID, payLoad) => {
 
     updateDoc(userToEdit, payLoad)
         .then(() => {
-            toast.success("Profile Updated");
+            toast.info("Profile Updated");
         })
         .catch((err) => {
             console.log(err);
@@ -182,7 +182,7 @@ export const updatePost = (id, status, postImage) => {
 
     try {
         updateDoc(docToUpdate, { status, postImage });
-        toast.success("Post has been Updated");
+        toast.info("Post has been Updated");
     } catch (err) {
         console.log(err);
     }
@@ -192,7 +192,7 @@ export const deletePost = (id) => {
     let docToDelete = doc(dbRef, id);
     try {
         deleteDoc(docToDelete);
-        toast.success("Post has been Deleted");
+        toast.info("Post has been Deleted");
     } catch (error) {
         console.log(error);
     }
@@ -204,7 +204,7 @@ export const addConnection = (userId, targetId) => {
 
         setDoc(connectionAdd, { userId, targetId });
 
-        toast.success("Connection Added");
+        toast.info("Connection Added");
     } catch (err) {
         console.log(err);
     }
@@ -242,7 +242,7 @@ export const addResume = async (resumeData) => {
         }
 
         await addDoc(resumeRef, resumeData);
-        toast.success("Resume added successfully");
+        toast.info("Resume added successfully");
     } catch (error) {
         console.error("Error adding resume:", error);
         toast.error("Failed to add resume");
@@ -297,7 +297,7 @@ export const removeConnection = (userId, targetId) => {
     let docToDelete = doc(connectionRef, `${userId}_${targetId}`);
     try {
         deleteDoc(docToDelete);
-        toast.success("Connection Removed");
+        toast.info("Connection Removed");
     } catch (error) {
         console.log(error);
     }

@@ -100,6 +100,9 @@
             // background-color: $forth;
             color: $forth;
         }
+        &:hover{
+            background-color: darken($third, 15%);
+        }
     }
 }
 

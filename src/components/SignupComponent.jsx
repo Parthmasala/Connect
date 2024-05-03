@@ -21,7 +21,7 @@ export default function SignupComponent() {
                 credentails.password
             );
             sendEmailVerification(response.user);
-            toast.success("Email Verification Link is Sent to Your Email");
+            toast.info("Email Verification Link is Sent to Your Email");
             postUserData({
                 name: credentails.name,
                 email: credentails.email,
@@ -43,7 +43,7 @@ export default function SignupComponent() {
         try {
             let response = GoogleAPI();
             // console.log("Google Response : ", response);
-            // toast.success("Login Successfully");
+            // toast.info("Login Successfully");
         } catch (error) {
             toast.error("Invalid Email or Password");
         }

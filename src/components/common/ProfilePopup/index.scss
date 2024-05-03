@@ -1,3 +1,5 @@
+@import "../../../GeneralTheme.scss";
+
 .popup-card {
     border: 1px solid #a8a8a8;
     border-radius: 5px;
@@ -11,7 +13,7 @@
     justify-content: center;
     align-items: center;
     color: black;
-    background-color: whitesmoke;
+    background-color: $forth;
     padding: 20px;
     z-index: 1;
 
@@ -32,5 +34,9 @@
 
     .popup-option {
         cursor: pointer;
+    }
+
+    .btn{
+        background-color: $forth;
     }
 }
