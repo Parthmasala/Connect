@@ -28,6 +28,7 @@ export default function MessageFileUploadModal({
         if (file) {
             try {
                 uploadMessageFile(file, setFileUrl, setUploadProgress);
+                setModalOpen(false);
             } catch (error) {
                 console.error("Error uploading file", error);
                 toast.error("An error occurred while uploading the file");

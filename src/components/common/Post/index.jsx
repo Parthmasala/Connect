@@ -14,6 +14,7 @@ import {
 import { getUniqueID } from "../../../helpers/getUniqueID";
 import { uploadPostImage } from "../../../API/ImageUpload";
 import usericon from "../../../assets/user-icon.png";
+import { useNavigate } from "react-router-dom";
 
 export default function PostStatus({ currentUser }) {
     let userEmail = localStorage.getItem("userEmail");
@@ -26,6 +27,7 @@ export default function PostStatus({ currentUser }) {
     const [followers, setFollowers] = useState([]);
     const [following, setFollowing] = useState([]);
 
+    let navigate = useNavigate();
     console.log(currentUser);
 
     const sendStatus = async () => {
@@ -65,7 +67,7 @@ export default function PostStatus({ currentUser }) {
     const openUser = (user) => {
         navigate("/profile", {
             state: {
-                id: user?.id,
+                id: user?.userid,
                 email: user?.email,
             },
         });
@@ -87,11 +89,9 @@ export default function PostStatus({ currentUser }) {
             removeConnection(currentUser?.userid, user.id);
             // const updatedFollowers = followers.filter(user => user.id !== id);
             // setFollowers(updatedFollowers);
-        } 
-        else if(event.target.classList.contains("remove-btn")){
+        } else if (event.target.classList.contains("remove-btn")) {
             removeConnection(user.id, currentUser?.userid);
-        }
-        else {
+        } else {
             openUser(user);
         }
     };
@@ -113,7 +113,17 @@ export default function PostStatus({ currentUser }) {
                 </div>
             </div> */}
 
-            <div className="left-info">
+            <div
+                className="left-info"
+                onClick={() =>
+                    navigate("/profile", {
+                        state: {
+                            id: currentUser?.userid,
+                            email: currentUser?.email,
+                        },
+                    })
+                }
+            >
                 <div className="post-status">
                     <div className="profile-image">
                         <img
@@ -130,13 +140,13 @@ export default function PostStatus({ currentUser }) {
             </div>
             <div className="post-status-parent">
                 <div className="post-status">
-                    <div className="profile-image">
+                    {/* <div className="profile-image">
                         <img
                             className="post-image"
                             src={currentUser?.imageLink || usericon}
                             alt="imageLink"
                         />
-                    </div>
+                    </div> */}
                     <button
                         className="create-post"
                         onClick={() => {
@@ -178,69 +188,65 @@ export default function PostStatus({ currentUser }) {
             </div>
 
             <div className="right-info">
-                <div className="post-status">
-                    {/* <div className="profile-image">
+                {/* <div className="post-status"> */}
+                {/* <div className="profile-image">
                         <img
                             className="post-image"
                             src={currentUser?.imageLink || usericon}
                             alt="imageLink"
                         />
                     </div> */}
-                    <p>List of Followers</p>
-                    <div className="followers-results">
-                        
-                        {followers.length === 0 ? (
-                            <div className="followers-inner">No results</div>
-                        ) : (
-                            followers.map((user) => (
-                                <div
-                                    className="followers-inner"
-                                    onClick={(event) => {
-                                        // console.log(user);
-                                        handleClick(event, user);
-                                    }}
-                                >
-                                    <img
-                                        src={user?.imageLink || usericon}
-                                        alt={user.name}
-                                    />
-                                    <p className="name">{user?.name}</p>
-                                    <button className="remove-btn">
-                                        {" "}
-                                        Remove
-                                    </button>
-                                </div>
-                            ))
-                        )}
-                    </div>
-
-                    <p>List of Following</p>
-                    <div className="following-results">
-                        {following.length === 0 ? (
-                            <div className="following-inner">No results</div>
-                        ) : (
-                            following.map((user) => (
-                                <div
-                                    className="following-inner"
-                                    onClick={(event) => {
-                                        // console.log(user);
-                                        handleClick(event, user);
-                                    }}
-                                >
-                                    <img
-                                        src={user?.imageLink || usericon}
-                                        alt={user.name}
-                                    />
-                                    <p className="name">{user?.name}</p>
-                                    <button className="unfollow-btn">
-                                        {" "}
-                                        Unfollow
-                                    </button>
-                                </div>
-                            ))
-                        )}
-                    </div>
+                <p>List of Followers</p>
+                <div className="followers-results">
+                    {followers.length === 0 ? (
+                        <div className="followers-inner">No results</div>
+                    ) : (
+                        followers.map((user) => (
+                            <div
+                                className="followers-inner"
+                                onClick={(event) => {
+                                    // console.log(user);
+                                    handleClick(event, user);
+                                }}
+                            >
+                                <img
+                                    src={user?.imageLink || usericon}
+                                    alt={user.name}
+                                />
+                                <p className="name">{user?.name}</p>
+                                <button className="remove-btn"> Remove</button>
+                            </div>
+                        ))
+                    )}
                 </div>
+
+                <p>List of Following</p>
+                <div className="following-results">
+                    {following.length === 0 ? (
+                        <div className="following-inner">No results</div>
+                    ) : (
+                        following.map((user) => (
+                            <div
+                                className="following-inner"
+                                onClick={(event) => {
+                                    // console.log(user);
+                                    handleClick(event, user);
+                                }}
+                            >
+                                <img
+                                    src={user?.imageLink || usericon}
+                                    alt={user.name}
+                                />
+                                <p className="name">{user?.name}</p>
+                                <button className="unfollow-btn">
+                                    {" "}
+                                    Unfollow
+                                </button>
+                            </div>
+                        ))
+                    )}
+                </div>
+                {/* </div> */}
             </div>
         </div>
     );

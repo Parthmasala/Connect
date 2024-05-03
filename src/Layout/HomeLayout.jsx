@@ -27,13 +27,6 @@ export default function HomeLayout() {
             user.reload().then(() => {
                 setIsEmailVerified(user.emailVerified);
                 setLoading(false);
-                navigate("/profile", {
-                    state: {
-                        id: currentUser?.userid,
-                        email: currentUser.userEmail,
-                    },
-                });
-                window.location.reload();
             });
         }
     };
