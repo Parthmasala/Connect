@@ -28,7 +28,7 @@ export default function PostStatus({ currentUser }) {
     const [following, setFollowing] = useState([]);
 
     let navigate = useNavigate();
-    console.log(currentUser);
+    // console.log(currentUser);
 
     const sendStatus = async () => {
         let object = {
@@ -67,7 +67,7 @@ export default function PostStatus({ currentUser }) {
     const openUser = (user) => {
         navigate("/profile", {
             state: {
-                id: user?.userid,
+                id: user?.id,
                 email: user?.email,
             },
         });
