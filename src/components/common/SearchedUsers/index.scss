@@ -20,12 +20,16 @@
 
     .user-details {
         text-align: left;
+        max-width: 100px; /* Adjust as needed */
     }
 
     .name {
-        color: #333;
+        color: $font-color1;
         font-weight: bold;
         margin-bottom: 5px;
+        white-space: nowrap; /* Prevent text from wrapping */
+        overflow: hidden; /* Hide overflowing text */
+        text-overflow: ellipsis;
     }
 
     .headline {
@@ -53,10 +57,10 @@
             padding: 6px 12px;
         }
     }
-    .message-button{
+    .message-button {
         width: 100px;
     }
-    
+
     .unfollow-button {
         border: $third 2px solid;
         background-color: $forth;
